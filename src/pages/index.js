@@ -1,0 +1,14 @@
+export { default as About } from './About';
+export { default as Account } from './Account';
+export { default as AllProducts } from './AllProducts';
+export { default as BestSelling } from './BestSelling';
+export { default as Cart } from './Cart';
+export { default as Checkout } from './Checkout';
+export { default as Contact } from './Contact';
+export { default as Home } from './Home';
+export { default as Login } from './Login';
+export { default as NotFound } from './NotFound';
+export { default as Product } from './Product';
+export { default as Register } from './Register';
+export { default as ThankYou } from './ThankYou';
+export { default as Whislist } from './Whislist';
