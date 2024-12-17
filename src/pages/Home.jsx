@@ -1,14 +1,7 @@
 import React from 'react';
 
-import { SectionTitle } from '@components';
-
 const Home = () => {
-  return (
-    <div>
-      Home
-      <SectionTitle />
-    </div>
-  );
+  return <div>Home</div>;
 };
 
 export default Home;
