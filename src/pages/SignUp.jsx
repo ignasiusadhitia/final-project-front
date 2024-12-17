@@ -5,6 +5,10 @@ import { Link } from 'react-router-dom';
 import { SignUpForm } from '@components';
 
 const SignUp = () => {
+  const inputChangeHandler = (event) => {
+    console.log(event.target.value);
+  };
+
   const submitHandler = (event) => {
     event.preventDefault();
     console.log('Submitted');
@@ -19,7 +23,10 @@ const SignUp = () => {
             Create an account
           </h1>
           <p className="mb-12 text-xs md:text-base">Enter your details below</p>
-          <SignUpForm onSubmitHandler={submitHandler} />
+          <SignUpForm
+            onInputChangeHandler={inputChangeHandler}
+            onSubmitHandler={submitHandler}
+          />
           <div className="flex items-center gap-4 mt-4">
             <span className="block text-xs md:text-base">
               Already have account?

@@ -3,6 +3,10 @@ import React from 'react';
 import { LogInForm } from '@components';
 
 const Login = () => {
+  const inputChangeHandler = (event) => {
+    console.log(event.target.value);
+  };
+
   const submitHandler = (event) => {
     event.preventDefault();
     console.log('Submitted');
@@ -17,7 +21,10 @@ const Login = () => {
             Log in to Exclusive
           </h1>
           <p className="mb-12 text-xs md:text-base">Enter your details below</p>
-          <LogInForm onSubmitHandler={submitHandler} />
+          <LogInForm
+            onInputChangeHandler={inputChangeHandler}
+            onSubmitHandler={submitHandler}
+          />
         </div>
       </div>
     </div>
