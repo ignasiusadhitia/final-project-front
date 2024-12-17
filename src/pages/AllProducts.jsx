@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import ProductGrid from '../components/ProductGrid';
+import { SectionTitle } from '@components';
 
 const AllProducts = () => {
   const initialProducts = [
@@ -169,9 +170,7 @@ const AllProducts = () => {
         </ul>
       </div>
       <div className="flex-grow p-4 mx-20">
-        <h2 className="text-2xl font-bold mb-4">
-          {selectedCategory.name}
-        </h2>
+        <SectionTitle title={selectedCategory.name} subTitle={selectedCategory.name} hideTitle/> 
         <ProductGrid products={filteredProducts} />
         {!showMore && (
           <button 
