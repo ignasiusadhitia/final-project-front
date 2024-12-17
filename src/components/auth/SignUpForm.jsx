@@ -2,25 +2,25 @@ import React from 'react';
 
 import PropTypes from 'prop-types';
 
-const SignUpForm = ({ submitHandlder }) => {
+const SignUpForm = ({ onSubmitHandler }) => {
   return (
-    <form className="flex flex-col gap-10" onSubmit={submitHandlder}>
+    <form className="flex flex-col gap-8" onSubmit={onSubmitHandler}>
       <input
-        className="w-full border-b-2 pb-2 leading-6"
+        className="w-full border-b-2 py-2 leading-6 focus:outline-none"
         id="name"
         name="name"
         placeholder="Name"
         type="text"
       />
       <input
-        className="w-full border-b-2 pb-2 leading-6"
+        className="w-full border-b-2 py-2 leading-6 focus:outline-none"
         id="email"
         name="email"
         placeholder="Email or Phone Number"
         type="text"
       />
       <input
-        className="w-full border-b-2 pb-2 leading-6"
+        className="w-full border-b-2 py-2 leading-6 focus:outline-none"
         id="password"
         name="password"
         placeholder="Password"
@@ -37,7 +37,7 @@ const SignUpForm = ({ submitHandlder }) => {
 };
 
 SignUpForm.propTypes = {
-  submitHandlder: PropTypes.func,
+  onSubmitHandler: PropTypes.func,
 };
 
 export default SignUpForm;

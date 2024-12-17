@@ -143,6 +143,9 @@ export default {
       fontSize: {},
       height: {},
       width: {},
+      backgroundImage: {
+        'auth-banner': "url('/src/assets/images/auth-banner.webp')",
+      },
     },
   },
   plugins: [],

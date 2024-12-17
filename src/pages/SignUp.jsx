@@ -3,24 +3,23 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 
 import { SignUpForm } from '@components';
-import { authBanner } from '@images';
 
 const SignUp = () => {
   return (
-    <div className="min-h-screen flex pt-[3.75rem] pb-[8.75rem]">
-      <img
-        alt="auth-banner"
-        className="w-full h-full left-0"
-        src={authBanner}
-      />
-      <div className="container h-full relative ">
-        <div className="w-full h-full flex flex-col justify-between my-auto pl-48 font-['Poppins']">
-          <h1 className="text-4xl font-medium mb-6">Create an account</h1>
-          <p className="mb-12">Enter your details below</p>
+    <div className="h-screen md:bg-auth-banner bg-no-repeat flex mt-6 md:mt-[3.75rem] md:mb-[8.75rem]">
+      <div className="container h-full grid grid-cols-1 md:grid-cols-2">
+        <div className="hidden md:block"></div>
+        <div className="w-full h-full flex flex-col justify-start md:justify-center my-auto px-6 md:pl-48">
+          <h1 className="text-2xl md:text-4xl font-medium mb-6 font-['Inter']">
+            Create an account
+          </h1>
+          <p className="mb-12 text-xs md:text-base">Enter your details below</p>
           <SignUpForm />
           <div className="flex items-center gap-4 mt-4">
-            <span className="block">Already have account?</span>
-            <span className="block border-b border-black pb-1 font-medium">
+            <span className="block text-xs md:text-base">
+              Already have account?
+            </span>
+            <span className="block border-b border-black pb-1 text-sm md:text-base md:font-medium">
               <Link>Log in</Link>
             </span>
           </div>
