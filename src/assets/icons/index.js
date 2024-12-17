@@ -8,3 +8,4 @@ export { default as Twitter } from './twitter.svg?react';
 export { default as Instagram } from './instagram.svg?react';
 export { default as Linkedin } from './linkedin.svg?react';
 export { default as Send } from './send.svg?react';
+export { default as Cart } from './cart.svg?react';
