@@ -5,6 +5,7 @@ import storage from 'redux-persist/lib/storage';
 import { encryptTransform } from 'redux-persist-transform-encrypt';
 
 import { configureStore } from '@reduxjs/toolkit';
+
 import authReducer from './features/authSlice';
 
 const encryptor = encryptTransform({
