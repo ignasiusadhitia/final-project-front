@@ -160,7 +160,7 @@ const Navbar = () => {
             <div className="border-t-2 pt-7 flex items-end justify-end gap-3">
               <Link
                 className="flex items-center justify-center w-[100px] h-[30px] border border-secondary-3 text-secondary-3 rounded-md text-xs"
-                to={'register'}
+                to={'sign-up'}
               >
                 Sign Up
               </Link>
@@ -213,8 +213,8 @@ const Navbar = () => {
             </li>
             <li>
               <Link
-                className={`${location === '/register' && 'border-b border-black'} text-base font-normal`}
-                to={'register'}
+                className={`${location === '/sign-up' && 'border-b border-black'} text-base font-normal`}
+                to={'sign-up'}
               >
                 Sign Up
               </Link>
@@ -226,7 +226,7 @@ const Navbar = () => {
           <div className="flex items-center gap-8">
             <div className="hidden lg:block relative">
               <input
-                className="bg-secondary-1 border border-secondary-1 rounded-md px-6 py-3 focus:border focus:outline-none focus:border-gray-300"
+                className="w-[243px] text-xs h-[38px] bg-secondary-1 border border-secondary-1 rounded-md px-6 py-3 focus:border focus:outline-none focus:border-gray-300"
                 placeholder="What are you looking for?"
                 type="text"
               />
