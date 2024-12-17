@@ -1,5 +1,5 @@
 import { SectionTitle } from '@components';
-import React from 'react';
+import React, { useState } from 'react';
 import ProductCard from '../components/ProductsCard';
 
 const initialProducts = [
@@ -117,18 +117,142 @@ const initialProducts = [
   },
 ];
 
+const anotherProducts = [
+  {
+    id: 1,
+    imageUrl: 'https://picsum.photos/400/300',
+    name: 'HP Spectre x360 Laptop',
+    description: 'Premium convertible laptop with sleek design and exceptional performance for work and play.',
+    price: '1200',
+    originalPrice: '1400',
+    discount: '-15%',
+    rating: 4.8,
+    ratingCount: 120,
+    categoryId: 1,
+    category: "Electronics",
+    stock: 10
+  },
+  {
+    id: 2,
+    imageUrl: 'https://picsum.photos/400/300',
+    name: 'Samsung QLED 4K Smart TV',
+    description: 'Stunning 4K resolution with a rich color experience for an immersive viewing experience.',
+    price: '850',
+    originalPrice: '1100',
+    discount: '-23%',
+    rating: 4.7,
+    ratingCount: 95,
+    categoryId: 1,
+    category: "Electronics",
+    stock: 5
+  },
+  {
+    id: 3,
+    imageUrl: 'https://picsum.photos/400/300',
+    name: 'Razer Kraken Gaming Headset',
+    description: 'High-quality gaming headset with surround sound and a comfortable fit for long gaming sessions.',
+    price: '80',
+    originalPrice: '100',
+    discount: '-20%',
+    rating: 4.6,
+    ratingCount: 80,
+    categoryId: 1,
+    category: "Electronics",
+    stock: 50
+  },
+  {
+    id: 4,
+    imageUrl: 'https://picsum.photos/400/300',
+    name: 'Leather Reclining Sofa',
+    description: 'Luxurious leather recliner for maximum comfort and relaxation.',
+    price: '1250',
+    originalPrice: '1500',
+    discount: '-17%',
+    rating: 4.5,
+    ratingCount: 60,
+    categoryId: 2,
+    category: "Home & Lifestyle",
+    stock: 15
+  },
+  {
+    id: 5,
+    imageUrl: 'https://picsum.photos/400/300',
+    name: 'Vitamix Professional Blender',
+    description: 'Powerful blender designed for quick and efficient blending, ideal for smoothies and soups.',
+    price: '150',
+    originalPrice: '200',
+    discount: '-25%',
+    rating: 4.9,
+    ratingCount: 40,
+    categoryId: 2,
+    category: "Home & Lifestyle",
+    stock: 30
+  },
+  {
+    id: 6,
+    imageUrl: 'https://picsum.photos/400/300',
+    name: 'Philips Hue Smart Bulb',
+    description: 'Smart lighting with adjustable brightness and a range of colors to set the perfect ambiance.',
+    price: '35',
+    originalPrice: '45',
+    discount: '-22%',
+    rating: 4.8,
+    ratingCount: 70,
+    categoryId: 2,
+    category: "Home & Lifestyle",
+    stock: 60
+  },
+  {
+    id: 7,
+    imageUrl: 'https://picsum.photos/400/300',
+    name: 'Wilson Ultra Tennis Racket',
+    description: 'High-performance racket designed for intermediate to advanced players looking to elevate their game.',
+    price: '150',
+    originalPrice: '180',
+    discount: '-17%',
+    rating: 4.6,
+    ratingCount: 50,
+    categoryId: 3,
+    category: "Sports & Outdoor",
+    stock: 20
+  },
+  {
+    id: 8,
+    imageUrl: 'https://picsum.photos/400/300',
+    name: 'Schwinn Mountain Bike',
+    description: 'Durable and reliable mountain bike built for all-terrain riding and outdoor adventures.',
+    price: '550',
+    originalPrice: '650',
+    discount: '-15%',
+    rating: 4.7,
+    ratingCount: 55,
+    categoryId: 3,
+    category: "Sports & Outdoor",
+    stock: 10
+  },
+];
+
+
 const BestSelling = () => {
+  const [products, setProducts] = useState(initialProducts);
+
+  const handleShowMore = () => {
+    setProducts((prevProducts) => [...prevProducts, ...anotherProducts]);
+  };
+
   return (
     <div className='container mt-16'>
       <SectionTitle title='Best Selling Products' subTitle='Products' />
       <div className='grid grid-cols-4 gap-5 mt-16'>
-          {initialProducts.map((product) => (
-            <ProductCard product={product} />
-          ))}
+        {products.map((product) => (
+          <ProductCard key={product.id} product={product} />
+        ))}
       </div>
 
       <div className='flex items-center justify-center my-24'>
-        <button className='bg-secondary-3 w-[184px] h-[56px] text-text-1 rounded-md'>Show More</button>
+        <button onClick={handleShowMore} className='bg-secondary-3 w-[184px] h-[56px] text-text-1 rounded-md'>
+          Show More
+        </button>
       </div>
     </div>
   );
