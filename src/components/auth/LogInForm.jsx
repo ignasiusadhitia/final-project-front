@@ -7,14 +7,14 @@ const LogInForm = ({ onSubmitHandler }) => {
   return (
     <form className="flex flex-col gap-8" onSubmit={onSubmitHandler}>
       <input
-        className="w-full border-b-2 py-2 leading-6 focus:outline-none"
+        className="w-full border-b-[1px] border-black border-opacity-50  py-2 leading-6 focus:outline-none"
         id="email"
         name="email"
         placeholder="Email or Phone Number"
         type="text"
       />
       <input
-        className="w-full border-b-2 py-2 leading-6 focus:outline-none"
+        className="w-full border-b-[1px] border-black border-opacity-50 py-2 leading-6 focus:outline-none"
         id="password"
         name="password"
         placeholder="Password"

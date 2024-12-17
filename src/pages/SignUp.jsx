@@ -25,7 +25,7 @@ const SignUp = () => {
               Already have account?
             </span>
             <span className="block border-b border-black pb-1 text-sm md:text-base md:font-medium">
-              <Link>Log in</Link>
+              <Link to="/login">Log in</Link>
             </span>
           </div>
         </div>
