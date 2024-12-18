@@ -5,7 +5,7 @@ import { Link, useLocation } from 'react-router-dom';
 import {
   Search,
   WishList,
-  Cart,
+  BlackCart,
   UserLogin,
   User,
   Order,
@@ -240,7 +240,7 @@ const Navbar = () => {
                 <WishList />
               </Link>
               <Link className="relative" to={'cart'}>
-                <Cart className="w-6 h-6 lg:w-8 lg:h-8" />
+                <BlackCart className="w-6 h-6 lg:w-8 lg:h-8" />
                 {login && (
                   <span className="absolute text-text-1 px-1 rounded-full text-xs -right-1 -top-1 bg-secondary-3">
                     2
