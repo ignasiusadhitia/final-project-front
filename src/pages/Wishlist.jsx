@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 
 import { ProductsCard } from '@components';
 
-const Whislist = () => {
+const Wishlist = () => {
   const navigate = useNavigate();
 
   // TODO: Replace with actual data from the backend
@@ -186,4 +186,4 @@ const Whislist = () => {
   );
 };
 
-export default Whislist;
+export default Wishlist;
