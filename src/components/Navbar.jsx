@@ -135,8 +135,8 @@ const Navbar = () => {
             </li>
             <li>
               <Link
-                className={`${location === '/whislist' ? 'text-black font-medium border-secondary-3' : 'text-text-2 font-normal border-transparent'} border-l-8 py-2 px-3 text-sm font-normal`}
-                to={'whislist'}
+                className={`${location === '/whishlist' ? 'text-black font-medium border-secondary-3' : 'text-text-2 font-normal border-transparent'} border-l-8 py-2 px-3 text-sm font-normal`}
+                to={'whishlist'}
               >
                 Whislist
               </Link>
@@ -236,7 +236,7 @@ const Navbar = () => {
             </div>
 
             <div className="flex gap-5 items-center">
-              <Link className="hidden lg:block" to={'whislist'}>
+              <Link className="hidden lg:block" to={'wishlist'}>
                 <WishList />
               </Link>
               <Link className="relative" to={'cart'}>
