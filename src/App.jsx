@@ -28,7 +28,7 @@ const routes = [
     element: <About />,
   },
   {
-    path: '/account',
+    path: '/my-account',
     element: <Account />,
   },
   {
@@ -81,7 +81,7 @@ const App = () => {
   const location = useLocation();
 
   // Hide breadcrumb on hidden paths
-  const hiddenPaths = ['/', '/login', '/sign-up'];
+  const hiddenPaths = ['/', '/products', '/login', '/sign-up', '/my-account'];
   const isBreadcrumbVisible = !hiddenPaths.includes(location.pathname);
 
   return (

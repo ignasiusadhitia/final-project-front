@@ -9,6 +9,14 @@ const Breadcrumb = ({ userName }) => {
   const currentPath = location.pathname;
   const pathnames = currentPath.split('/').filter((x) => x);
 
+  // Function to format a bredcrumb
+  const formatBreadcrumb = (value) => {
+    return value
+      .split('-')
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
+  };
+
   useEffect(() => {
     const fetchProductNames = async () => {
       // Mock product data
@@ -25,10 +33,10 @@ const Breadcrumb = ({ userName }) => {
   }, []);
 
   return (
-    <nav>
+    <nav className="container flex justify-between items-center mt-6 md:mt-20 px-6 md:px-0">
       {/* Breadcrumb Links */}
       <ol className="flex">
-        <li>
+        <li className="text-xs md:text-sm opacity-100 md:opacity-50">
           <Link to="/">Home</Link>
         </li>
 
@@ -40,12 +48,16 @@ const Breadcrumb = ({ userName }) => {
           const to = `/${pathnames.slice(0, index + 1).join('/')}`;
 
           return (
-            <li key={to}>
-              <span>/</span>
+            <li key={to} className="text-xs md:text-sm">
+              <span className="opacity-100 md:opacity-50">&nbsp;/&nbsp;</span>
               {index === pathnames.length - 1 ? (
-                <span>{label}</span>
+                <span className="capitalize font-semibold md:font-normal">
+                  {formatBreadcrumb(label)}
+                </span>
               ) : (
-                <Link to={to}>{label}</Link>
+                <Link className="capitalize opacity-100 md:opacity-50" to={to}>
+                  {formatBreadcrumb(label)}
+                </Link>
               )}
             </li>
           );
@@ -54,8 +66,8 @@ const Breadcrumb = ({ userName }) => {
 
       {/* Welcome Message */}
       {userName && (
-        <div>
-          Welcome <span>{userName}</span>
+        <div className="hidden md:block text-sm">
+          Welcome! <span className="text-secondary-3">{userName}</span>
         </div>
       )}
     </nav>
