@@ -21,7 +21,7 @@ const About = () => {
     <div className="overflow-hidden mt-6 md:mt-[3.75rem]">
       <div>
         {/* BREADCRUMB */}
-        <div className="container px-5 md:p-0 text-sm">
+        <div className="container px-5 lg:p-0 text-sm">
           <button className="text-text-2" onClick={() => navigate('/')}>
             Home
           </button>
@@ -30,7 +30,7 @@ const About = () => {
         </div>
 
         {/* HERO SECTION */}
-        <div className="grid md:grid-cols-2 w-screen gap-5 md:gap-20 p-10 md:p-0">
+        <div className="grid md:grid-cols-2 w-screen gap-5 md:gap-20 p-10 lg:p-0">
           {/* DESCRIPTIONS */}
           <div className="lg:pl-[88px] flex flex-col justify-center items-center gap-5">
             <h1 className="text-2xl md:text-5xl text-center md:text-left font-semibold w-full">
@@ -61,7 +61,7 @@ const About = () => {
         </div>
 
         {/* SERVICE SECTION */}
-        <div className=" container p-5 md:p-0 grid grid-cols-2 lg:grid-cols-4 gap-5 mt-10 md:mt-40">
+        <div className=" container p-5 lg:p-0 grid grid-cols-2 lg:grid-cols-4 gap-5 mt-10 md:mt-40">
           <div className="text-center border rounded-lg flex flex-col justify-center items-center p-5 gap-5">
             <SellersActive />
             <p className="text-3xl font-bold">10.5k</p>
@@ -85,7 +85,7 @@ const About = () => {
         </div>
 
         {/* TEAM SECTION */}
-        <div className="container p-5 md:p-0 gap-5 mt-10 md:mt-40">
+        <div className="container p-5 lg:p-0 gap-5 mt-10 md:mt-40">
           <Swiper
             className="swiper-cstm"
             loop={true}
