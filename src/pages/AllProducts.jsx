@@ -1,8 +1,6 @@
 import React, { useState } from 'react';
 
-import { SectionTitle } from '@components';
-
-import ProductGrid from '../components/ProductGrid';
+import { ProductGrid, SectionTitle } from '@components';
 
 const AllProducts = () => {
   const initialProducts = [
