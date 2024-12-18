@@ -3,12 +3,22 @@ export { default as Close } from './close.svg?react';
 export { default as Hamburger } from './hamburger.svg?react';
 export { default as Moon } from './moon.svg?react';
 export { default as Sun } from './sun.svg?react';
+export { default as Search } from './search.svg?react';
+export { default as WishList } from './wishlist.svg?react';
+export { default as BlackCart } from './black-cart.svg?react';
+export { default as WhiteCart } from './white-cart.svg?react';
+export { default as UserLogin } from './user-login.svg?react';
+export { default as User } from './user.svg?react';
+export { default as Order } from './order.svg?react';
+export { default as Reviews } from './reviews.svg?react';
+export { default as Logout } from './logout.svg?react';
 // FOOTER ICONS
 export { default as Facebook } from './facebook.svg?react';
 export { default as Twitter } from './twitter.svg?react';
 export { default as Instagram } from './instagram.svg?react';
 export { default as Linkedin } from './linkedin.svg?react';
 export { default as Send } from './send.svg?react';
+export { default as Cart } from './cart.svg?react';
 // ABOUT'S ICONS
 export { default as CustomerService } from './customer-service.svg?react';
 export { default as Delivery } from './delivery.svg?react';

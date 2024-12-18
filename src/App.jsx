@@ -13,7 +13,7 @@ import {
   Login,
   NotFound,
   Product,
-  Register,
+  SignUp,
   ThankYou,
   Whislist,
 } from '@pages';
@@ -60,8 +60,8 @@ const routes = [
     element: <Login />,
   },
   {
-    path: '/register',
-    element: <Register />,
+    path: '/sign-up',
+    element: <SignUp />,
   },
   {
     path: '/thank-you',
@@ -81,7 +81,7 @@ const App = () => {
   return (
     <Router>
       <Navbar />
-      <div>
+      <div className="min-h-screen">
         <Routes>
           {routes.map(({ path, element }) => (
             <Route key={path} element={element} path={path} />

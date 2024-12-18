@@ -2,7 +2,6 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-
 /* Pagination Bullets */
 .swiper-cstm .swiper-pagination-bullet {
   background-color: gray;

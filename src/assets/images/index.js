@@ -1,4 +1,5 @@
 export { default as articleImg } from './articleImg.webp';
+export { default as authBanner } from './auth-banner.webp';
 // Footer Image
 export { default as playStore } from './google-play-store.png';
 export { default as appleStore } from './apple-store.png';
