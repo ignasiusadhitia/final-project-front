@@ -18,10 +18,10 @@ import { aboutHero, member1, member2, member3, member4 } from '@images';
 const About = () => {
   const navigate = useNavigate();
   return (
-    <div className="overflow-hidden">
+    <div className="overflow-hidden mt-6 md:mt-[3.75rem]">
       <div>
         {/* BREADCRUMB */}
-        <div className="container p-5 md:p-0 text-sm">
+        <div className="container px-5 md:p-0 text-sm">
           <button className="text-text-2" onClick={() => navigate('/')}>
             Home
           </button>
