@@ -11,3 +11,6 @@ export { default as LogInForm } from './auth/LogInForm';
 // About Page Components
 export { default as Guarantee } from './Guarantee';
 export { default as TeamsCard } from './about/TeamsCard';
+// Product Page Components
+export { default as ProductGrid } from './ProductGrid';
+export { default as ProductsCard } from './ProductsCard';

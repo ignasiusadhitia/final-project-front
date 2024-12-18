@@ -15,7 +15,7 @@ import {
   Product,
   SignUp,
   ThankYou,
-  Whislist,
+  Wishlist,
 } from '@pages';
 
 const routes = [
@@ -68,8 +68,8 @@ const routes = [
     element: <ThankYou />,
   },
   {
-    path: '/whislist',
-    element: <Whislist />,
+    path: '/wishlist',
+    element: <Wishlist />,
   },
   {
     path: '*',
