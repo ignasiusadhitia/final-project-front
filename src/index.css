@@ -2,3 +2,20 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Pagination Bullets */
+.swiper-cstm .swiper-pagination-bullet {
+  background-color: gray;
+  opacity: 1;
+  width: 12px;
+  height: 12px;
+}
+.swiper-cstm .swiper-pagination-bullet-active {
+  background-color: #db4444;
+  box-shadow: 0 0 0 3px #db444430;
+}
+.swiper-cstm .swiper-pagination {
+  top: 0;
+  position: relative;
+  padding-top: 3rem;
+}

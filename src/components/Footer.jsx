@@ -6,7 +6,7 @@ import { playStore, appleStore, qrCode } from '@images';
 
 const Footer = () => {
   return (
-    <footer className="bg-black text-white py-5">
+    <footer className="bg-black text-white p-5">
       <div className="container p-5 md:px-0 grid gap-10 grid-cols-2 lg:grid-cols-5">
         {/* Header (Exclusive) */}
         <div className="flex col-span-2 md:col-span-1 justify-between order-1 md:order-none">
@@ -19,6 +19,7 @@ const Footer = () => {
               <label className="hidden" htmlFor="email-input"></label>
               <input
                 className="bg-black text-white w-full max-w-[217px] border rounded p-2 text-sm"
+                id="email-input"
                 placeholder="Enter your Email"
                 type="email"
               />
