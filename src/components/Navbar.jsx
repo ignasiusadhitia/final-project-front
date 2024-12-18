@@ -135,10 +135,10 @@ const Navbar = () => {
             </li>
             <li>
               <Link
-                className={`${location === '/whishlist' ? 'text-black font-medium border-secondary-3' : 'text-text-2 font-normal border-transparent'} border-l-8 py-2 px-3 text-sm font-normal`}
-                to={'whishlist'}
+                className={`${location === '/wishlist' ? 'text-black font-medium border-secondary-3' : 'text-text-2 font-normal border-transparent'} border-l-8 py-2 px-3 text-sm font-normal`}
+                to={'wishlist'}
               >
-                Whislist
+                Wishlist
               </Link>
             </li>
           </ul>
