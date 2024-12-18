@@ -5,3 +5,5 @@ export { default as Skeleton } from './Skeleteon';
 export { default as SignUpForm } from './auth/SignUpForm';
 export { default as LogInForm } from './auth/LogInForm';
 export { default as SectionTitle } from './SectionTitle';
+export { default as ContactCard } from './contact/ContactCard';
+export { default as ContactForm } from './contact/ContactForm';
