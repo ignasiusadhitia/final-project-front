@@ -17,3 +17,6 @@ export { default as Twitter } from './twitter.svg?react';
 export { default as Instagram } from './instagram.svg?react';
 export { default as Linkedin } from './linkedin.svg?react';
 export { default as Send } from './send.svg?react';
+export { default as EditAddress } from './edit-address.svg?react';
+export { default as DeleteAddress } from './delete-address.svg?react';
+export { default as AddAddress } from './add-address.svg?react';
