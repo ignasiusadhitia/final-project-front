@@ -4,7 +4,7 @@ import { Mail, Phone } from '@icons';
 
 const ContactCard = () => {
   return (
-    <section className="max-w-[340px] flex flex-col gap-9 px-[2.188rem] pt-10 pb-[3.188rem] rounded shadow-md text-black">
+    <section className="max-w-full md:max-w-[340px] flex flex-col gap-9 px-[2.188rem] pt-10 pb-[3.188rem] rounded shadow-md text-black">
       {/* Call To Us */}
       <div className="flex flex-col gap-6">
         <div className="flex gap-4 items-center">
