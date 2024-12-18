@@ -1,6 +1,6 @@
-import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
+import { Route, Routes, useLocation } from 'react-router-dom';
 
-import { Footer, Navbar } from '@components';
+import { Breadcrumb, Footer, Navbar } from '@components';
 import {
   About,
   Account,
@@ -28,7 +28,7 @@ const routes = [
     element: <About />,
   },
   {
-    path: '/account',
+    path: '/my-account',
     element: <Account />,
   },
   {
@@ -78,10 +78,19 @@ const routes = [
 ];
 
 const App = () => {
+  const location = useLocation();
+
+  // Hide breadcrumb on hidden paths
+  const hiddenPaths = ['/', '/products', '/login', '/sign-up', '/my-account'];
+  const isBreadcrumbVisible = !hiddenPaths.includes(location.pathname);
+
   return (
-    <Router>
+    <>
       <Navbar />
       <div className="min-h-screen">
+        {/* Global Breadcrumb */}
+        {isBreadcrumbVisible && <Breadcrumb />}
+
         <Routes>
           {routes.map(({ path, element }) => (
             <Route key={path} element={element} path={path} />
@@ -89,7 +98,7 @@ const App = () => {
         </Routes>
       </div>
       <Footer />
-    </Router>
+    </>
   );
 };
 
