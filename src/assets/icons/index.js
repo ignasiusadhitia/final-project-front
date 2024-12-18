@@ -19,10 +19,10 @@ export { default as Instagram } from './instagram.svg?react';
 export { default as Linkedin } from './linkedin.svg?react';
 export { default as Send } from './send.svg?react';
 export { default as Cart } from './cart.svg?react';
-<<<<<<< HEAD
+
 export { default as Mail } from './mail.svg?react';
 export { default as Phone } from './phone.svg?react';
-=======
+
 // ABOUT'S ICONS
 export { default as CustomerService } from './customer-service.svg?react';
 export { default as Delivery } from './delivery.svg?react';
@@ -34,4 +34,3 @@ export { default as SellersActive } from './sellers-active.svg?react';
 export { default as CardTwitter } from './card-twitter.svg?react';
 export { default as CardInstagram } from './card-instagram.svg?react';
 export { default as CardLinkedin } from './card-linkedin.svg?react';
->>>>>>> 0badcdd87c27a093cb7eb2bd45524deaac197ec9
