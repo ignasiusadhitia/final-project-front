@@ -11,7 +11,6 @@ export { default as LogInForm } from './auth/LogInForm';
 // Contact Page Components
 export { default as ContactCard } from './contact/ContactCard';
 export { default as ContactForm } from './contact/ContactForm';
-
 // About Page Components
 export { default as Guarantee } from './Guarantee';
 export { default as TeamsCard } from './about/TeamsCard';
