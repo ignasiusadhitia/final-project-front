@@ -26,3 +26,5 @@ export { default as MyOrders } from './account/MyOrders';
 export { default as Banner } from './home/Banner';
 export { default as CategoryCard } from './home/CategoryCard';
 export { default as FeatureCard } from './home/FeatureCard';
+// Checkout Flow Pages Components
+export { default as CheckoutProductCard } from './checkout/CheckoutProductCard';
