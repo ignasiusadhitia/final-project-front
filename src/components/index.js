@@ -17,3 +17,8 @@ export { default as TeamsCard } from './about/TeamsCard';
 // Product Page Components
 export { default as ProductGrid } from './ProductGrid';
 export { default as ProductsCard } from './ProductsCard';
+// Account Page Components
+export { default as UpdateAddress } from './account/UpdateAddress';
+export { default as UpdateProfile } from './account/UpdateProfile';
+export { default as AddressList } from './account/AddressList';
+export { default as MyOrders } from './account/MyOrders';

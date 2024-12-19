@@ -7,12 +7,12 @@
       "@components": ["src/components/index.js"],
       "@hooks/*": ["src/hooks/*"],
       "@layouts/*": ["src/layouts/*"],
-      "@pages": ["src/pages/index.js"],
+      "@pages": ["pages/index.js"],
       "@store/*": ["src/store/*"],
       "@services/*": ["src/services/*"],
       "@utils/*": ["src/utils/*"]
     }
   },
-  "include": ["src/**/*"],
+  "include": ["src/**/*", "pages"],
   "exclude": ["node_modules", "dist"]
 }
