@@ -1,9 +1,14 @@
 import React, { useState } from 'react';
 
-import { ProductGrid, SectionTitle } from '@components';
+import { useNavigate } from 'react-router-dom';
 
-const AllProducts = () => {
-  const initialProducts = [
+import { ProductsCard } from '@components';
+
+const Wishlist = () => {
+  const navigate = useNavigate();
+
+  // TODO: Replace with actual data from the backend
+  const wishLists = [
     {
       id: 1,
       imageUrl: 'https://picsum.photos/400/300',
@@ -64,6 +69,8 @@ const AllProducts = () => {
       category: 'Home & Lifestyle',
       stock: 8,
     },
+  ];
+  const justForYouProducts = [
     {
       id: 5,
       imageUrl: 'https://picsum.photos/400/300',
@@ -120,80 +127,63 @@ const AllProducts = () => {
       category: 'Sports & Outdoor',
       stock: 12,
     },
-    {
-      id: 9,
-      imageUrl: 'https://picsum.photos/400/300',
-      name: 'Camping Tent XL',
-      description: 'Spacious waterproof tent for family camping trips.',
-      price: '199',
-      originalPrice: '249',
-      discount: '-20%',
-      rating: 4.6,
-      ratingCount: 38,
-      categoryId: 3,
-      category: 'Sports & Outdoor',
-      stock: 22,
-    },
-  ];
-  const categories = [
-    { id: 0, name: 'All Products' },
-    { id: 1, name: 'Electronics' },
-    { id: 2, name: 'Home & Lifestyle' },
-    { id: 3, name: 'Sports & Outdoor' },
   ];
 
-  const [products, setProducts] = useState(initialProducts);
-  const [selectedCategory, setSelectedCategory] = useState(categories[0]);
-  const [showMore, setShowMore] = useState(false);
-
-  const handleSelectCategory = (category) => {
-    setSelectedCategory(category);
+  const [cart, setCart] = useState([]);
+  // TODO: Replace with actual process
+  const handleMoveAllToCart = () => {
+    setCart(wishLists);
+    console.log(cart);
+    alert('All products moved to cart (console log)');
   };
-
-  const handleShowMore = () => {
-    setShowMore(true);
-  };
-
-  const filteredProducts =
-    selectedCategory.id === 0
-      ? products
-      : products.filter(
-          (product) => product.categoryId === selectedCategory.id
-        );
 
   return (
-    <div className="flex w-full ">
-      <div className="w-[30%] h-ful p-5 text-left">
-        <ul className="space-y-3 flex flex-col items-center text-left">
-          {categories.map((category) => (
-            <li
-              key={category.id}
-              className={`cursor-pointer hover:text-red-500 text-left w-full flex justify-end ${selectedCategory?.id === category.id ? 'text-red-500' : ''}`}
-              onClick={() => handleSelectCategory(category)}
-            >
-              <span className="text-left w-[70%] ">{category.name}</span>
-            </li>
-          ))}
-        </ul>
-      </div>
-      <div className="flex-grow p-4 mx-20">
-        <SectionTitle
-          hideTitle
-          subTitle={selectedCategory.name}
-          title={selectedCategory.name}
-        />
-        <ProductGrid products={filteredProducts} />
-        {!showMore && (
+    <div className="container p-5 lg:p-0 my-6 md:my-[3.75rem] space-y-10">
+      {/* WISHLIST SECCTION */}
+      <section>
+        <div className="flex justify-between items-center">
+          <h1 className="text-sm font-semibold lg:text-xl lg:font-medium">{`WishList (${wishLists.length})`}</h1>
           <button
-            className="my-20 bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-8 rounded mx-auto block"
-            onClick={handleShowMore}
+            className="text-xs lg:text-base py-3 lg:px-10 text-secondary-3 lg:text-black rounded lg:border border-black/50 lg:hover:bg-black lg:hover:text-white transition-colors"
+            onClick={handleMoveAllToCart}
           >
-            Show More
+            Move All To Bag
           </button>
-        )}
-      </div>
+        </div>
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-5 mt-5">
+          {wishLists.map((product) => (
+            <ProductsCard key={product.id} product={product} />
+          ))}
+        </div>
+      </section>
+
+      {/* JUST FOR YOU SECTION */}
+      <section>
+        <div className="flex justify-between items-center">
+          {/* CUSTOM SECTION TITLE */}
+          <div className="flex flex-col gap-5">
+            <div className="flex gap-4 items-center">
+              <div className="w-5 h-10 hidden md:block bg-secondary-3 rounded"></div>
+              <h2 className="text-sm md:text-xl text-black font-semibold">
+                Just For You
+              </h2>
+            </div>
+          </div>
+          <button
+            className="text-xs lg:text-base py-3 lg:px-10 text-secondary-3 lg:text-black rounded lg:border border-black/50 lg:hover:bg-black lg:hover:text-white transition-colors"
+            onClick={() => navigate('/products')}
+          >
+            See All
+          </button>
+        </div>
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-5 mt-5">
+          {justForYouProducts.map((product) => (
+            <ProductsCard key={product.id} product={product} />
+          ))}
+        </div>
+      </section>
     </div>
   );
 };
 
-export default AllProducts;
+export default Wishlist;

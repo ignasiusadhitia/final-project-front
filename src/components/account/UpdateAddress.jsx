@@ -53,8 +53,8 @@ const UpdateAddress = () => {
       <div className="flex justify-end items-end">
         <div className="w-full lg:w-auto flex justify-between lg:justify-center lg:items-center gap-2 lg:gap-8">
           <Link
-            className="bg-secondary-1 lg:bg-transparent w-[181px] h-11 lg:w-auto lg:h-auto border-none text-sm lg:text-base font-medium rounded-md lg:font-normal text-black"
-            to={'/account/address'}
+            className="flex items-center justify-center bg-secondary-1 lg:bg-transparent w-[181px] h-11 lg:w-auto lg:h-auto border-none text-sm lg:text-base font-medium rounded-md lg:font-normal text-black"
+            to={'/my-account/address'}
           >
             Cancel
           </Link>

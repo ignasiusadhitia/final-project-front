@@ -12,7 +12,7 @@ const AddressList = () => {
           <h3 className="text-base lg:text-xl font-medium text-secondary-3">
             Your Address
           </h3>
-          <Link className="block lg:hidden" to={'/account/address/add'}>
+          <Link className="block lg:hidden" to={'/my-account/address/add'}>
             <AddAddress />
           </Link>
         </div>
@@ -29,7 +29,7 @@ const AddressList = () => {
             </div>
 
             <div className="flex items-center gap-2">
-              <Link to={'/account/address/edit/1'}>
+              <Link to={'/my-account/address/edit/1'}>
                 <EditAddress />
               </Link>
               <button>
@@ -50,7 +50,7 @@ const AddressList = () => {
             </div>
 
             <div className="flex items-center gap-2">
-              <Link to={'/account/address/edit/2'}>
+              <Link to={'/my-account/address/edit/2'}>
                 <EditAddress />
               </Link>
               <button>
@@ -65,7 +65,7 @@ const AddressList = () => {
         <div className="w-full lg:w-auto flex justify-between lg:justify-center lg:items-center gap-2 lg:gap-8">
           <Link
             className="flex justify-center items-center w-[181px] h-11 lg:w-[214px] lg:h-14 bg-secondary-3 rounded-md text-sm lg:text-base font-medium text-text-1"
-            to={'/account/address/add'}
+            to={'/my-account/address/add'}
           >
             Add New Address
           </Link>
