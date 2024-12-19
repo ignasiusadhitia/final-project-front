@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import ProductGrid from '../components/ProductGrid';
 import { SectionTitle } from '@components';
+import PropTypes from 'prop-types';
 
 const AllProducts = () => {
   const initialProducts = [
@@ -183,6 +184,31 @@ const AllProducts = () => {
       </div>
     </div>
   );
+};
+
+AllProducts.propTypes = {
+  initialProducts: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      imageUrl: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      description: PropTypes.string.isRequired,
+      price: PropTypes.string.isRequired,
+      originalPrice: PropTypes.string,
+      discount: PropTypes.string,
+      rating: PropTypes.number,
+      ratingCount: PropTypes.number,
+      categoryId: PropTypes.number.isRequired,
+      category: PropTypes.string.isRequired,
+      stock: PropTypes.number.isRequired
+    })
+  ),
+  categories: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      name: PropTypes.string.isRequired
+    })
+  )
 };
 
 export default AllProducts; 
