@@ -3,17 +3,12 @@ import React from 'react';
 import ProductCard from './ProductsCard';
 import PropTypes from 'prop-types';
 
-const ProductGrid = ({ products, gridCols = 3 }) => {
-  const gridColsClass = {
-    2: 'grid-cols-2',
-    3: 'grid-cols-3',
-    4: 'grid-cols-4',
-  };
+const ProductGrid = ({ products, gridCols = 3, showTrashButton = false }) => {
 
   return (
     <div className={`grid grid-cols-${gridCols} gap-6 my-16`}>
       {products.map((product) => (
-        <ProductCard key={product.id} product={product} showTrashButton={false} />
+        <ProductCard key={product.id} product={product} showTrashButton={showTrashButton} />
       ))}
     </div>
   );
@@ -33,7 +28,8 @@ ProductGrid.propTypes = {
       category: PropTypes.string
     })
   ).isRequired,
-  gridCols: PropTypes.number
+  gridCols: PropTypes.number,
+  showTrashButton: PropTypes.bool
 };
 
 ProductGrid.defaultProps = {
