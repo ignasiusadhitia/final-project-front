@@ -35,12 +35,12 @@ const Checkout = () => {
               ))}
             </div>
 
-            <div className="flex justify-between mt-8 pb-4 border-b">
+            <div className="flex justify-between mt-8 pb-4 border-b-[1px] border-black border-opacity-30 ">
               <span className="block">Subtotal:</span>
               <span className="block">${subtotal}</span>
             </div>
 
-            <div className="flex justify-between py-4 border-b">
+            <div className="flex justify-between py-4 border-b-[1px] border-black border-opacity-30">
               <span className="block">Shipping:</span>
               <span className="block">
                 {order?.shipping === 'Free'
