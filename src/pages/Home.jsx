@@ -79,6 +79,21 @@ const Home = () => {
       category: 'Home & Lifestyle',
       stock: 8,
     },
+    {
+      id: 5,
+      imageUrl: 'https://picsum.photos/400/300',
+      name: 'ASUS FHD Gaming Laptop',
+      description:
+        'Powerful gaming laptop with high-performance specs for a smooth gaming experience.',
+      price: '960',
+      originalPrice: '1160',
+      discount: '-35%',
+      rating: 4.7,
+      ratingCount: 65,
+      categoryId: 1,
+      category: 'Electronics',
+      stock: 0,
+    },
   ];
   const exploreOurProducts = [
     {

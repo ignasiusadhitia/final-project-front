@@ -7,7 +7,9 @@ const Breadcrumb = ({ userName }) => {
   const location = useLocation();
   const [productNames, setProductNames] = useState({});
   const currentPath = location.pathname;
-  const pathnames = currentPath.split('/').filter((x) => x);
+  let pathnames = currentPath.split('/').filter((x) => x);
+
+  pathnames = pathnames[0] === 'my-account' ? ['my-account'] : pathnames;
 
   // Function to format a bredcrumb
   const formatBreadcrumb = (value) => {
@@ -40,13 +42,12 @@ const Breadcrumb = ({ userName }) => {
           <Link to="/">Home</Link>
         </li>
 
-        {pathnames.map((value, index) => {
+        {pathnames?.map((value, index) => {
           const isId = /^\d+$/.test(value); // Check if the value is a number
           const label =
             isId && productNames[value] ? productNames[value] : value; // Use product name if available
 
           const to = `/${pathnames.slice(0, index + 1).join('/')}`;
-
           return (
             <li key={to} className="text-xs md:text-sm">
               <span className="opacity-100 md:opacity-50">&nbsp;/&nbsp;</span>

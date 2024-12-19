@@ -1,6 +1,12 @@
-import { Route, Routes, useLocation } from 'react-router-dom';
+import { Route, Routes, useLocation, useParams } from 'react-router-dom';
 
 import { Breadcrumb, Footer, Navbar } from '@components';
+import {
+  UpdateAddress,
+  UpdateProfile,
+  AddressList,
+  MyOrders,
+} from '@components';
 import {
   About,
   Account,
@@ -26,10 +32,6 @@ const routes = [
   {
     path: '/about',
     element: <About />,
-  },
-  {
-    path: '/my-account',
-    element: <Account />,
   },
   {
     path: '/products',
@@ -79,10 +81,23 @@ const routes = [
 
 const App = () => {
   const location = useLocation();
+  const currentPath = location.pathname;
 
-  // Hide breadcrumb on hidden paths
-  const hiddenPaths = ['/', '/products', '/login', '/sign-up', '/my-account'];
-  const isBreadcrumbVisible = !hiddenPaths.includes(location.pathname);
+  const hiddenPathsRegex = new RegExp(
+    [
+      '^/$',
+      '^/products$',
+      '^/login$',
+      '^/sign-up$',
+      '^/my-account$',
+      '^/my-account/address$',
+      '^/my-account/address/add$',
+      '^/my-account/address/edit/\\d+$',
+      '^/my-account/my-orders$',
+    ].join('|')
+  );
+
+  const isBreadcrumbVisible = !hiddenPathsRegex.test(currentPath);
 
   return (
     <>
@@ -95,6 +110,14 @@ const App = () => {
           {routes.map(({ path, element }) => (
             <Route key={path} element={element} path={path} />
           ))}
+
+          <Route element={<Account />} path="/my-account">
+            <Route index element={<UpdateProfile />} />
+            <Route element={<AddressList />} path="address" />
+            <Route element={<UpdateAddress />} path="address/add" />
+            <Route element={<UpdateAddress />} path="address/edit/:id" />
+            <Route element={<MyOrders />} path="my-orders" />
+          </Route>
         </Routes>
       </div>
       <Footer />
