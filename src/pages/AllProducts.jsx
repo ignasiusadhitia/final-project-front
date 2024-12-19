@@ -169,9 +169,9 @@ const AllProducts = () => {
           ))}
         </ul>
       </div>
-      <div className="flex-grow p-4 mx-20">
+      <div className="flex-grow py-4 mx-5">
         <SectionTitle title={selectedCategory.name} subTitle={selectedCategory.name} hideTitle/> 
-        <ProductGrid products={filteredProducts} />
+        <ProductGrid products={filteredProducts} gridCols={3} />
         {!showMore && (
           <button 
             onClick={handleShowMore} 
