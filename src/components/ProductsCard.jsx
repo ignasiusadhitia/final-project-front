@@ -1,8 +1,8 @@
+import { WhiteCart, Trash } from '@icons';
 import React from 'react';
+import PropTypes from 'prop-types';
 
-import { Cart } from '@icons';
-
-const ProductCard = ({ product }) => {
+const ProductCard = ({ product, showTrashButton = false }) => {
   return (
     <div className="max-w-sm rounded overflow-hidden bg-white group">
       <div className="relative">
@@ -12,23 +12,27 @@ const ProductCard = ({ product }) => {
             className="p-10 relative"
             src={product.imageUrl}
           />
-          <div className="bottom-0 left-0 right-0 bg-black opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          <div className="bg-black opacity-0 group-hover:opacity-100 transition-opacity duration-300">
             {product.stock > 0 ? (
               <button className="w-full py-3 text-center">
-                <span className="bg-black hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
-                  <Cart className="inline-block mr-2" />
+                <span className="bg-black text-white font-bold py-2 px-4 rounded">
+                  <WhiteCart className="inline-block mr-2" />
                   Add to Cart
                 </span>
               </button>
             ) : (
               <div className="w-full py-3 text-center">
                 <span className="text-white font-bold">
-                  <Cart className="inline-block mr-2" />
-                  Out of Stock
-                </span>
+                  <WhiteCart className="inline-block mr-2" />
+                  Out of Stock</span>
               </div>
             )}
           </div>
+          {showTrashButton && (
+            <button className="absolute top-4 right-4 hover:bg-gray-200 rounded-full h-fit shadow-lg bg-white p-2">
+            <Trash className=""/>
+          </button>
+      )}
         </div>
         {product.discount && (
           <span className="bg-red-500 absolute top-4 left-4 text-white font-bold py-1 px-3 rounded text-xs">
@@ -51,6 +55,25 @@ const ProductCard = ({ product }) => {
       </div>
     </div>
   );
+}
+
+
+ProductCard.propTypes = {
+  product: PropTypes.shape({
+    id: PropTypes.number.isRequired,
+    imageUrl: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    description: PropTypes.string.isRequired,
+    price: PropTypes.string.isRequired,
+    originalPrice: PropTypes.string,
+    discount: PropTypes.string,
+    rating: PropTypes.number,
+    ratingCount: PropTypes.number,
+    categoryId: PropTypes.number.isRequired,
+    category: PropTypes.string.isRequired,
+    stock: PropTypes.number.isRequired
+  }).isRequired,
+  showTrashButton: PropTypes.bool,
 };
 
 export default ProductCard;

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
-
-import { ProductGrid, SectionTitle } from '@components';
+import ProductGrid from '../components/ProductGrid';
+import { SectionTitle } from '@components';
+import PropTypes from 'prop-types';
 
 const AllProducts = () => {
   const initialProducts = [
@@ -176,13 +177,9 @@ const AllProducts = () => {
           ))}
         </ul>
       </div>
-      <div className="flex-grow p-4 mx-20">
-        <SectionTitle
-          hideTitle
-          subTitle={selectedCategory.name}
-          title={selectedCategory.name}
-        />
-        <ProductGrid products={filteredProducts} />
+      <div className="flex-grow py-4 mx-5">
+        <SectionTitle title={selectedCategory.name} subTitle={selectedCategory.name} hideTitle/> 
+        <ProductGrid products={filteredProducts} gridCols={3} />
         {!showMore && (
           <button
             className="my-20 bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-8 rounded mx-auto block"
@@ -194,6 +191,31 @@ const AllProducts = () => {
       </div>
     </div>
   );
+};
+
+AllProducts.propTypes = {
+  initialProducts: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      imageUrl: PropTypes.string.isRequired,
+      name: PropTypes.string.isRequired,
+      description: PropTypes.string.isRequired,
+      price: PropTypes.string.isRequired,
+      originalPrice: PropTypes.string,
+      discount: PropTypes.string,
+      rating: PropTypes.number,
+      ratingCount: PropTypes.number,
+      categoryId: PropTypes.number.isRequired,
+      category: PropTypes.string.isRequired,
+      stock: PropTypes.number.isRequired
+    })
+  ),
+  categories: PropTypes.arrayOf(
+    PropTypes.shape({
+      id: PropTypes.number.isRequired,
+      name: PropTypes.string.isRequired
+    })
+  )
 };
 
 export default AllProducts;
