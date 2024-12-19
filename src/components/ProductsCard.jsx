@@ -1,6 +1,8 @@
-import { WhiteCart, Trash } from '@icons';
 import React from 'react';
+
 import PropTypes from 'prop-types';
+
+import { WhiteCart, Trash } from '@icons';
 
 const ProductCard = ({ product, showTrashButton = false }) => {
   return (
@@ -24,15 +26,16 @@ const ProductCard = ({ product, showTrashButton = false }) => {
               <div className="w-full py-3 text-center">
                 <span className="text-white font-bold">
                   <WhiteCart className="inline-block mr-2" />
-                  Out of Stock</span>
+                  Out of Stock
+                </span>
               </div>
             )}
           </div>
           {showTrashButton && (
             <button className="absolute top-4 right-4 hover:bg-gray-200 rounded-full h-fit shadow-lg bg-white p-2">
-            <Trash className=""/>
-          </button>
-      )}
+              <Trash className="" />
+            </button>
+          )}
         </div>
         {product.discount && (
           <span className="bg-red-500 absolute top-4 left-4 text-white font-bold py-1 px-3 rounded text-xs">
@@ -55,8 +58,7 @@ const ProductCard = ({ product, showTrashButton = false }) => {
       </div>
     </div>
   );
-}
-
+};
 
 ProductCard.propTypes = {
   product: PropTypes.shape({
@@ -71,7 +73,7 @@ ProductCard.propTypes = {
     ratingCount: PropTypes.number,
     categoryId: PropTypes.number.isRequired,
     category: PropTypes.string.isRequired,
-    stock: PropTypes.number.isRequired
+    stock: PropTypes.number.isRequired,
   }).isRequired,
   showTrashButton: PropTypes.bool,
 };

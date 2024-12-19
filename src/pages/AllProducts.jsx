@@ -1,7 +1,10 @@
 import React, { useState } from 'react';
-import ProductGrid from '../components/ProductGrid';
-import { SectionTitle } from '@components';
+
 import PropTypes from 'prop-types';
+
+import { SectionTitle } from '@components';
+
+import ProductGrid from '../components/ProductGrid';
 
 const AllProducts = () => {
   const initialProducts = [
@@ -178,8 +181,12 @@ const AllProducts = () => {
         </ul>
       </div>
       <div className="flex-grow py-4 mx-5">
-        <SectionTitle title={selectedCategory.name} subTitle={selectedCategory.name} hideTitle/> 
-        <ProductGrid products={filteredProducts} gridCols={3} />
+        <SectionTitle
+          hideTitle
+          subTitle={selectedCategory.name}
+          title={selectedCategory.name}
+        />
+        <ProductGrid gridCols={3} products={filteredProducts} />
         {!showMore && (
           <button
             className="my-20 bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-8 rounded mx-auto block"
@@ -207,15 +214,15 @@ AllProducts.propTypes = {
       ratingCount: PropTypes.number,
       categoryId: PropTypes.number.isRequired,
       category: PropTypes.string.isRequired,
-      stock: PropTypes.number.isRequired
+      stock: PropTypes.number.isRequired,
     })
   ),
   categories: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.number.isRequired,
-      name: PropTypes.string.isRequired
+      name: PropTypes.string.isRequired,
     })
-  )
+  ),
 };
 
 export default AllProducts;
