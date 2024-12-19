@@ -76,7 +76,7 @@ const About = () => {
         {/* TEAM SECTION */}
         <div className="container p-5 lg:p-0 gap-5 mt-10 md:mt-40">
           <Swiper
-            className="swiper-cstm"
+            className="swiper-cstm about"
             loop={true}
             modules={[Pagination]}
             pagination={{ clickable: true }}

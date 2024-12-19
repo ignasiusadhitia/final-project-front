@@ -14,3 +14,7 @@ export { default as TeamsCard } from './about/TeamsCard';
 // Product Page Components
 export { default as ProductGrid } from './ProductGrid';
 export { default as ProductsCard } from './ProductsCard';
+// Home Page Components
+export { default as Banner } from './home/Banner';
+export { default as CategoryCard } from './home/CategoryCard';
+export { default as FeatureCard } from './home/FeatureCard';
