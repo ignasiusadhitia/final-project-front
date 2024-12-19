@@ -20,13 +20,15 @@ ProductGrid.propTypes = {
       id: PropTypes.number.isRequired,
       imageUrl: PropTypes.string.isRequired,
       name: PropTypes.string.isRequired,
-      price: PropTypes.string.isRequired,
-      originalPrice: PropTypes.string,
-      discount: PropTypes.string,
-      stock: PropTypes.number.isRequired
+      price: PropTypes.number.isRequired,
+      originalPrice: PropTypes.number,
+      discount: PropTypes.number,
+      stock: PropTypes.number.isRequired,
+      description: PropTypes.string,
+      category: PropTypes.string
     })
   ).isRequired,
-  gridCols: PropTypes.oneOf([2, 3, 4])
+  gridCols: PropTypes.number
 };
 
 ProductGrid.defaultProps = {
@@ -34,4 +36,3 @@ ProductGrid.defaultProps = {
 };
 
 export default ProductGrid;
-
