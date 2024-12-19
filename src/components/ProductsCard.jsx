@@ -7,7 +7,11 @@ const ProductCard = ({ product, showTrashButton = false }) => {
     <div className="max-w-sm rounded overflow-hidden bg-white group">
       <div className="relative">
         <div className="relative bg-gray-200">
-          <img className="p-10 relative" src={product.imageUrl} alt={product.name} />
+          <img
+            alt={product.name}
+            className="p-10 relative"
+            src={product.imageUrl}
+          />
           <div className="bg-black opacity-0 group-hover:opacity-100 transition-opacity duration-300">
             {product.stock > 0 ? (
               <button className="w-full py-3 text-center">
@@ -31,16 +35,22 @@ const ProductCard = ({ product, showTrashButton = false }) => {
       )}
         </div>
         {product.discount && (
-          <span className="bg-red-500 absolute top-4 left-4 text-white font-bold py-1 px-3 rounded text-xs">{product.discount}</span>
+          <span className="bg-red-500 absolute top-4 left-4 text-white font-bold py-1 px-3 rounded text-xs">
+            {product.discount}
+          </span>
         )}
       </div>
       <div className="px-3 py-4 h-20">
         <div className="font-bold text-xl line-clamp-2">{product.name}</div>
       </div>
       <div className="px-3 pb-4">
-        <span className="inline-block text-secondary-3 me-3">${product.price}</span>
+        <span className="inline-block text-secondary-3 me-3">
+          ${product.price}
+        </span>
         {product.discount && (
-          <span className="line-through text-gray-500">${product.originalPrice}</span>
+          <span className="line-through text-gray-500">
+            ${product.originalPrice}
+          </span>
         )}
       </div>
     </div>

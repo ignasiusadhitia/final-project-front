@@ -1,6 +1,5 @@
 import React from 'react';
 
-import { useNavigate } from 'react-router-dom';
 import { Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
@@ -16,19 +15,9 @@ import {
 import { aboutHero, member1, member2, member3, member4 } from '@images';
 
 const About = () => {
-  const navigate = useNavigate();
   return (
     <div className="overflow-hidden mt-6 md:mt-[3.75rem]">
       <div>
-        {/* BREADCRUMB */}
-        <div className="container px-5 lg:p-0 text-sm">
-          <button className="text-text-2" onClick={() => navigate('/')}>
-            Home
-          </button>
-          <span> / </span>
-          <span>About</span>
-        </div>
-
         {/* HERO SECTION */}
         <div className="grid md:grid-cols-2 w-screen gap-5 md:gap-20 p-10 lg:p-0">
           {/* DESCRIPTIONS */}
