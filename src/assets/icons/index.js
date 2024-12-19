@@ -37,3 +37,5 @@ export { default as SellersActive } from './sellers-active.svg?react';
 export { default as CardTwitter } from './card-twitter.svg?react';
 export { default as CardInstagram } from './card-instagram.svg?react';
 export { default as CardLinkedin } from './card-linkedin.svg?react';
+// HOME'S ICONS
+export { default as Arrow } from './arrow.svg?react';

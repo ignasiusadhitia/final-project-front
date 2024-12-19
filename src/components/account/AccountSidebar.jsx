@@ -13,8 +13,9 @@ const AccountSidebar = () => {
         </h2>
         <ul className="flex flex-row lg:flex-col gap-5 lg:gap-3 ml-7">
           <li>
-            <Link to={"/my-account"}
+            <Link
               className={`flex lg:inline justify-center items-center lg:text-base font-medium w-[92px] h-[28px] lg:w-auto lg:h-0 text-xs rounded-md ${location === '/my-account' ? 'lg:text-secondary-3 lg:bg-transparent bg-secondary-3 text-text-1' : 'lg:text-text-2 border border-text-2 lg:border-none'}`}
+              to={'/my-account'}
             >
               My Profile
             </Link>

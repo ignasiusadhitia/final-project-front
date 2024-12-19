@@ -17,10 +17,11 @@ const MyOrders = () => {
         </div>
         <div className="relative flex flex-col gap-3 lg:gap-6 justify-between">
           {status.map((item, index) => (
-            <div key={index} className="flex flex-row items-start w-full lg:w-[710px] justify-between py-4 px-8 bg-secondary-1">
-              <div
-                className="flex flex-col lg:flex-row gap-7 lg:gap-12"
-              >
+            <div
+              key={index}
+              className="flex flex-row items-start w-full lg:w-[710px] justify-between py-4 px-8 bg-secondary-1"
+            >
+              <div className="flex flex-col lg:flex-row gap-7 lg:gap-12">
                 <div>
                   <img alt="order-item" src="https://picsum.photos/80/80" />
                 </div>

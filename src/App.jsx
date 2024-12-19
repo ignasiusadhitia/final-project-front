@@ -2,6 +2,12 @@ import { Route, Routes, useLocation, useParams } from 'react-router-dom';
 
 import { Breadcrumb, Footer, Navbar } from '@components';
 import {
+  UpdateAddress,
+  UpdateProfile,
+  AddressList,
+  MyOrders,
+} from '@components';
+import {
   About,
   Account,
   AllProducts,
@@ -17,13 +23,6 @@ import {
   ThankYou,
   Wishlist,
 } from '@pages';
-
-import { 
-  UpdateAddress,
-  UpdateProfile,
-  AddressList,
-  MyOrders 
-} from '@components';
 
 const routes = [
   {
@@ -80,7 +79,6 @@ const routes = [
   },
 ];
 
-
 const App = () => {
   const location = useLocation();
   const currentPath = location.pathname;
@@ -113,13 +111,13 @@ const App = () => {
             <Route key={path} element={element} path={path} />
           ))}
 
-        <Route path="/my-account" element={<Account />}>
-          <Route index element={<UpdateProfile />} />
-          <Route path="address" element={<AddressList />} />
-          <Route path="address/add" element={<UpdateAddress />} />
-          <Route path="address/edit/:id" element={<UpdateAddress />} />
-          <Route path="my-orders" element={<MyOrders />} />
-        </Route>
+          <Route element={<Account />} path="/my-account">
+            <Route index element={<UpdateProfile />} />
+            <Route element={<AddressList />} path="address" />
+            <Route element={<UpdateAddress />} path="address/add" />
+            <Route element={<UpdateAddress />} path="address/edit/:id" />
+            <Route element={<MyOrders />} path="my-orders" />
+          </Route>
         </Routes>
       </div>
       <Footer />
