@@ -1,9 +1,9 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 import { Link, useParams } from 'react-router-dom';
 
 const UpdateAddress = () => {
-  const { id } = useParams;
+  const { id } = useParams();
   const [isEdit, setIsEdit] = useState(id ? true : false);
 
   return (
