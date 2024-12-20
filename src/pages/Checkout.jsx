@@ -8,7 +8,7 @@ import { productSmall } from '@images';
 const order = {
   products: [
     { id: 1, img: productSmall, name: 'Game Pad', price: 650 },
-    { id: 1, img: productSmall, name: 'Game Pad', price: 1100 },
+    { id: 1, img: productSmall, name: 'Game Pad 2', price: 1100 },
   ],
   shipping: 'Free',
 };
