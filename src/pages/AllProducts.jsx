@@ -153,6 +153,7 @@ const AllProducts = () => {
     { id: 3, name: 'Sports & Outdoor' },
   ];
 
+  // eslint-disable-next-line
   const [products, setProducts] = useState(initialProducts);
   const [selectedCategory, setSelectedCategory] = useState(categories[0]);
   const [showMore, setShowMore] = useState(false);
