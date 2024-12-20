@@ -10,5 +10,5 @@ export { default as Login } from './Login';
 export { default as NotFound } from './NotFound';
 export { default as Product } from './Product';
 export { default as SignUp } from './SignUp';
-export { default as ThankYou } from './ThankYou';
+export { default as Success } from './Success';
 export { default as Wishlist } from './Wishlist';

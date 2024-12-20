@@ -19,8 +19,8 @@ import {
   Login,
   NotFound,
   Product,
+  Success,
   SignUp,
-  ThankYou,
   Wishlist,
 } from '@pages';
 
@@ -54,6 +54,10 @@ const routes = [
     element: <Checkout />,
   },
   {
+    path: '/success',
+    element: <Success />,
+  },
+  {
     path: '/contact',
     element: <Contact />,
   },
@@ -64,10 +68,6 @@ const routes = [
   {
     path: '/sign-up',
     element: <SignUp />,
-  },
-  {
-    path: '/thank-you',
-    element: <ThankYou />,
   },
   {
     path: '/wishlist',
