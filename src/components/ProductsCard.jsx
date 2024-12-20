@@ -1,10 +1,15 @@
 import { WhiteCart, Trash, Favorite } from '@icons';
-import React from 'react';
+import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import ReactStars from 'react-rating-stars-component';
 
 
 const ProductCard = ({ product, showTrashButton = false, showRating = false, showFavoriteButton = false }) => {
+  const [isFavorite, setIsFavorite] = useState(false);
+
+  const handleFavoriteClick = () => {
+    setIsFavorite(!isFavorite);
+  };
   return (
     <div className="max-w-sm rounded overflow-hidden bg-white group">
       <div className="relative">
@@ -36,11 +41,13 @@ const ProductCard = ({ product, showTrashButton = false, showRating = false, sho
             </button>
           )}
           {showFavoriteButton && (
-            <button className="absolute top-4 right-4 hover:bg-gray-200 rounded-full h-fit shadow-lg bg-white p-2">
+            <button
+              onClick={handleFavoriteClick}
+              className={`absolute top-4 right-4 hover:bg-gray-200 rounded-full h-fit shadow-lg ${isFavorite ? "bg-red-500" : "bg-white"} p-2`}
+            >
               <Favorite className="" />
             </button>
-          )}
-        </div>
+          )}        </div>
         {product.discount && (
           <span className="bg-red-500 absolute top-4 left-4 text-white font-bold py-1 px-3 rounded text-xs">
             {product.discount}
@@ -76,7 +83,7 @@ const ProductCard = ({ product, showTrashButton = false, showRating = false, sho
           </div>
         )}
       </div>
-    </div>  );
+    </div>);
 }
 
 
