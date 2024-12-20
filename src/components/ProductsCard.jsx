@@ -1,10 +1,10 @@
-import { WhiteCart, Trash } from '@icons';
+import { WhiteCart, Trash, Favorite } from '@icons';
 import React from 'react';
 import PropTypes from 'prop-types';
 import ReactStars from 'react-rating-stars-component';
 
 
-const ProductCard = ({ product, showTrashButton = false }) => {
+const ProductCard = ({ product, showTrashButton = false, showRating = false, showFavoriteButton = false }) => {
   return (
     <div className="max-w-sm rounded overflow-hidden bg-white group">
       <div className="relative">
@@ -35,6 +35,11 @@ const ProductCard = ({ product, showTrashButton = false }) => {
               <Trash className="" />
             </button>
           )}
+          {showFavoriteButton && (
+            <button className="absolute top-4 right-4 hover:bg-gray-200 rounded-full h-fit shadow-lg bg-white p-2">
+              <Favorite className="" />
+            </button>
+          )}
         </div>
         {product.discount && (
           <span className="bg-red-500 absolute top-4 left-4 text-white font-bold py-1 px-3 rounded text-xs">
@@ -56,20 +61,22 @@ const ProductCard = ({ product, showTrashButton = false }) => {
         )}
       </div>
       <div className="flex items-center px-3 pb-4">
-        <ReactStars
-          count={5}
-          value={product.rating}
-          isHalf={true}
-          edit={false}
-          size={24}
-          activeColor="#FBBF24"
-        />
-
-        <span className="ml-1 me-2">{product.rating}</span>
-        <span className="text-gray-600">({product.ratingCount})</span>
+        {showRating && (
+          <div className="flex items-center">
+            <ReactStars
+              count={5}
+              value={product.rating}
+              isHalf={true}
+              edit={false}
+              size={24}
+              activeColor="#FBBF24"
+            />
+            <span className="ml-1 me-2">{product.rating}</span>
+            <span className="text-gray-600">({product.ratingCount})</span>
+          </div>
+        )}
       </div>
-    </div>
-  );
+    </div>  );
 }
 
 
@@ -89,6 +96,14 @@ ProductCard.propTypes = {
     stock: PropTypes.number.isRequired
   }).isRequired,
   showTrashButton: PropTypes.bool,
+  showRating: PropTypes.bool,
+  showFavoriteButton: PropTypes.bool,
+};
+
+ProductCard.defaultProps = {
+  showTrashButton: false,
+  showFavoriteButton: false,
+  showRating: false,
 };
 
 export default ProductCard;
