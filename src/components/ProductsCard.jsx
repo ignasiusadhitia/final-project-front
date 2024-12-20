@@ -1,6 +1,8 @@
 import { WhiteCart, Trash } from '@icons';
 import React from 'react';
 import PropTypes from 'prop-types';
+import ReactStars from 'react-rating-stars-component';
+
 
 const ProductCard = ({ product, showTrashButton = false }) => {
   return (
@@ -30,9 +32,9 @@ const ProductCard = ({ product, showTrashButton = false }) => {
           </div>
           {showTrashButton && (
             <button className="absolute top-4 right-4 hover:bg-gray-200 rounded-full h-fit shadow-lg bg-white p-2">
-            <Trash className=""/>
-          </button>
-      )}
+              <Trash className="" />
+            </button>
+          )}
         </div>
         {product.discount && (
           <span className="bg-red-500 absolute top-4 left-4 text-white font-bold py-1 px-3 rounded text-xs">
@@ -43,7 +45,7 @@ const ProductCard = ({ product, showTrashButton = false }) => {
       <div className="px-3 py-4 h-20">
         <div className="font-bold text-xl line-clamp-2">{product.name}</div>
       </div>
-      <div className="px-3 pb-4">
+      <div className="px-3">
         <span className="inline-block text-secondary-3 me-3">
           ${product.price}
         </span>
@@ -52,6 +54,19 @@ const ProductCard = ({ product, showTrashButton = false }) => {
             ${product.originalPrice}
           </span>
         )}
+      </div>
+      <div className="flex items-center px-3 pb-4">
+        <ReactStars
+          count={5}
+          value={product.rating}
+          isHalf={true}
+          edit={false}
+          size={24}
+          activeColor="#FBBF24"
+        />
+
+        <span className="ml-1 me-2">{product.rating}</span>
+        <span className="text-gray-600">({product.ratingCount})</span>
       </div>
     </div>
   );
