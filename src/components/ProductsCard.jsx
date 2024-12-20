@@ -1,8 +1,15 @@
-import { WhiteCart, Trash } from '@icons';
-import React from 'react';
+import { WhiteCart, Trash, Favorite } from '@icons';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import ReactStars from 'react-rating-stars-component';
 
-const ProductCard = ({ product, showTrashButton = false }) => {
+
+const ProductCard = ({ product, showTrashButton = false, showRating = false, showFavoriteButton = false }) => {
+  const [isFavorite, setIsFavorite] = useState(false);
+
+  const handleFavoriteClick = () => {
+    setIsFavorite(!isFavorite);
+  };
   return (
     <div className="max-w-sm rounded overflow-hidden bg-white group">
       <div className="relative">
@@ -30,20 +37,35 @@ const ProductCard = ({ product, showTrashButton = false }) => {
           </div>
           {showTrashButton && (
             <button className="absolute top-4 right-4 hover:bg-gray-200 rounded-full h-fit shadow-lg bg-white p-2">
-            <Trash className=""/>
-          </button>
-      )}
+              <Trash className="" />
+            </button>
+          )}
+          {showFavoriteButton && (
+            <button
+              onClick={handleFavoriteClick}
+              className={`absolute top-4 right-4 hover:bg-gray-200 rounded-full h-fit shadow-lg ${isFavorite ? "bg-red-500" : "bg-white"} p-2`}
+            >
+              <Favorite className="" />
+            </button>
+          )}
+          <div className="absolute top-4 left-4 flex gap-2">
+            {product.isNew && (
+              <span className="bg-green-500 text-white font-bold py-1 px-3 rounded text-xs">
+                New
+              </span>
+            )}
+            {product.discount && (
+              <span className="bg-red-500 text-white font-bold py-1 px-3 rounded text-xs">
+                {product.discount}
+              </span>
+            )}
+          </div>
         </div>
-        {product.discount && (
-          <span className="bg-red-500 absolute top-4 left-4 text-white font-bold py-1 px-3 rounded text-xs">
-            {product.discount}
-          </span>
-        )}
       </div>
       <div className="px-3 py-4 h-20">
         <div className="font-bold text-xl line-clamp-2">{product.name}</div>
       </div>
-      <div className="px-3 pb-4">
+      <div className="px-3">
         <span className="inline-block text-secondary-3 me-3">
           ${product.price}
         </span>
@@ -53,10 +75,24 @@ const ProductCard = ({ product, showTrashButton = false }) => {
           </span>
         )}
       </div>
-    </div>
-  );
+      <div className="flex items-center px-3 pb-4">
+        {showRating && (
+          <div className="flex items-center">
+            <ReactStars
+              count={5}
+              value={product.rating}
+              isHalf={true}
+              edit={false}
+              size={24}
+              activeColor="#FBBF24"
+            />
+            <span className="ml-1 me-2">{product.rating}</span>
+            <span className="text-gray-600">({product.ratingCount})</span>
+          </div>
+        )}
+      </div>
+    </div>);
 }
-
 
 ProductCard.propTypes = {
   product: PropTypes.shape({
@@ -71,9 +107,17 @@ ProductCard.propTypes = {
     ratingCount: PropTypes.number,
     categoryId: PropTypes.number.isRequired,
     category: PropTypes.string.isRequired,
-    stock: PropTypes.number.isRequired
+    stock: PropTypes.number.isRequired,
+    isNew: PropTypes.bool
   }).isRequired,
   showTrashButton: PropTypes.bool,
+  showRating: PropTypes.bool,
+  showFavoriteButton: PropTypes.bool,
 };
 
+ProductCard.defaultProps = {
+  showTrashButton: false,
+  showFavoriteButton: false,
+  showRating: false,
+};
 export default ProductCard;
