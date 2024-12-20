@@ -22,3 +22,7 @@ export { default as UpdateAddress } from './account/UpdateAddress';
 export { default as UpdateProfile } from './account/UpdateProfile';
 export { default as AddressList } from './account/AddressList';
 export { default as MyOrders } from './account/MyOrders';
+// Home Page Components
+export { default as Banner } from './home/Banner';
+export { default as CategoryCard } from './home/CategoryCard';
+export { default as FeatureCard } from './home/FeatureCard';

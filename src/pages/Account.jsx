@@ -1,9 +1,11 @@
 import React from 'react';
 
+import { Outlet } from 'react-router-dom';
+
+import { Breadcrumb } from '@components';
+
 import AccountSidebar from '../components/account/AccountSidebar';
 import UpdateProfile from '../components/account/UpdateProfile';
-import { Breadcrumb } from '@components';
-import { Outlet } from 'react-router-dom';
 
 const Account = () => {
   return (
@@ -15,7 +17,7 @@ const Account = () => {
         <Outlet />
       </div>
     </>
-  )
+  );
 };
 
 export default Account;

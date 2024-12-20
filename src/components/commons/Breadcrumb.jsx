@@ -9,8 +9,8 @@ const Breadcrumb = ({ userName }) => {
   const currentPath = location.pathname;
   let pathnames = currentPath.split('/').filter((x) => x);
 
-  pathnames = pathnames[0] === "my-account" ? ["my-account"] : pathnames;
-  
+  pathnames = pathnames[0] === 'my-account' ? ['my-account'] : pathnames;
+
   // Function to format a bredcrumb
   const formatBreadcrumb = (value) => {
     return value
