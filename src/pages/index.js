@@ -11,4 +11,5 @@ export { default as NotFound } from './NotFound';
 export { default as Product } from './Product';
 export { default as SignUp } from './SignUp';
 export { default as ThankYou } from './ThankYou';
-export { default as Whislist } from './Whislist';
+export { default as Wishlist } from './Wishlist';
+export { default as Error } from './Error';

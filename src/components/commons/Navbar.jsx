@@ -5,7 +5,7 @@ import { Link, useLocation } from 'react-router-dom';
 import {
   Search,
   WishList,
-  Cart,
+  BlackCart,
   UserLogin,
   User,
   Order,
@@ -135,8 +135,8 @@ const Navbar = () => {
             </li>
             <li>
               <Link
-                className={`${location === '/whislist' ? 'text-black font-medium border-secondary-3' : 'text-text-2 font-normal border-transparent'} border-l-8 py-2 px-3 text-sm font-normal`}
-                to={'whislist'}
+                className={`${location === '/wishlist' ? 'text-black font-medium border-secondary-3' : 'text-text-2 font-normal border-transparent'} border-l-8 py-2 px-3 text-sm font-normal`}
+                to={'wishlist'}
               >
                 Whislist
               </Link>
@@ -160,7 +160,7 @@ const Navbar = () => {
             <div className="border-t-2 pt-7 flex items-end justify-end gap-3">
               <Link
                 className="flex items-center justify-center w-[100px] h-[30px] border border-secondary-3 text-secondary-3 rounded-md text-xs"
-                to={'register'}
+                to={'sign-up'}
               >
                 Sign Up
               </Link>
@@ -213,8 +213,8 @@ const Navbar = () => {
             </li>
             <li>
               <Link
-                className={`${location === '/register' && 'border-b border-black'} text-base font-normal`}
-                to={'register'}
+                className={`${location === '/sign-up' && 'border-b border-black'} text-base font-normal`}
+                to={'sign-up'}
               >
                 Sign Up
               </Link>
@@ -226,7 +226,7 @@ const Navbar = () => {
           <div className="flex items-center gap-8">
             <div className="hidden lg:block relative">
               <input
-                className="bg-secondary-1 border border-secondary-1 rounded-md px-6 py-3 focus:border focus:outline-none focus:border-gray-300"
+                className="w-[243px] text-xs h-[38px] bg-secondary-1 border border-secondary-1 rounded-md px-6 py-3 focus:border focus:outline-none focus:border-gray-300"
                 placeholder="What are you looking for?"
                 type="text"
               />
@@ -236,11 +236,11 @@ const Navbar = () => {
             </div>
 
             <div className="flex gap-5 items-center">
-              <Link className="hidden lg:block" to={'whislist'}>
+              <Link className="hidden lg:block" to={'wishlist'}>
                 <WishList />
               </Link>
               <Link className="relative" to={'cart'}>
-                <Cart className="w-6 h-6 lg:w-8 lg:h-8" />
+                <BlackCart className="w-6 h-6 lg:w-8 lg:h-8" />
                 {login && (
                   <span className="absolute text-text-1 px-1 rounded-full text-xs -right-1 -top-1 bg-secondary-3">
                     2

@@ -241,16 +241,17 @@ const BestSelling = () => {
   };
 
   return (
-    <div className='container mt-16'>
+    <div className='container px-5 md:mt-16'>
+      <h3 className="md:hidden block text-sm text-black font-semibold">Best Selling Product</h3>
       <SectionTitle title='Best Selling Products' subTitle='Products' />
-      <div className='grid grid-cols-4 gap-5 mt-16'>
+      <div className='lg:px-0 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 mt-7 lg:mt-16'>
         {products.map((product) => (
-          <ProductCard key={product.id} product={product} />
+          <ProductCard key={product.id} showRating={true} product={product} />
         ))}
       </div>
 
       <div className='flex items-center justify-center my-24'>
-        <button onClick={handleShowMore} className='bg-secondary-3 w-[184px] h-[56px] text-text-1 rounded-md'>
+        <button onClick={handleShowMore} className='bg-secondary-3 w-[125px] hover:opacity-85 h-[45px] text-sm md:text-base lg:w-[184px] lg:h-[56px] text-text-1 rounded-md'>
           Show More
         </button>
       </div>
