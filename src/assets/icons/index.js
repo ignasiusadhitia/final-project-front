@@ -14,7 +14,7 @@ export { default as Reviews } from './reviews.svg?react';
 export { default as Logout } from './logout.svg?react';
 export { default as Trash } from './trash.svg?react';
 export { default as Favorite } from './favorite.svg?react';
-// FOOTER ICONS
+// Footer Icons
 export { default as Facebook } from './facebook.svg?react';
 export { default as Twitter } from './twitter.svg?react';
 export { default as Instagram } from './instagram.svg?react';
@@ -24,10 +24,10 @@ export { default as EditAddress } from './edit-address.svg?react';
 export { default as DeleteAddress } from './delete-address.svg?react';
 export { default as AddAddress } from './add-address.svg?react';
 export { default as Cart } from './cart.svg?react';
-// CONTACT'S ICONS
+// Contact's Icons
 export { default as Mail } from './mail.svg?react';
 export { default as Phone } from './phone.svg?react';
-// ABOUT'S ICONS
+// About's Icons
 export { default as CustomerService } from './customer-service.svg?react';
 export { default as Delivery } from './delivery.svg?react';
 export { default as MoneyBack } from './money-back.svg?react';
@@ -38,5 +38,8 @@ export { default as SellersActive } from './sellers-active.svg?react';
 export { default as CardTwitter } from './card-twitter.svg?react';
 export { default as CardInstagram } from './card-instagram.svg?react';
 export { default as CardLinkedin } from './card-linkedin.svg?react';
-// HOME'S ICONS
+// Home's Icons
 export { default as Arrow } from './arrow.svg?react';
+// Cart's Icons
+export { default as Minus } from './minus.svg?react';
+export { default as Plus } from './plus.svg?react';
