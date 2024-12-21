@@ -138,7 +138,7 @@ const Wishlist = () => {
   };
 
   return (
-    <div className="container px-5 lg:p-0 lg:my-6 md:my-[3.75rem] space-y-10">
+    <div className="container lg:mb-32 px-5 lg:p-0 lg:my-6 md:my-[3.75rem] space-y-10">
       {/* WISHLIST SECCTION */}
       <section>
         <div className="flex justify-between items-center">

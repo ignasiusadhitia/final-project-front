@@ -241,7 +241,7 @@ const BestSelling = () => {
   };
 
   return (
-    <div className='container px-5 md:mt-16'>
+    <div className='container px-5 lg:mb-12 md:mt-16'>
       <h3 className="md:hidden block text-sm text-black font-semibold">Best Selling Product</h3>
       <SectionTitle title='Best Selling Products' subTitle='Products' />
       <div className='lg:px-0 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 mt-7 lg:mt-16'>
