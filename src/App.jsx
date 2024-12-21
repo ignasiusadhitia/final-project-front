@@ -22,6 +22,7 @@ import {
   SignUp,
   ThankYou,
   Wishlist,
+  Error,
 } from '@pages';
 
 const routes = [
@@ -74,10 +75,21 @@ const routes = [
     element: <Wishlist />,
   },
   {
-    path: '*',
-    element: <NotFound />,
+    path: '/404',
+    element: <Error code={404} />,
   },
-];
+  {
+    path: '/500',
+    element: <Error code={500} />,
+  },
+  {
+    path: '/401',
+    element: <Error code={401} />,
+  },
+  {
+    path: '*',
+    element: <Error code={404} />,
+  },];
 
 const App = () => {
   const location = useLocation();
