@@ -8,7 +8,7 @@ export { default as Contact } from './Contact';
 export { default as Home } from './Home';
 export { default as Login } from './Login';
 export { default as NotFound } from './NotFound';
-export { default as Product } from './Product';
+export { default as ProductDetail } from './ProductDetail';
 export { default as SignUp } from './SignUp';
 export { default as Success } from './Success';
 export { default as Wishlist } from './Wishlist';

@@ -13,3 +13,8 @@ export { default as member4 } from './team-4.png';
 // Checkout Flow Images
 export { default as productSmall } from './product-small.png';
 export { default as bank } from './bank.png';
+export { default as productImg1 } from './product-1.png';
+export { default as productImg2 } from './product-2.png';
+export { default as productImg3 } from './product-3.png';
+export { default as productImg4 } from './product-4.png';
+export { default as productImg5 } from './product-5.png';

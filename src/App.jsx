@@ -18,7 +18,7 @@ import {
   Home,
   Login,
   NotFound,
-  Product,
+  ProductDetail,
   Success,
   SignUp,
   Wishlist,
@@ -39,7 +39,7 @@ const routes = [
   },
   {
     path: '/products/:id',
-    element: <Product />,
+    element: <ProductDetail />,
   },
   {
     path: '/best-selling',

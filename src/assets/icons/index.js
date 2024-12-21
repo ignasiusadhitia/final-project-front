@@ -43,3 +43,5 @@ export { default as Arrow } from './arrow.svg?react';
 // Cart's Icons
 export { default as Minus } from './minus.svg?react';
 export { default as Plus } from './plus.svg?react';
+export { default as Return } from './return.svg?react';
+export { default as DeliveryPlain } from './delivery-plain.svg?react';
