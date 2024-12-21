@@ -25,7 +25,7 @@ const ErrorPage = ({ code }) => {
       <p className="text-sm mb-8 text-gray-600">{error.message}</p>
       <Link 
         to="/" 
-        className="bg-red-500 hover:bg-red-700 text-white font-bold py-3 px-6 rounded-lg transition duration-300"
+        className="bg-button-2 hover:bg-button-hover-1 text-text-1 font-medium py-3 px-6 rounded transition duration-300"
       >
         Back to home page
       </Link>
