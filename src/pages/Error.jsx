@@ -20,12 +20,12 @@ const ErrorPage = ({ code }) => {
   const error = errorTypes[code] || errorTypes[404];
 
   return (
-    <div className="h-screen flex flex-col justify-center items-center text-center px-4">
-      <h1 className="text-8xl font-semibold mb-4">{error.errorCode}</h1>
-      <p className="text-sm mb-8 text-gray-600">{error.message}</p>
+    <div className="h-[50vh] lg:h-[70vh] flex flex-col justify-center items-center text-center px-4">
+      <h2 className="text-2xl font-bold lg:text-[110px] lg:font-medium mb-3 lg:mb-20">{error.errorCode}</h2>
+      <p className="text-[8px] lg:text-sm mb-8 text-gray-600">{error.message}</p>
       <Link 
         to="/" 
-        className="bg-button-2 hover:bg-button-hover-1 text-text-1 font-medium py-3 px-6 rounded transition duration-300"
+        className="lg:mt-10 text-sm lg:text-base bg-button-2 hover:bg-button-hover-1 text-text-1 font-medium py-3 px-6 rounded transition duration-300"
       >
         Back to home page
       </Link>

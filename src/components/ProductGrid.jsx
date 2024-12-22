@@ -10,7 +10,7 @@ const ProductGrid = ({ products, gridCols = 3, showTrashButton = false, showRati
   };
 
   return (
-    <div className={`grid grid-cols-2 md:${gridColsClass[gridCols]} gap-6 my-16`}>
+    <div className={`grid grid-cols-2 md:${gridColsClass[gridCols]} gap-6 my-3 lg:my-16`}>
       {products.map((product) => (
         <ProductCard key={product.id} product={product} showTrashButton={showTrashButton} showRating={showRating} showFavoriteButton={showFavoriteButton} />
       ))}

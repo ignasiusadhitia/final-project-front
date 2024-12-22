@@ -14,6 +14,7 @@ export { default as Reviews } from './reviews.svg?react';
 export { default as Logout } from './logout.svg?react';
 export { default as Trash } from './trash.svg?react';
 export { default as Favorite } from './favorite.svg?react';
+export { default as Love } from './love.svg?react';
 // FOOTER ICONS
 export { default as Facebook } from './facebook.svg?react';
 export { default as Twitter } from './twitter.svg?react';

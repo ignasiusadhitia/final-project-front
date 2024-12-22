@@ -37,7 +37,7 @@ const Breadcrumb = ({ userName }) => {
   return (
     <nav className="container flex justify-between items-center mt-6 md:mt-20 px-6 md:px-0">
       {/* Breadcrumb Links */}
-      <ol className="flex">
+      <ol className={`${(pathnames[0] === "best-selling" || pathnames[0] === "wishlist") && "hidden md:flex"} flex`}>
         <li className="text-xs md:text-sm opacity-100 md:opacity-50">
           <Link to="/">Home</Link>
         </li>
@@ -46,7 +46,7 @@ const Breadcrumb = ({ userName }) => {
           const isId = /^\d+$/.test(value); // Check if the value is a number
           const label =
             isId && productNames[value] ? productNames[value] : value; // Use product name if available
-
+          
           const to = `/${pathnames.slice(0, index + 1).join('/')}`;
           return (
             <li key={to} className="text-xs md:text-sm">
