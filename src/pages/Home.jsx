@@ -15,7 +15,7 @@ import {
   CategoryCard,
   FeatureCard,
 } from '@components';
-import { Arrow } from '@icons';
+import { Arrow, Love } from '@icons';
 
 const Home = () => {
   const bestSellingProducts = [
@@ -388,7 +388,7 @@ const Home = () => {
       </section>
 
       {/* BEST SELLING PRODUCT SECTION */}
-      <section className="space-y-3 md:space-y-20 px-5 lg:p-0">
+      <section className="space-y-3 mb-5 md:space-y-20 px-5 lg:p-0">
         <header className="flex justify-between items-center">
           <SectionTitle subTitle="This Month" title="Best Selling Products" />
 
@@ -413,7 +413,12 @@ const Home = () => {
           >
             {bestSellingProducts.map((product) => (
               <SwiperSlide key={product.id}>
-                <ProductsCard product={product} showRating={true} />
+                <div className='relative'>
+                  <ProductsCard product={product} showRating={true} />
+                  <button className='flex justify-center items-center absolute right-2 top-2 lg:right-5 lg:top-5 bg-white rounded-full w-6 h-6 md:w-8 md:h-8'>
+                    <Love className="block md:hidden" />
+                  </button>
+                </div>
               </SwiperSlide>
             ))}
           </Swiper>
@@ -473,7 +478,12 @@ const Home = () => {
           >
             {exploreOurProducts.map((product) => (
               <SwiperSlide key={product.id}>
-                <ProductsCard product={product} showRating={true} />
+                <div className='relative'>
+                  <ProductsCard product={product} showRating={true} />
+                  <button className='flex justify-center items-center absolute right-2 top-2 lg:right-5 lg:top-5 bg-white rounded-full w-6 h-6 md:w-8 md:h-8'>
+                    <Love className="block md:hidden" />
+                  </button>
+                </div>
               </SwiperSlide>
             ))}
           </Swiper>

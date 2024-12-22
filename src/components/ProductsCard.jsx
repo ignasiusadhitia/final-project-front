@@ -11,7 +11,7 @@ const ProductCard = ({ product, showTrashButton = false, showRating = false, sho
     setIsFavorite(!isFavorite);
   };
   return (
-    <div className="max-w-[173px] lg:min-w-[270px] rounded overflow-hidden bg-white group">
+    <div className="min-w-[173px] md:max-w-[270px] rounded overflow-hidden bg-white group">
       <div className="relative">
         <div className="relative bg-secondary-1">
           <img

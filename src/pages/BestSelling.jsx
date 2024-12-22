@@ -1,6 +1,7 @@
 import { SectionTitle } from '@components';
 import React, { useState } from 'react';
 import ProductCard from '../components/ProductsCard';
+import { Love } from '@icons';
 
 const initialProducts = [
   {
@@ -246,11 +247,16 @@ const BestSelling = () => {
       <SectionTitle title='Best Selling Products' subTitle='Products' />
       <div className='lg:px-0 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 mt-7 lg:mt-16'>
         {products.map((product) => (
-          <ProductCard key={product.id} showRating={true} product={product} />
+          <div className='relative'>
+            <ProductCard key={product.id} showRating={true} product={product} />
+            <button className='flex justify-center items-center absolute right-2 top-2 lg:right-5 lg:top-5 bg-white rounded-full w-6 h-6 md:w-8 md:h-8'>
+              <Love className="block md:hidden" />
+            </button>
+          </div>
         ))}
       </div>
 
-      <div className='flex items-center justify-center my-24'>
+      <div className='flex items-center justify-center my-5 md:my-24'>
         <button onClick={handleShowMore} className='bg-secondary-3 w-[125px] hover:opacity-85 h-[45px] text-sm md:text-base lg:w-[184px] lg:h-[56px] text-text-1 rounded-md'>
           Show More
         </button>

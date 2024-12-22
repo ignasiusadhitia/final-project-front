@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { ProductsCard } from '@components';
+import { Favorite, Love, Trash } from '@icons';
 
 const Wishlist = () => {
   const navigate = useNavigate();
@@ -138,7 +139,7 @@ const Wishlist = () => {
   };
 
   return (
-    <div className="container lg:mb-32 px-5 lg:p-0 lg:my-6 md:my-[3.75rem] space-y-10">
+    <div className="container mb-4 lg:mb-32 px-5 lg:p-0 lg:my-6 md:my-[3.75rem] space-y-10">
       {/* WISHLIST SECCTION */}
       <section>
         <div className="flex justify-between items-center">
@@ -150,9 +151,15 @@ const Wishlist = () => {
             Move All To Bag
           </button>
         </div>
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-5 mt-5">
+        <div className="grid grid-cols-2 md:flex flex-wrap justify-between gap-5 mt-5">
           {wishLists.map((product) => (
-            <ProductsCard key={product.id} product={product} />
+              <div className='relative'>
+                <ProductsCard key={product.id} product={product} />
+                <button className='flex justify-center items-center absolute right-2 top-2 lg:right-5 lg:top-5 bg-white rounded-full w-6 h-6 md:w-8 md:h-8'>
+                  <Trash className="hidden md:block" />
+                  <Love className="block md:hidden" />
+                </button>
+              </div>
           ))}
         </div>
       </section>
@@ -176,9 +183,9 @@ const Wishlist = () => {
             See All
           </button>
         </div>
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-5 mt-5">
+        <div className="grid grid-cols-2 md:flex flex-wrap justify-between gap-5 mt-5">
           {justForYouProducts.map((product) => (
-            <ProductsCard key={product.id} product={product} />
+              <ProductsCard key={product.id} showRating={true} product={product} />
           ))}
         </div>
       </section>
