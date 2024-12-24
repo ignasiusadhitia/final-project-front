@@ -1,6 +1,12 @@
-import { Route, BrowserRouter as Router, Routes } from 'react-router-dom';
+import { Route, Routes, useLocation, useParams } from 'react-router-dom';
 
-import { Footer, Navbar } from '@components';
+import { Breadcrumb, Footer, Navbar } from '@components';
+import {
+  UpdateAddress,
+  UpdateProfile,
+  AddressList,
+  MyOrders,
+} from '@components';
 import {
   About,
   Account,
@@ -13,9 +19,10 @@ import {
   Login,
   NotFound,
   Product,
-  Register,
+  SignUp,
   ThankYou,
-  Whislist,
+  Wishlist,
+  Error,
 } from '@pages';
 
 const routes = [
@@ -26,10 +33,6 @@ const routes = [
   {
     path: '/about',
     element: <About />,
-  },
-  {
-    path: '/account',
-    element: <Account />,
   },
   {
     path: '/products',
@@ -60,36 +63,77 @@ const routes = [
     element: <Login />,
   },
   {
-    path: '/register',
-    element: <Register />,
+    path: '/sign-up',
+    element: <SignUp />,
   },
   {
     path: '/thank-you',
     element: <ThankYou />,
   },
   {
-    path: '/whislist',
-    element: <Whislist />,
+    path: '/wishlist',
+    element: <Wishlist />,
+  },
+  {
+    path: '/404',
+    element: <Error code={404} />,
+  },
+  {
+    path: '/500',
+    element: <Error code={500} />,
+  },
+  {
+    path: '/401',
+    element: <Error code={401} />,
   },
   {
     path: '*',
-    element: <NotFound />,
-  },
-];
+    element: <Error code={404} />,
+  },];
 
 const App = () => {
+  const location = useLocation();
+  const currentPath = location.pathname;
+
+  const hiddenPathsRegex = new RegExp(
+    [
+      '^/$',
+      '^/products$',
+      '^/login$',
+      '^/sign-up$',
+      '^/my-account$',
+      '^/my-account/address$',
+      '^/my-account/address/add$',
+      '^/my-account/address/edit/\\d+$',
+      '^/my-account/my-orders$',
+    ].join('|')
+  );
+
+  const isBreadcrumbVisible = !hiddenPathsRegex.test(currentPath);
+
   return (
-    <Router>
+    <>
       <Navbar />
-      <div>
+      <div className="">
+        {/* Global Breadcrumb */}
+        {isBreadcrumbVisible && <Breadcrumb />}
+
         <Routes>
           {routes.map(({ path, element }) => (
             <Route key={path} element={element} path={path} />
           ))}
+
+          <Route element={<Account />} path="/my-account">
+            <Route index element={<UpdateProfile />} />
+            <Route element={<AddressList />} path="address" />
+            <Route element={<UpdateAddress />} path="address/add" />
+            <Route element={<UpdateAddress />} path="address/edit/:id" />
+            <Route element={<MyOrders />} path="my-orders" />
+          </Route>
         </Routes>
       </div>
       <Footer />
-    </Router>
+    </>
   );
 };
 

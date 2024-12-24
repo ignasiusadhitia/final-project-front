@@ -3,7 +3,7 @@ export default {
   content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     fontFamily: {
-      sans: ['Inter', 'Poppins', 'sans-serif'],
+      sans: ['Poppins', 'Inter', 'sans-serif'],
     },
     extend: {
       colors: {
@@ -143,6 +143,9 @@ export default {
       fontSize: {},
       height: {},
       width: {},
+      backgroundImage: {
+        'auth-banner': "url('/src/assets/images/auth-banner.webp')",
+      },
     },
   },
   plugins: [],
