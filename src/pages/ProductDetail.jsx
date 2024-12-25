@@ -100,11 +100,11 @@ const ProductDetail = () => {
   return (
     <main className="container mt-[33px] mb-[140px]">
       {/* Main Product Section */}
-      <section className="flex gap-[37px]">
+      <section className="flex flex-col md:flex-row gap-[37px]">
         {/* Product Image */}
 
         <div className="grow">
-          <div className="w-full h-[496px] flex justify-center items-center bg-secondary-1 rounded">
+          <div className="w-full h-[496px] hidden md:flex justify-center items-center bg-secondary-1 rounded">
             <img
               alt="product-image"
               className="h-[315px]"
@@ -112,7 +112,7 @@ const ProductDetail = () => {
             />
           </div>
 
-          <div className="mt-5 grid grid-cols-4 gap-[23px]">
+          <div className="mt-5 grid grid-col md:grid-cols-4 gap-[23px]">
             {product.images.map((image, index) => (
               <div
                 key={index}
@@ -174,7 +174,7 @@ const ProductDetail = () => {
             </div>
           )}
 
-          <div className="mt-[68px] flex items-center gap-[13px]">
+          <div className="mt-[58px] flex items-center gap-[13px]">
             <div className="flex items-center">
               <button
                 className="flex justify-center items-center w-10 h-11 border-[1px] border-black border-opacity-50 rounded-tl rounded-bl hover:bg-button-2 text-primary-2 hover:text-white hover:border-none"

@@ -22,7 +22,7 @@ const Success = () => {
   const total = subtotal + (order.shipping === 'Free' ? 0 : order.shipping);
 
   return (
-    <main className="container">
+    <main className="container px-6 md:px-0">
       <div className="max-w-[27.813rem] mx-auto mt-[4.438rem]">
         {order?.products?.length !== 0 ? (
           <>
