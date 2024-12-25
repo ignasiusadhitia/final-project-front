@@ -22,6 +22,7 @@ import {
   SignUp,
   ThankYou,
   Wishlist,
+  Error,
 } from '@pages';
 
 const routes = [
@@ -74,8 +75,20 @@ const routes = [
     element: <Wishlist />,
   },
   {
+    path: '/404',
+    element: <Error code={404} />,
+  },
+  {
+    path: '/500',
+    element: <Error code={500} />,
+  },
+  {
+    path: '/401',
+    element: <Error code={401} />,
+  },
+  {
     path: '*',
-    element: <NotFound />,
+    element: <Error code={404} />,
   },
 ];
 
@@ -102,7 +115,7 @@ const App = () => {
   return (
     <>
       <Navbar />
-      <div className="min-h-screen">
+      <div className="">
         {/* Global Breadcrumb */}
         {isBreadcrumbVisible && <Breadcrumb />}
 

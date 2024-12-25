@@ -4,13 +4,28 @@ import PropTypes from 'prop-types';
 
 import ProductCard from './ProductsCard';
 
-const ProductGrid = ({ products, gridCols = 3, showTrashButton = false }) => {
+const ProductGrid = ({
+  products,
+  gridCols = 3,
+  showTrashButton = false,
+  showRating = false,
+  showFavoriteButton = false,
+}) => {
+  const gridColsClass = {
+    3: 'grid-cols-3',
+    4: 'grid-cols-4',
+  };
+
   return (
-    <div className={`grid grid-cols-${gridCols} gap-6 my-16`}>
+    <div
+      className={`grid grid-cols-2 md:${gridColsClass[gridCols]} gap-6 my-3 lg:my-16`}
+    >
       {products.map((product) => (
         <ProductCard
           key={product.id}
           product={product}
+          showFavoriteButton={showFavoriteButton}
+          showRating={showRating}
           showTrashButton={showTrashButton}
         />
       ))}
@@ -34,10 +49,14 @@ ProductGrid.propTypes = {
   ).isRequired,
   gridCols: PropTypes.number,
   showTrashButton: PropTypes.bool,
+  showRating: PropTypes.bool,
+  showFavoriteButton: PropTypes.bool,
 };
 
 ProductGrid.defaultProps = {
   gridCols: 3,
+  showTrashButton: false,
+  showFavoriteButton: false,
 };
 
 export default ProductGrid;

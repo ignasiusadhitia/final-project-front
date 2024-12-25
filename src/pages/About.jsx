@@ -16,60 +16,78 @@ import { aboutHero, member1, member2, member3, member4 } from '@images';
 
 const About = () => {
   return (
-    <div className="overflow-hidden mt-6 md:mt-[3.75rem]">
+    <div className="overflow-hidden lg:mt-12 md:mt-[3.75rem]">
       <div>
         {/* HERO SECTION */}
-        <div className="grid md:grid-cols-2 w-screen gap-5 md:gap-20 p-10 lg:p-0">
-          {/* DESCRIPTIONS */}
-          <div className="lg:pl-[88px] flex flex-col justify-center items-center gap-5">
-            <h1 className="text-2xl md:text-5xl text-center md:text-left font-semibold w-full">
-              Our Story
-            </h1>
-            <p>
-              Launced in 2015, Exclusive is South Asia&apos;s premier online
-              shopping makterplace with an active presense in Bangladesh.
-              Supported by wide range of tailored marketing, data and service
-              solutions, Exclusive has 10,500 sallers and 300 brands and serves
-              3 millioons customers across the region.
-            </p>
-            <p>
-              Exclusive has more than 1 Million products to offer, growing at a
-              very fast. Exclusive offers a diverse assotment in categories
-              ranging from consumer.
-            </p>
-          </div>
+        <div className="flex justify-start">
+          <div className="flex container flex-col justify-center h-full lg:h-[609px] gap-5 md:gap-20 p-10 lg:p-0">
+            {/* DESCRIPTIONS */}
+            <div className="w-full lg:w-[525px] flex flex-col justify-center items-start gap-4 lg:gap-10">
+              <h1 className="text-2xl md:text-5xl text-center md:text-left font-semibold w-full">
+                Our Story
+              </h1>
+              <p className="text-[8px] lg:text-base font-normal">
+                Launced in 2015, Exclusive is South Asia&apos;s premier online
+                shopping makterplace with an active presense in Bangladesh.
+                Supported by wide range of tailored marketing, data and service
+                solutions, Exclusive has 10,500 sallers and 300 brands and
+                serves 3 millioons customers across the region.
+              </p>
+              <p className="text-[8px] lg:text-base">
+                Exclusive has more than 1 Million products to offer, growing at
+                a very fast. Exclusive offers a diverse assotment in categories
+                ranging from consumer.
+              </p>
+            </div>
 
-          {/* IMAGE */}
-          <div className="overflow-hidden flex justify-center items-center">
-            <img
-              alt="About's hero image"
-              className="w-full h-full rounded-2xl md:rounded-sm md:object-cover"
-              src={aboutHero}
-            />
+            {/* IMAGE */}
+            <div className="overflow-hidden mt-4 lg:mt-0 rounded-xl lg:absolute right-0 flex justify-end items-center">
+              <img
+                alt="About's hero image"
+                className="h-full w-full lg:w-[705px] lg:h-[609px] lg:object-cover rounded-xl md:rounded-sm md:object-cover"
+                src={aboutHero}
+              />
+            </div>
           </div>
         </div>
 
         {/* SERVICE SECTION */}
         <div className=" container p-5 lg:p-0 grid grid-cols-2 lg:grid-cols-4 gap-5 mt-10 md:mt-40">
           <div className="text-center border rounded-lg flex flex-col justify-center items-center p-5 gap-5">
-            <SellersActive />
-            <p className="text-3xl font-bold">10.5k</p>
-            <p>Sellers active our site</p>
+            <SellersActive className="w-[50px] h-[50px] lg:w-20 lg:h-20" />
+            <p className="text-base font-semibold lg:text-3xl lg:font-bold">
+              10.5k
+            </p>
+            <p className="text-xs font-normal lg:text-base">
+              Sellers active our site
+            </p>
           </div>
           <div className="text-center border rounded-lg flex flex-col justify-center items-center p-5 gap-5 bg-secondary-3 text-white">
-            <MonthlyProductSales />
-            <p className="text-3xl font-bold">33k</p>
-            <p>Monthly Product Sale</p>
+            <MonthlyProductSales className="w-[50px] h-[50px] lg:w-20 lg:h-20" />
+            <p className="text-base font-semibold lg:text-3xl lg:font-bold">
+              33k
+            </p>
+            <p className="text-xs font-normal lg:text-base">
+              Monthly Product Sale
+            </p>
           </div>
           <div className="text-center border rounded-lg flex flex-col justify-center items-center p-5 gap-5">
-            <CustomersActive />
-            <p className="text-3xl font-bold">45.5k</p>
-            <p>Customers active in our site</p>
+            <CustomersActive className="w-[50px] h-[50px] lg:w-20 lg:h-20" />
+            <p className="text-base font-semibold lg:text-3xl lg:font-bold">
+              45.5k
+            </p>
+            <p className="text-xs font-normal lg:text-base">
+              Customers active in our site
+            </p>
           </div>
           <div className="text-center border rounded-lg flex flex-col justify-center items-center p-5 gap-5">
-            <AnualGross />
-            <p className="text-3xl font-bold">25k</p>
-            <p>Anual gross sale in our site</p>
+            <AnualGross className="w-[50px] h-[50px] lg:w-20 lg:h-20" />
+            <p className="text-base font-semibold lg:text-3xl lg:font-bold">
+              25k
+            </p>
+            <p className="text-xs font-normal lg:text-base">
+              Anual gross sale in our site
+            </p>
           </div>
         </div>
 
