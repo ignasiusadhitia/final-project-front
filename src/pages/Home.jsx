@@ -15,7 +15,7 @@ import {
   CategoryCard,
   FeatureCard,
 } from '@components';
-import { Arrow } from '@icons';
+import { Arrow, Love } from '@icons';
 
 const Home = () => {
   const bestSellingProducts = [
@@ -335,14 +335,14 @@ const Home = () => {
   ];
 
   return (
-    <main className="container space-y-32 my-6 md:my-[3.75rem]">
+    <main className="container lg:space-y-32 lg:my-6 md:my-[3.75rem]">
       {/* HERO SECTION */}
       <section>
         <Banner data={banner1} />
       </section>
 
       {/* CATEGORY SECTION */}
-      <section className="space-y-5 p-5 lg:p-0 md:space-y-20">
+      <section className="space-y-3 px-5 py-3 lg:p-0 md:space-y-20">
         <header className="flex justify-between">
           <SectionTitle subTitle="Categoty" title="Browse By Category" />
           <div className="hidden md:flex gap-2 self-end">
@@ -388,11 +388,12 @@ const Home = () => {
       </section>
 
       {/* BEST SELLING PRODUCT SECTION */}
-      <section className="space-y-5 md:space-y-20 p-5 lg:p-0">
-        <header className="flex justify-between">
+      <section className="space-y-3 mb-5 md:space-y-20 px-5 lg:p-0">
+        <header className="flex justify-between items-center">
           <SectionTitle subTitle="This Month" title="Best Selling Products" />
-          <div className="flex gap-5 self-end">
-            <button className="text-xs md:text-base  py-3 px-10 text-button-2 md:text-white md:bg-button-2 md:hover:bg-button-hover-1 rounded-md">
+
+          <div className="flex gap-5 lg:self-end">
+            <button className="text-xs md:text-base lg:py-3 lg:px-10 text-button-2 md:text-white md:bg-button-2 md:hover:bg-button-hover-1 rounded-md">
               View All
             </button>
           </div>
@@ -412,7 +413,12 @@ const Home = () => {
           >
             {bestSellingProducts.map((product) => (
               <SwiperSlide key={product.id}>
-                <ProductsCard product={product} />
+                <div className="relative">
+                  <ProductsCard product={product} showRating={true} />
+                  <button className="flex justify-center items-center absolute right-2 top-2 lg:right-5 lg:top-5 bg-white rounded-full w-6 h-6 md:w-8 md:h-8">
+                    <Love className="block md:hidden" />
+                  </button>
+                </div>
               </SwiperSlide>
             ))}
           </Swiper>
@@ -472,7 +478,12 @@ const Home = () => {
           >
             {exploreOurProducts.map((product) => (
               <SwiperSlide key={product.id}>
-                <ProductsCard product={product} />
+                <div className="relative">
+                  <ProductsCard product={product} showRating={true} />
+                  <button className="flex justify-center items-center absolute right-2 top-2 lg:right-5 lg:top-5 bg-white rounded-full w-6 h-6 md:w-8 md:h-8">
+                    <Love className="block md:hidden" />
+                  </button>
+                </div>
               </SwiperSlide>
             ))}
           </Swiper>

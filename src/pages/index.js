@@ -12,3 +12,4 @@ export { default as ProductDetail } from './ProductDetail';
 export { default as SignUp } from './SignUp';
 export { default as Success } from './Success';
 export { default as Wishlist } from './Wishlist';
+export { default as Error } from './Error';

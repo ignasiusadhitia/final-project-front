@@ -6,7 +6,7 @@ const Guarantee = () => {
   return (
     <div className="grid grid-cols-2 lg:grid-cols-3 gap-5">
       <div className="flex flex-col gap-5 justify-center items-center lg:p-10 text-center">
-        <Delivery />
+        <Delivery className="w-[42px] h-[42px] lg:w-[80px] lg:h-[80px]" />
         <div className="space-y-2">
           <p className="font-semibold text-xs lg:text-xl capitalize">
             FREE AND FAST DELIVERY
@@ -17,7 +17,7 @@ const Guarantee = () => {
         </div>
       </div>
       <div className="flex flex-col gap-5 justify-center items-center lg:p-10 text-center">
-        <CustomerService />
+        <CustomerService className="w-[42px] h-[42px] lg:w-[80px] lg:h-[80px]" />
         <div className="space-y-2">
           <p className="font-semibold text-xs lg:text-xl capitalize">
             24/7 CUSTOMER SERVICE
@@ -26,7 +26,7 @@ const Guarantee = () => {
         </div>
       </div>
       <div className="flex flex-col gap-5 justify-center items-center lg:p-10 text-center col-span-2 lg:col-span-1">
-        <MoneyBack />
+        <MoneyBack className="w-[42px] h-[42px] lg:w-[80px] lg:h-[80px]" />
         <div className="space-y-2">
           <p className="font-semibold text-xs lg:text-xl capitalize">
             MONEY BACK GUARANTEE

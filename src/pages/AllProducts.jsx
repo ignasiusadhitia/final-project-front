@@ -146,11 +146,18 @@ const AllProducts = () => {
       price: product.originalPrice,
     };
   });
+
   const categories = [
     { id: 0, name: 'All Products' },
-    { id: 1, name: 'Electronics' },
-    { id: 2, name: 'Home & Lifestyle' },
-    { id: 3, name: 'Sports & Outdoor' },
+    { id: 1, name: 'Woman’s Fashion' },
+    { id: 2, name: 'Men’s Fashion' },
+    { id: 3, name: 'Electronics' },
+    { id: 4, name: 'Home & Lifestyle' },
+    { id: 5, name: 'Medicine' },
+    { id: 6, name: 'Sports & Outdoor' },
+    { id: 7, name: 'Baby’s & Toys' },
+    { id: 8, name: 'Groceries & Pets' },
+    { id: 9, name: 'Health & Beauty' },
   ];
 
   // eslint-disable-next-line
@@ -174,21 +181,24 @@ const AllProducts = () => {
         );
 
   return (
-    <div className="flex w-full ">
-      <div className="w-[30%] h-ful p-5 text-left">
-        <ul className="space-y-3 flex flex-col items-center text-left">
+    <div className="flex px-5 lg:px-0 justify-start lg:justify-between container lg:mt-10">
+      <div className="h-full py-5 text-left">
+        <ul className="hidden lg:flex flex-col gap-4 justify-start">
           {categories.map((category) => (
             <li
               key={category.id}
-              className={`cursor-pointer hover:text-red-500 text-left w-full flex justify-end ${selectedCategory?.id === category.id ? 'text-red-500' : ''}`}
+              className={`cursor-pointer hover:text-secondary-3 text-left w-full flex justify-start ${selectedCategory?.id === category.id ? 'text-secondary-3' : ''}`}
               onClick={() => handleSelectCategory(category)}
             >
-              <span className="text-left w-[70%] ">{category.name}</span>
+              <span className="text-left text-base font-normal">
+                {category.name}
+              </span>
             </li>
           ))}
         </ul>
       </div>
-      <div className="flex-grow py-4 mx-5">
+
+      <div className="py-4">
         <SectionTitle
           hideTitle
           subTitle={selectedCategory.name}
@@ -198,7 +208,7 @@ const AllProducts = () => {
 
         {!showMore && (
           <button
-            className="my-20 bg-red-500 hover:bg-red-600 text-white font-bold py-2 px-8 rounded mx-auto block"
+            className="my-20 bg-secondary-3 hover:opacity-85 text-white font-medium text-base w-[184px] h-[56px] rounded mx-auto block"
             onClick={handleShowMore}
           >
             Show More

@@ -15,7 +15,7 @@ const Footer = () => {
             <h2 className="text-base md:text-xl font-semibold">Exclusive</h2>
             <p className="text-sm md:text-base font-medium">Subscribe</p>
             <p className="text-sm">Get 10% off your first order</p>
-            <div className="flex items-center relative">
+            <div className="flex justify-between items-center relative">
               <label className="hidden" htmlFor="email-input"></label>
               <input
                 className="bg-black text-white w-full max-w-[217px] border rounded p-2 text-sm"
@@ -23,7 +23,7 @@ const Footer = () => {
                 placeholder="Enter your Email"
                 type="email"
               />
-              <button className="absolute right-10">
+              <button className="absolute right-3">
                 <Send />
               </button>
             </div>

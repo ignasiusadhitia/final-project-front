@@ -18,7 +18,7 @@ const ProductGrid = ({
 
   return (
     <div
-      className={`grid grid-cols-2 md:${gridColsClass[gridCols]} gap-6 my-16`}
+      className={`grid grid-cols-2 md:${gridColsClass[gridCols]} gap-6 my-3 lg:my-16`}
     >
       {products.map((product) => (
         <ProductCard

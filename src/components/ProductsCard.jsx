@@ -18,25 +18,25 @@ const ProductCard = ({
   };
 
   return (
-    <div className="max-w-sm rounded overflow-hidden bg-white group">
+    <div className="min-w-[173px] md:max-w-[270px] rounded overflow-hidden bg-white group">
       <div className="relative">
-        <div className="relative bg-gray-200">
+        <div className="relative bg-secondary-1">
           <img
             alt={product.name}
             className="p-10 relative"
             src={product.imageUrl}
           />
-          <div className="bg-black opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          <div className="bg-black rounded-b-[4px] opacity-0 group-hover:opacity-100 transition-opacity duration-300">
             {product.stock > 0 ? (
               <button className="w-full py-3 text-center">
-                <span className="bg-black text-white font-bold py-2 px-4 rounded">
+                <span className="bg-black text-white font-normal text-xs py-2 px-4">
                   <WhiteCart className="inline-block mr-2" />
                   Add to Cart
                 </span>
               </button>
             ) : (
               <div className="w-full py-3 text-center">
-                <span className="text-white font-bold">
+                <span className="text-white font-normal text-xs">
                   <WhiteCart className="inline-block mr-2" />
                   Out of Stock
                 </span>
@@ -45,41 +45,43 @@ const ProductCard = ({
           </div>
           {showTrashButton && (
             <button className="absolute top-4 right-4 hover:bg-gray-200 rounded-full h-fit shadow-lg bg-white p-2">
-              <Trash className="" />
+              <Trash />
             </button>
           )}
 
           {showFavoriteButton && (
             <button
-              className={`absolute top-4 right-4 hover:bg-gray-200 rounded-full h-fit shadow-lg ${isFavorite ? 'bg-red-500' : 'bg-white'} p-2`}
+              className={`absolute top-4 right-4 hover:bg-gray-200 rounded-full h-fit shadow-lg ${isFavorite ? 'bg-secondary-3' : 'bg-white'} p-2`}
               onClick={handleFavoriteClick}
             >
-              <Favorite className="" />
+              <Favorite />
             </button>
           )}
           <div className="absolute top-4 left-4 flex gap-2">
             {product.isNew && (
-              <span className="bg-green-500 text-white font-bold py-1 px-3 rounded text-xs">
+              <span className="bg-green-500 text-white font-normal py-1 px-3 rounded text-xs">
                 New
               </span>
             )}
             {product.discount && (
-              <span className="bg-red-500 text-white font-bold py-1 px-3 rounded text-xs">
+              <span className="bg-secondary-3 text-white font-normal py-1 px-3 rounded text-xs">
                 {product.discount}
               </span>
             )}
           </div>
         </div>
       </div>
-      <div className="px-3 py-4 h-20">
-        <div className="font-bold text-xl line-clamp-2">{product.name}</div>
+      <div className="px-3 py-4">
+        <div className="font-medium text-sm lg:text-base line-clamp-2">
+          {product.name}
+        </div>
       </div>
       <div className="px-3">
-        <span className="inline-block text-secondary-3 me-3">
+        <span className="inline-block text-sm lg:text-base font-medium text-secondary-3 me-3">
           ${product.price}
         </span>
         {product.discount && (
-          <span className="line-through text-gray-500">
+          <span className="line-through text-sm lg:text-base text-gray-500">
             ${product.originalPrice}
           </span>
         )}
@@ -87,17 +89,30 @@ const ProductCard = ({
 
       <div className="flex items-center px-3 pb-4">
         {showRating && (
-          <div className="flex items-center">
-            <ReactStars
-              activeColor="#FBBF24"
-              count={5}
-              edit={false}
-              isHalf={true}
-              size={24}
-              value={product.rating}
-            />
-            <span className="ml-1 me-2">{product.rating}</span>
-            <span className="text-gray-600">({product.ratingCount})</span>
+          <div className="flex gap-2 items-center mt-1">
+            <div className="hidden lg:block">
+              <ReactStars
+                activeColor="#FBBF24"
+                count={5}
+                edit={false}
+                isHalf={true}
+                size={24}
+                value={product.rating}
+              />
+            </div>
+            <div className="blok lg:hidden">
+              <ReactStars
+                activeColor="#FBBF24"
+                count={5}
+                edit={false}
+                isHalf={true}
+                size={16}
+                value={product.rating}
+              />
+            </div>
+            <span className="text-gray-600 text-xs lg:text-sm font-semibold">
+              ({product.ratingCount})
+            </span>
           </div>
         )}
       </div>
