@@ -2,8 +2,11 @@ import React from 'react';
 
 import PropTypes from 'prop-types';
 import ReactStars from 'react-rating-stars-component';
+import { Swiper, SwiperSlide } from 'swiper/react';
 
 import { DeliveryPlain, Minus, Plus, Return, WishList } from '@icons';
+
+import 'swiper/css';
 
 const ProductDetailDesktop = ({
   product,
@@ -25,16 +28,23 @@ const ProductDetailDesktop = ({
           <img alt="product-image" className="h-[315px]" src={selectedImage} />
         </div>
 
-        <div className="mt-5 grid grid-cols-4 gap-[23px]">
-          {product.images.map((image, index) => (
-            <div
-              key={index}
-              className="w-full h-[138px] flex justify-center items-center cursor-pointer rounded bg-secondary-1"
-              onClick={() => onImageClickHandler(image)}
-            >
-              <img alt="product-image" className="h-[114px] p-3" src={image} />
-            </div>
-          ))}
+        <div className="mt-5 max-w-[730px]">
+          <Swiper className="mySwiper" slidesPerView={4} spaceBetween={23}>
+            {product.images.map((image, index) => (
+              <SwiperSlide key={index}>
+                <div
+                  className="w-full h-[138px] flex justify-center cursor-pointer rounded bg-secondary-1"
+                  onClick={() => onImageClickHandler(image)}
+                >
+                  <img
+                    alt="product-image"
+                    className="h[114px] p-3"
+                    src={image}
+                  />
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
         </div>
       </div>
       {/* Product Details */}
@@ -69,7 +79,7 @@ const ProductDetailDesktop = ({
         {product.variant && (
           <div className="mt-6 flex items-center gap-6">
             <h3 className="text-xl font-normal">Size:</h3>
-            <div className="flex items-center gap-3">
+            <div className="flex gap-4">
               {product.variant.size.map((size, index) => (
                 <button
                   key={index}

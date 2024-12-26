@@ -1,5 +1,7 @@
 import { useState } from 'react';
 
+import { Swiper, SwiperSlide } from 'swiper/react';
+
 import {
   BottomSheet,
   ProductDetailDesktop,
@@ -8,10 +10,17 @@ import {
   SectionTitle,
 } from '@components';
 import { WishList } from '@icons';
-import { productImg1, productImg2, productImg3, productImg5 } from '@images';
+import {
+  productImg1,
+  productImg2,
+  productImg3,
+  productImg4,
+  productImg5,
+} from '@images';
+import 'swiper/css';
 
 const product = {
-  images: [productImg1, productImg2, productImg3, productImg5],
+  images: [productImg1, productImg2, productImg3, productImg4, productImg5],
   name: 'Havic HV G-92 Gamepad',
   price: 1200,
   desc: 'PlayStation 5 Controller Skin High quality vinyl with air channel adhesive for easy bubble free install & mess free removal Pressure sensitive.',
@@ -94,6 +103,7 @@ const ProductDetail = () => {
   );
   const [quantity, setQuantity] = useState(1);
   const [bottomSheetOpen, setBottomSheetOpen] = useState(false);
+  const [activeSlide, setActiveSlide] = useState(1);
 
   const handleImageClick = (image) => {
     setSelectedImage(image);
@@ -126,8 +136,31 @@ const ProductDetail = () => {
   };
 
   return (
-    <main className="container mt-[33px] mb-6 md:mb-[140px]">
+    <main className="container mt-6 md:mt-[33px] mb-6 md:mb-[140px]">
       {/* Main Product Section */}
+      <div className="block md:hidden">
+        <Swiper
+          className="mySwiper"
+          onSlideChange={(swiper) => setActiveSlide(swiper.activeIndex + 1)}
+        >
+          {product.images.map((image, index) => (
+            <SwiperSlide key={index}>
+              <div className="w-full h-[240px] flex justify-center cursor-pointer rounded bg-secondary-1">
+                <img
+                  alt="product-image"
+                  className="h[114px] py-6"
+                  src={image}
+                />
+              </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
+        <div className="absolute flex justify-center items-center w-8 h-4 mx-6 mt-[-24px] text-[8px] border-[1px] border-black border-opacity-50 rounded-sm z-30">
+          <span className="block mt-[2.5px]">
+            {activeSlide}/{product?.images.length}
+          </span>
+        </div>
+      </div>
 
       <div className="hidden md:block">
         <ProductDetailDesktop

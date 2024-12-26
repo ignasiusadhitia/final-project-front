@@ -8,25 +8,6 @@ import { DeliveryPlain, Return } from '@icons';
 const ProductDetailMobile = ({ product }) => {
   return (
     <section className="flex gap-[37px] px-6">
-      {/* Product Image */}
-
-      {/* <div className="grow">
-        <div className="w-full h-[496px] flex justify-center items-center bg-secondary-1 rounded">
-          <img alt="product-image" className="h-[315px]" src={selectedImage} />
-        </div>
-
-        <div className="mt-5 grid grid-cols-4 gap-[23px]">
-          {product.images.map((image, index) => (
-            <div
-              key={index}
-              className="w-full h-[138px] flex justify-center items-center cursor-pointer rounded bg-secondary-1"
-              onClick={() => onImageClickHandler(image)}
-            >
-              <img alt="product-image" className="h-[114px] p-3" src={image} />
-            </div>
-          ))}
-        </div>
-      </div> */}
       {/* Product Details */}
       <div className="w-full mt-6">
         <h1 className="text-xl leading-5 font-semibold">{product.name}</h1>
