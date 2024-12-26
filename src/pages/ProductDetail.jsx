@@ -1,9 +1,13 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
-import ReactStars from 'react-rating-stars-component';
-
-import { ProductsCard, SectionTitle } from '@components';
-import { DeliveryPlain, Minus, Plus, Return, WishList } from '@icons';
+import {
+  BottomSheet,
+  ProductDetailDesktop,
+  ProductDetailMobile,
+  ProductGrid,
+  SectionTitle,
+} from '@components';
+import { WishList } from '@icons';
 import { productImg1, productImg2, productImg3, productImg5 } from '@images';
 
 const product = {
@@ -88,6 +92,8 @@ const ProductDetail = () => {
   const [selectedVariant, setSelectedVariant] = useState(
     product.variant.size[0]
   );
+  const [quantity, setQuantity] = useState(1);
+  const [bottomSheetOpen, setBottomSheetOpen] = useState(false);
 
   const handleImageClick = (image) => {
     setSelectedImage(image);
@@ -97,159 +103,98 @@ const ProductDetail = () => {
     setSelectedVariant(variant);
   };
 
+  const handleBottomSheetOpen = () => {
+    setBottomSheetOpen((prev) => !prev);
+  };
+
+  const handleQuantityInputChange = (event) => {
+    setQuantity(event.target.value);
+  };
+
+  const handleSetQuantity = (type) => {
+    if (type === 'inc') {
+      setQuantity((prev) => prev + 1);
+    } else if (type === 'dec') {
+      setQuantity((prev) => prev - 1);
+    } else {
+      return;
+    }
+  };
+
+  const handleAddToCart = () => {
+    console.log(quantity);
+  };
+
   return (
-    <main className="container mt-[33px] mb-[140px]">
+    <main className="container mt-[33px] mb-6 md:mb-[140px]">
       {/* Main Product Section */}
-      <section className="flex flex-col md:flex-row gap-[37px]">
-        {/* Product Image */}
 
-        <div className="grow">
-          <div className="w-full h-[496px] hidden md:flex justify-center items-center bg-secondary-1 rounded">
-            <img
-              alt="product-image"
-              className="h-[315px]"
-              src={selectedImage}
-            />
-          </div>
+      <div className="hidden md:block">
+        <ProductDetailDesktop
+          product={product}
+          quantity={quantity}
+          selectedImage={selectedImage}
+          selectedVariant={selectedVariant}
+          onAddToCartHandler={handleAddToCart}
+          onImageClickHandler={handleImageClick}
+          onQuantityInputChangeHandler={handleQuantityInputChange}
+          onSetQuantityHandler={handleSetQuantity}
+          onVariantClickHandler={handleVariantClick}
+        />
+      </div>
 
-          <div className="mt-5 grid grid-col md:grid-cols-4 gap-[23px]">
-            {product.images.map((image, index) => (
-              <div
-                key={index}
-                className="w-full h-[138px] flex justify-center items-center cursor-pointer rounded bg-secondary-1"
-                onClick={() => handleImageClick(image)}
-              >
-                <img
-                  alt="product-image"
-                  className="h-[114px] p-3"
-                  src={image}
-                />
-              </div>
-            ))}
-          </div>
-        </div>
-        {/* Product Details */}
-        <div className="w-[405px] mt-[47px]">
-          <h1 className="text-2xl leading-6 font-semibold">{product.name}</h1>
-          <div className="mt-4 flex items-center gap-2">
-            <ReactStars
-              activeColor="#FBBF24"
-              count={5}
-              edit={false}
-              isHalf={true}
-              size={24}
-              value={product.rating}
-            />
-            <div className="flex items-center gap-4">
-              <span className="block text-black opacity-50 text-sm">
-                ({product.ratingCount} Reviews)
-              </span>
-
-              <span className="block">|</span>
-              <span
-                className={`block text-sm ${product.stock > 0 ? 'text-button-1' : 'text-button-2'}`}
-              >
-                {product.stock > 0 ? 'In Stock' : 'Out of Stock'}
-              </span>
-            </div>
-          </div>
-          <h2 className="mt-4 text-2xl">${product.price}</h2>
-          <p className="mt-6 mb-6 text-sm">{product.desc}</p>
-          <hr className="border-t-[1px] border-black opacity-50" />
-
-          {product.variant && (
-            <div className="mt-6 flex items-center gap-6">
-              <h3 className="text-xl font-normal">Size:</h3>
-              <div className="flex items-center gap-3">
-                {product.variant.size.map((size, index) => (
-                  <button
-                    key={index}
-                    className={`w-8 h-8 flex justify-center items-center border-[1px] border-black border-opacity-50 rounded hover:bg-button-2 hover:text-text-1 hover:border-none ${selectedVariant === size ? 'bg-button-2 text-text-1 border-none' : ''}`}
-                    onClick={() => handleVariantClick(size)}
-                  >
-                    {size}
-                  </button>
-                ))}
-              </div>
-            </div>
-          )}
-
-          <div className="mt-[58px] flex items-center gap-[13px]">
-            <div className="flex items-center">
-              <button
-                className="flex justify-center items-center w-10 h-11 border-[1px] border-black border-opacity-50 rounded-tl rounded-bl hover:bg-button-2 text-primary-2 hover:text-white hover:border-none"
-                // onClick={() => setQuantity('dec')}
-              >
-                <Minus />
-              </button>
-              <input
-                className="w-20 h-11 text-center border-y-[1px] border-black border-opacity-50"
-                id="quantity"
-                name="quantity"
-                type="text"
-                // value={item.qty}
-                // onChange={handleInputChange}
-              />
-              <button
-                className="flex justify-center items-center w-10 h-11 border-[1px] border-black border-opacity-50 rounded-tr rounded-br hover:bg-button-2 text-primary-2 hover:text-white hover:border-none"
-                // onClick={() => setQuantity('inc')}
-              >
-                <Plus />
-              </button>
-            </div>
-            <div className="flex items-center gap-[2px]">
-              <button className="py-[10px] px-12 text-text-1 bg-button-2 hover:bg-button-hover-1 rounded">
-                Add to Cart
-              </button>
-              <button className="w-10 h-10 flex justify-center items-center border-[1px] border-black border-opacity-50 rounded">
-                <WishList />
-              </button>
-            </div>
-          </div>
-
-          <div className="border-[1px] border-black border-opacity-50 mt-[58px] rounded">
-            <div className="mt-6 mb-4 mx-4 flex items-center gap-4 ">
-              <div>
-                <DeliveryPlain />
-              </div>
-              <div>
-                <h3 className="font-medium">Free Delivery</h3>
-                <p className="mt-2 text-xs underline cursor-pointer">
-                  Enter your postal code for Delivery Availability
-                </p>
-              </div>
-            </div>
-            <div className="border-b-[1px] border-black border-opacity-50"></div>
-            <div className="mt-4 mb-6 mx-4 flex items-center gap-4">
-              <div>
-                <Return />
-              </div>
-              <div>
-                <h3 className="font-medium">Return Delivery</h3>
-                <p className="mt-2 text-xs">
-                  Free 30 Days Delivery Returns.{' '}
-                  <span className="underline cursor-pointer">Details</span>
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
+      <div className="block md:hidden">
+        <ProductDetailMobile
+          product={product}
+          selectedImage={selectedImage}
+          selectedVariant={selectedVariant}
+          onBottomSheetOpenHandler={handleBottomSheetOpen}
+          onImageClickHandler={handleImageClick}
+          onVariantClickHandler={handleVariantClick}
+        />
+      </div>
 
       {/* Related Product Section */}
-      <section className="mt-[133px]">
-        <SectionTitle hideTitle subTitle="Related Item" />
-        <div className="grid grid-cols-4 gap-[30px] mt-[60px]">
-          {relatedProducts?.map((product) => (
-            <ProductsCard
-              key={product.id}
-              showFavoriteButton
-              showRating
-              product={product}
-            />
-          ))}
+      <section className="mt-6 px-6 md:px-0">
+        <SectionTitle
+          hideTitle
+          subTitle="Related Items"
+          title="Related Items"
+        />
+        <div>
+          <ProductGrid
+            showFavoriteButton
+            showRating
+            gridCols={4}
+            products={relatedProducts}
+          />
         </div>
       </section>
+      <div className="w-full px-6 py-4 mt-[58px] fixed bottom-0 bg-white flex md:hidden items-center gap-[13px] z-10">
+        <div className="w-full flex items-center gap-3">
+          <button className="w-10 h-10 flex justify-center items-center border-[1px] border-black border-opacity-50 rounded">
+            <WishList />
+          </button>
+          <button
+            className="grow py-[10px] px-12 text-text-1 bg-button-2 hover:bg-button-hover-1 rounded"
+            onClick={handleBottomSheetOpen}
+          >
+            Add to Cart
+          </button>
+        </div>
+      </div>
+      {bottomSheetOpen && (
+        <BottomSheet
+          product={product}
+          quantity={quantity}
+          selectedVariant={selectedVariant}
+          onAddToCartHandler={handleAddToCart}
+          onBottomSheetOpenHandler={handleBottomSheetOpen}
+          onQuantityInputChangeHandler={handleQuantityInputChange}
+          onSetQuantityHandler={handleSetQuantity}
+          onVariantClickHandler={handleVariantClick}
+        />
+      )}
     </main>
   );
 };
