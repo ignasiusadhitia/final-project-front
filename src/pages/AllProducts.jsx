@@ -5,8 +5,11 @@ import PropTypes from 'prop-types';
 import { SectionTitle } from '@components';
 
 import ProductGrid from '../components/ProductGrid';
+import { useSelector } from 'react-redux';
 
 const AllProducts = () => {
+  const lang = useSelector((state) => state.lang.lang);
+
   const initialProducts = [
     {
       id: 1,
@@ -148,16 +151,16 @@ const AllProducts = () => {
   });
 
   const categories = [
-    { id: 0, name: 'All Products' },
-    { id: 1, name: 'Woman’s Fashion' },
-    { id: 2, name: 'Men’s Fashion' },
-    { id: 3, name: 'Electronics' },
-    { id: 4, name: 'Home & Lifestyle' },
-    { id: 5, name: 'Medicine' },
-    { id: 6, name: 'Sports & Outdoor' },
-    { id: 7, name: 'Baby’s & Toys' },
-    { id: 8, name: 'Groceries & Pets' },
-    { id: 9, name: 'Health & Beauty' },
+    { id: 0, name: lang === 'id' ? 'Semua Produk' : 'All Products' },
+    { id: 1, name: lang === 'id' ? 'Fesyen Wanita' : 'Woman’s Fashion' },
+    { id: 2, name: lang === 'id' ? 'Fesyen Pria' : 'Men’s Fashion' },
+    { id: 3, name: lang === 'id' ? 'Elektronik' : 'Electronics' },
+    { id: 4, name: lang === 'id' ? 'Rumah & Gaya Hidup' : 'Home & Lifestyle' },
+    { id: 5, name: lang === 'id' ? 'Obat-obatan' : 'Medicine' },
+    { id: 6, name: lang === 'id' ? 'Olahraga & Luar Ruangan' : 'Sports & Outdoor' },
+    { id: 7, name: lang === 'id' ? 'Mainan & Bayi' : 'Baby’s & Toys' },
+    { id: 8, name: lang === 'id' ? 'Groceries & Hewan Peliharaan' : 'Groceries & Pets' },
+    { id: 9, name: lang === 'id' ? 'Kesehatan & Kecantikan' : 'Health & Beauty' },
   ];
 
   const [products, setProducts] = useState(initialProducts);
@@ -210,7 +213,7 @@ const AllProducts = () => {
             className="my-20 bg-secondary-3 hover:opacity-85 text-white font-medium text-base w-[184px] h-[56px] rounded mx-auto block"
             onClick={handleShowMore}
           >
-            Show More
+            {lang === 'id' ? 'Lebih Banyak' : 'Show More'}
           </button>
         )}
       </div>

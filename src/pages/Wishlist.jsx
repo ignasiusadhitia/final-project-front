@@ -3,10 +3,29 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 import { ProductsCard } from '@components';
-import { Favorite, Love, Trash } from '@icons';
+import { Love, Trash } from '@icons';
+import { useSelector } from 'react-redux';
 
 const Wishlist = () => {
   const navigate = useNavigate();
+  const lang = useSelector((state) => state.lang.lang);
+
+  const translations = {
+    en: {
+      wishlist: 'Wishlist',
+      moveAllToBag: 'Move All To Bag',
+      justForYou: 'Just For You',
+      seeAll: 'See All'
+    },
+    id: {
+      wishlist: 'Daftar Keinginan',
+      moveAllToBag: 'Pindahkan Semua',
+      justForYou: 'Hanya Untuk Kamu',
+      seeAll: 'Lihat Semua'
+    },
+  };
+
+  const text = translations[lang];
 
   // TODO: Replace with actual data from the backend
   const wishLists = [
@@ -148,7 +167,7 @@ const Wishlist = () => {
             className="text-xs lg:text-base py-3 lg:px-10 text-secondary-3 lg:text-black rounded lg:border border-black/50 lg:hover:bg-black lg:hover:text-white transition-colors"
             onClick={handleMoveAllToCart}
           >
-            Move All To Bag
+            {text.moveAllToBag}
           </button>
         </div>
         <div className="grid grid-cols-2 md:flex flex-wrap justify-between gap-5 mt-5">
@@ -172,7 +191,7 @@ const Wishlist = () => {
             <div className="flex gap-4 items-center">
               <div className="w-5 h-10 hidden md:block bg-secondary-3 rounded"></div>
               <h2 className="text-sm md:text-xl text-black font-semibold">
-                Just For You
+                {text.justForYou}
               </h2>
             </div>
           </div>
@@ -180,7 +199,7 @@ const Wishlist = () => {
             className="text-xs lg:text-base py-3 lg:px-10 text-secondary-3 lg:text-black rounded lg:border border-black/50 lg:hover:bg-black lg:hover:text-white transition-colors"
             onClick={() => navigate('/products')}
           >
-            See All
+            {text.seeAll}
           </button>
         </div>
         <div className="grid grid-cols-2 md:flex flex-wrap justify-between gap-5 mt-5">

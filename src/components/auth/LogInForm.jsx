@@ -2,15 +2,35 @@ import React from 'react';
 
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const LogInForm = ({ onSubmitHandler, onInputChangeHandler }) => {
+  const lang = useSelector((state) => state.lang.lang);
+
+  const translations = {
+    en: {
+      emailPlaceholder: 'Email or Phone Number',
+      passwordPlaceholder: 'Password',
+      logInButton: 'Log In',
+      forgetPassword: 'Forget Password?',
+    },
+    id: {
+      emailPlaceholder: 'Email atau Nomor Telepon',
+      passwordPlaceholder: 'Kata Sandi',
+      logInButton: 'Masuk',
+      forgetPassword: 'Lupa Kata Sandi?',
+    },
+  };
+
+  const text = translations[lang];
+
   return (
     <form className="flex flex-col gap-8" onSubmit={onSubmitHandler}>
       <input
         className="w-full border-b-[1px] border-black border-opacity-50  py-2 leading-6 focus:outline-none"
         id="email"
         name="email"
-        placeholder="Email or Phone Number"
+        placeholder={text.emailPlaceholder}
         type="text"
         onChange={onInputChangeHandler}
       />
@@ -18,7 +38,7 @@ const LogInForm = ({ onSubmitHandler, onInputChangeHandler }) => {
         className="w-full border-b-[1px] border-black border-opacity-50 py-2 leading-6 focus:outline-none"
         id="password"
         name="password"
-        placeholder="Password"
+        placeholder={text.passwordPlaceholder}
         type="password"
         onChange={onInputChangeHandler}
       />
@@ -28,11 +48,11 @@ const LogInForm = ({ onSubmitHandler, onInputChangeHandler }) => {
           className="w-full md:w-fit bg-button-2 hover:bg-button-hover-1 py-4 px-12 rounded text-white"
           type="submit"
         >
-          Log In
+          {text.logInButton}
         </button>
 
         <span className="block text-secondary-3 text-base mb-2 md:mb-0 ">
-          <Link>Forget Password?</Link>
+          <Link>{text.forgetPassword}</Link>
         </span>
       </div>
     </form>

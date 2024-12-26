@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import ReactStars from 'react-rating-stars-component';
 
 import { WhiteCart, Trash, Favorite } from '@icons';
+import { useSelector } from 'react-redux';
 
 const ProductCard = ({
   product,
@@ -11,11 +12,27 @@ const ProductCard = ({
   showRating = false,
   showFavoriteButton = false,
 }) => {
+  const lang = useSelector((state) => state.lang.lang);
   const [isFavorite, setIsFavorite] = useState(false);
 
   const handleFavoriteClick = () => {
     setIsFavorite(!isFavorite);
   };
+
+  const translations = {
+    en: {
+      addToCart: 'Add to Cart',
+      outOfStock: 'Out of Stock',
+      newLabel: 'New',
+    },
+    id: {
+      addToCart: 'Tambahkan ke Keranjang',
+      outOfStock: 'Stok Habis',
+      newLabel: 'Baru',
+    },
+  };
+  
+  const text = translations[lang];
 
   return (
     <div className="min-w-[173px] md:max-w-[270px] rounded overflow-hidden bg-white group">
@@ -31,14 +48,14 @@ const ProductCard = ({
               <button className="w-full py-3 text-center">
                 <span className="bg-black text-white font-normal text-xs py-2 px-4">
                   <WhiteCart className="inline-block mr-2" />
-                  Add to Cart
+                  {text.addToCart}
                 </span>
               </button>
             ) : (
               <div className="w-full py-3 text-center">
                 <span className="text-white font-normal text-xs">
                   <WhiteCart className="inline-block mr-2" />
-                  Out of Stock
+                  {text.outOfStock}
                 </span>
               </div>
             )}
@@ -59,7 +76,7 @@ const ProductCard = ({
           <div className="absolute top-4 left-4 flex gap-2">
             {product.isNew && (
               <span className="bg-green-500 text-white font-normal py-1 px-3 rounded text-xs">
-                New
+                {text.newLabel}
               </span>
             )}
             {product.discount && (

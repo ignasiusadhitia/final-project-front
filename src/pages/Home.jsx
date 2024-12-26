@@ -16,8 +16,36 @@ import {
   FeatureCard,
 } from '@components';
 import { Arrow, Love } from '@icons';
+import { useSelector } from 'react-redux';
 
 const Home = () => {
+  const lang = useSelector((state) => state.lang.lang);
+
+  const translations = {
+    en: {
+      category: 'Category',
+      thisMonth: 'This Month',
+      viewAll: 'View All',
+      viewAllProducts: 'View All Products',
+      featured: 'Featured',
+      bestSelling: 'Best Selling Products',
+      exploreProduct: 'Explore Our Products',
+      browseByCategory: 'Browse By Category'
+    },
+    id: {
+      category: 'Kategori',
+      thisMonth: 'Bulan Ini',
+      viewAll: 'Lihat Semua',
+      viewAllProducts: 'Lihat Semua Produk',
+      featured: 'Unggulan',
+      bestSelling: 'Produk Terlaris',
+      exploreProduct: 'Jelajahi Produk Kami',
+      browseByCategory: 'Telusuri Berdasarkan Kategori'
+    }
+  }
+
+  const text = translations[lang];
+
   const bestSellingProducts = [
     {
       id: 1,
@@ -293,7 +321,7 @@ const Home = () => {
     },
     {
       id: 6,
-      name: 'Gamming',
+      name: 'Gaming',
       imageUrl: 'https://picsum.photos/300/200',
       url: '#',
     },
@@ -344,7 +372,7 @@ const Home = () => {
       {/* CATEGORY SECTION */}
       <section className="space-y-3 px-5 py-3 lg:p-0 md:space-y-20">
         <header className="flex justify-between">
-          <SectionTitle subTitle="Categoty" title="Browse By Category" />
+          <SectionTitle subTitle={text.category} title={text.browseByCategory} />
           <div className="hidden md:flex gap-2 self-end">
             <button
               className="w-12 h-12 rounded-full bg-secondary-1 flex justify-center items-center"
@@ -390,11 +418,11 @@ const Home = () => {
       {/* BEST SELLING PRODUCT SECTION */}
       <section className="space-y-3 mb-5 md:space-y-20 px-5 lg:p-0">
         <header className="flex justify-between items-center">
-          <SectionTitle subTitle="This Month" title="Best Selling Products" />
+          <SectionTitle subTitle={text.thisMonth} title={text.bestSelling} />
 
           <div className="flex gap-5 lg:self-end">
             <button className="text-xs md:text-base lg:py-3 lg:px-10 text-button-2 md:text-white md:bg-button-2 md:hover:bg-button-hover-1 rounded-md">
-              View All
+              {text.viewAll}
             </button>
           </div>
         </header>
@@ -434,7 +462,7 @@ const Home = () => {
       <section className="space-y-5 md:space-y-20 p-5 lg:p-0">
         {/* HEADER */}
         <header className="flex justify-between">
-          <SectionTitle subTitle="Our Products" title="Explore Our Products" />
+          <SectionTitle subTitle="Our Products" title={text.exploreProduct} />
           <div className="flex gap-2 self-end">
             <button
               className="hidden w-12 h-12 rounded-full bg-secondary-1 md:flex justify-center items-center"
@@ -449,7 +477,7 @@ const Home = () => {
               <Arrow />
             </button>
             <button className="text-button-2 text-xs md:hidden">
-              View All
+              {text.viewAll}
             </button>
           </div>
         </header>
@@ -490,14 +518,14 @@ const Home = () => {
         </div>
         {/* BUTTON */}
         <button className="hidden bg-button-2 hover:bg-button-hover-1 transition-colors text-white py-3 px-10 rounded-md mx-auto md:block">
-          View All Products
+          {text.viewAllProducts}
         </button>
       </section>
 
       {/* FEATURED PRODUCT SECTION */}
       <section className="space-y-5 md:space-y-20 p-5 lg:p-0">
         <header className="flex justify-between">
-          <SectionTitle subTitle="Featured" title="Recommend" />
+          <SectionTitle subTitle={text.featured} title="Recommend" />
         </header>
         <div className="grid grid-cols-12 gap-1 border">
           {featuredProducts.map((item, index) => (

@@ -2,9 +2,11 @@ import React, { useEffect, useState } from 'react';
 
 import PropTypes from 'prop-types';
 import { Link, useLocation } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 
 const Breadcrumb = ({ userName }) => {
   const location = useLocation();
+  const lang = useSelector((state) => state.lang.lang);
   const [productNames, setProductNames] = useState({});
   const currentPath = location.pathname;
   let pathnames = currentPath.split('/').filter((x) => x);
@@ -70,7 +72,7 @@ const Breadcrumb = ({ userName }) => {
       {/* Welcome Message */}
       {userName && (
         <div className="hidden md:block text-sm">
-          Welcome! <span className="text-secondary-3">{userName}</span>
+          {lang === 'id' ? 'Welcome!' : 'Selamat datang!'} <span className="text-secondary-3">{userName}</span>
         </div>
       )}
     </nav>
