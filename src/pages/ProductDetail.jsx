@@ -6,7 +6,7 @@ import {
   BottomSheet,
   ProductDetailDesktop,
   ProductDetailMobile,
-  ProductGrid,
+  ProductsCard,
   SectionTitle,
 } from '@components';
 import { WishList } from '@icons';
@@ -194,13 +194,15 @@ const ProductDetail = () => {
           subTitle="Related Items"
           title="Related Items"
         />
-        <div>
-          <ProductGrid
-            showFavoriteButton
-            showRating
-            gridCols={4}
-            products={relatedProducts}
-          />
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-[26px] md:gap-30">
+          {relatedProducts.map((product) => (
+            <ProductsCard
+              key={product.id}
+              showFavoriteButton
+              showRating
+              product={product}
+            />
+          ))}
         </div>
       </section>
       <div className="w-full px-6 py-4 mt-[58px] fixed bottom-0 bg-white flex md:hidden items-center gap-[13px] z-10">

@@ -18,7 +18,10 @@ const ProductCard = ({
   };
 
   return (
-    <div className="min-w-[173px] md:max-w-[270px] rounded overflow-hidden bg-white group">
+    <div
+      className="min-w-[173px] md:max-w-[270px]
+     rounded overflow-hidden bg-white group"
+    >
       <div className="relative">
         <div className="relative bg-secondary-1">
           <img
