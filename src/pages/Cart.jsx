@@ -23,19 +23,27 @@ const Cart = () => {
 
   const total = subtotal + (order.shipping === 'Free' ? 0 : order.shipping);
 
-  const setQuantity = (type) => {
-    if (type === 'inc') {
-      setUserOrder((prev) => prev.qty + 1);
-    }
-
-    if (type === 'dec') {
-      setUserOrder((prev) => prev.qty - 1);
-    }
+  const setQuantity = (id, type) => {
+    setUserOrder((prevOrders) =>
+      prevOrders.map((item) =>
+        item.id === id
+          ? {
+              ...item,
+              qty: type === 'inc' ? item.qty + 1 : Math.max(item.qty - 1, 0),
+            }
+          : item
+      )
+    );
   };
 
-  // const handleInputChange = (event) => {
-  //   setUserOrder((userOrder.qty = event.target.value));
-  // };
+  const handleInputChange = (id, event) => {
+    const newQty = Math.max(0, parseInt(event.target.value, 10) || 0);
+    setUserOrder((prevOrders) =>
+      prevOrders.map((item) =>
+        item.id === id ? { ...item, qty: newQty } : item
+      )
+    );
+  };
 
   useEffect(() => {
     setUserOrder(order.products);
@@ -70,7 +78,7 @@ const Cart = () => {
                 <td className="flex items-center justify-center">
                   <button
                     className="flex justify-center items-center w-10 h-11 border-[1px] border-black border-opacity-50 rounded-tl rounded-bl hover:bg-button-2 text-primary-2 hover:text-white hover:border-none"
-                    onClick={() => setQuantity('dec')}
+                    onClick={() => setQuantity(item.id, 'dec')}
                   >
                     <Minus height="32" width="32" />
                   </button>
@@ -80,11 +88,11 @@ const Cart = () => {
                     name="quantity"
                     type="text"
                     value={item.qty}
-                    // onChange={handleInputChange}
+                    onChange={(event) => handleInputChange(item.id, event)}
                   />
                   <button
                     className="flex justify-center items-center w-10 h-11 border-[1px] border-black border-opacity-50 rounded-tr rounded-br hover:bg-button-2 text-primary-2 hover:text-white hover:border-none"
-                    onClick={() => setQuantity('inc')}
+                    onClick={() => setQuantity(item.id, 'inc')}
                   >
                     <Plus height="32" width="32" />
                   </button>
@@ -132,7 +140,7 @@ const Cart = () => {
                 <div className="flex items-center justify-center">
                   <button
                     className="flex justify-center items-center w-7 h-7 border-[1px] border-black border-opacity-50 rounded-tl rounded-bl hover:bg-button-2 text-primary-2 hover:text-white hover:border-none"
-                    onClick={() => setQuantity('dec')}
+                    onClick={() => setQuantity(item.id, 'dec')}
                   >
                     <Minus height="16" width="16" />
                   </button>
@@ -142,11 +150,11 @@ const Cart = () => {
                     name="quantity"
                     type="text"
                     value={item.qty}
-                    // onChange={handleInputChange}
+                    onChange={(event) => handleInputChange(item.id, event)}
                   />
                   <button
                     className="flex justify-center items-center w-7 h-7 border-[1px] border-black border-opacity-50 rounded-tr rounded-br hover:bg-button-2 text-primary-2 hover:text-white hover:border-none"
-                    onClick={() => setQuantity('inc')}
+                    onClick={() => setQuantity(item.id, 'inc')}
                   >
                     <Plus height="16" width="16" />
                   </button>
