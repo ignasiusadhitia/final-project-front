@@ -18,7 +18,10 @@ const ProductCard = ({
   };
 
   return (
-    <div className="min-w-[173px] md:max-w-[270px] rounded overflow-hidden bg-white group">
+    <div
+      className="min-w-[173px] md:max-w-[270px]
+     rounded overflow-hidden bg-white group"
+    >
       <div className="relative">
         <div className="relative bg-secondary-1">
           <img
@@ -48,6 +51,7 @@ const ProductCard = ({
               <Trash />
             </button>
           )}
+
           {showFavoriteButton && (
             <button
               className={`absolute top-4 right-4 hover:bg-gray-200 rounded-full h-fit shadow-lg ${isFavorite ? 'bg-secondary-3' : 'bg-white'} p-2`}

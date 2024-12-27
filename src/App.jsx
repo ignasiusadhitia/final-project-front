@@ -18,9 +18,9 @@ import {
   Home,
   Login,
   NotFound,
-  Product,
+  ProductDetail,
+  Success,
   SignUp,
-  ThankYou,
   Wishlist,
   Error,
 } from '@pages';
@@ -40,7 +40,7 @@ const routes = [
   },
   {
     path: '/products/:id',
-    element: <Product />,
+    element: <ProductDetail />,
   },
   {
     path: '/best-selling',
@@ -55,6 +55,10 @@ const routes = [
     element: <Checkout />,
   },
   {
+    path: '/success',
+    element: <Success />,
+  },
+  {
     path: '/contact',
     element: <Contact />,
   },
@@ -65,10 +69,6 @@ const routes = [
   {
     path: '/sign-up',
     element: <SignUp />,
-  },
-  {
-    path: '/thank-you',
-    element: <ThankYou />,
   },
   {
     path: '/wishlist',
