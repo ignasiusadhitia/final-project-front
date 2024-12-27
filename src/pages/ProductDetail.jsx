@@ -155,7 +155,7 @@ const ProductDetail = () => {
             </SwiperSlide>
           ))}
         </Swiper>
-        <div className="absolute flex justify-center items-center w-8 h-4 mx-6 mt-[-24px] text-[8px] border-[1px] border-black border-opacity-50 rounded-sm z-30">
+        <div className="absolute flex justify-center items-center w-8 h-4 mx-6 mt-[-24px] text-[8px] border-[1px] border-black border-opacity-50 rounded-sm z-10">
           <span className="block mt-[2.5px]">
             {activeSlide}/{product?.images.length}
           </span>
