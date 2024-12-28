@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from 'react';
 
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import { Minus, Plus } from '@icons';
 import { productSmall } from '@images';
-import { useSelector } from 'react-redux';
 
 const order = {
   products: [
@@ -53,30 +53,30 @@ const Cart = () => {
 
   const translations = {
     en: {
-      product: "Product",
-      price: "Price",
-      quantity: "Quantity",
-      subtotal: "Subtotal",
-      shipping: "Shipping",
-      couponCode: "Coupon Code",
-      applyCoupon: "Apply Coupon",
-      cartTotal: "Cart Total",
-      returnToShop: "Return to Shop",
-      freeShipping: "Free",
-      processToCheckout: "Process to checkout",
+      product: 'Product',
+      price: 'Price',
+      quantity: 'Quantity',
+      subtotal: 'Subtotal',
+      shipping: 'Shipping',
+      couponCode: 'Coupon Code',
+      applyCoupon: 'Apply Coupon',
+      cartTotal: 'Cart Total',
+      returnToShop: 'Return to Shop',
+      freeShipping: 'Free',
+      processToCheckout: 'Process to checkout',
     },
     id: {
-      product: "Produk",
-      price: "Harga",
-      quantity: "Jumlah",
-      subtotal: "Subtotal",
-      shipping: "Pengiriman",
-      couponCode: "Kode Kupon",
-      applyCoupon: "Terapkan Kupon",
-      cartTotal: "Total Keranjang",
-      returnToShop: "Kembali ke Toko",
-      freeShipping: "Gratis",
-      processToCheckout: "Proses ke Checkout",
+      product: 'Produk',
+      price: 'Harga',
+      quantity: 'Jumlah',
+      subtotal: 'Subtotal',
+      shipping: 'Pengiriman',
+      couponCode: 'Kode Kupon',
+      applyCoupon: 'Terapkan Kupon',
+      cartTotal: 'Total Keranjang',
+      returnToShop: 'Kembali ke Toko',
+      freeShipping: 'Gratis',
+      processToCheckout: 'Proses ke Checkout',
     },
   };
 
@@ -89,10 +89,14 @@ const Cart = () => {
         <table className="w-full">
           <thead>
             <tr className="py-6 px-10 grid grid-cols-4 rounded shadow-md mb-10">
-              <th className="font-normal text-base text-left">{text.product}</th>
+              <th className="font-normal text-base text-left">
+                {text.product}
+              </th>
               <th className="font-normal text-base">{text.price}</th>
               <th className="font-normal text-base">{text.quantity}</th>
-              <th className="font-normal text-base text-right">{text.subtotal}</th>
+              <th className="font-normal text-base text-right">
+                {text.subtotal}
+              </th>
             </tr>
           </thead>
           <tbody className="flex flex-col gap-10">
@@ -169,7 +173,9 @@ const Cart = () => {
               </div>
 
               <div className="flex items-center justify-between">
-                <span className="block text-sm md:text-base">{text.quantity}</span>
+                <span className="block text-sm md:text-base">
+                  {text.quantity}
+                </span>
                 <div className="flex items-center justify-center">
                   <button
                     className="flex justify-center items-center w-7 h-7 border-[1px] border-black border-opacity-50 rounded-tl rounded-bl hover:bg-button-2 text-primary-2 hover:text-white hover:border-none"
@@ -195,7 +201,9 @@ const Cart = () => {
               </div>
 
               <div className="flex justify-between items-center">
-                <span className="block text-sm md:text-base">{text.subtotal}</span>
+                <span className="block text-sm md:text-base">
+                  {text.subtotal}
+                </span>
                 <span className="block text-button-2 font-semibold">
                   ${item.price * item.qty}
                 </span>
@@ -245,12 +253,18 @@ const Cart = () => {
           </div>
 
           <div className="flex justify-between">
-            <Link to={'/checkout'} className="hidden text-center md:block mt-4 mx-auto py-4 px-12 bg-button-2 hover:bg-button-hover-1 rounded text-text-1">
+            <Link
+              className="hidden text-center md:block mt-4 mx-auto py-4 px-12 bg-button-2 hover:bg-button-hover-1 rounded text-text-1"
+              to={'/checkout'}
+            >
               {text.processToCheckout}
             </Link>
           </div>
         </div>
-        <Link to={'/checkout'} className="block text-center md:hidden py-4 px-12 bg-button-2 hover:bg-button-hover-1 rounded text-text-1">
+        <Link
+          className="block text-center md:hidden py-4 px-12 bg-button-2 hover:bg-button-hover-1 rounded text-text-1"
+          to={'/checkout'}
+        >
           {text.processToCheckout}
         </Link>
       </section>

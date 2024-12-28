@@ -1,9 +1,9 @@
 import React from 'react';
 
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import { EditAddress, DeleteAddress, AddAddress } from '@icons';
-import { useSelector } from 'react-redux';
 
 const AddressList = () => {
   const lang = useSelector((state) => state.lang.lang);

@@ -1,9 +1,9 @@
 import React from 'react';
 
 import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
 
 import { SectionTitle } from '@components';
-import { useSelector } from 'react-redux';
 
 const FeatureCard = ({ data }) => {
   const lang = useSelector((state) => state.lang.lang);
@@ -22,7 +22,7 @@ const FeatureCard = ({ data }) => {
           className="text-text-1 text-base cursor-pointer underline"
           href={data.url}
         >
-          {lang === 'en' ? 'Shop Now' : "Beli Sekarang"}
+          {lang === 'en' ? 'Shop Now' : 'Beli Sekarang'}
         </a>
       </div>
     </div>

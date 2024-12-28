@@ -2,10 +2,10 @@ import React, { useState } from 'react';
 
 import PropTypes from 'prop-types';
 import ReactStars from 'react-rating-stars-component';
-
-import { WhiteCart, Trash, Favorite } from '@icons';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+
+import { WhiteCart, Trash, Favorite } from '@icons';
 
 const ProductCard = ({
   product,
@@ -32,7 +32,7 @@ const ProductCard = ({
       newLabel: 'Baru',
     },
   };
-  
+
   const text = translations[lang];
 
   return (
@@ -94,7 +94,7 @@ const ProductCard = ({
       </div>
       <div className="px-3 py-4">
         <div className="font-medium text-sm lg:text-base line-clamp-2">
-          <Link to={"/products/1"}>{product.name}</Link>
+          <Link to={'/products/1'}>{product.name}</Link>
         </div>
       </div>
       <div className="px-3">

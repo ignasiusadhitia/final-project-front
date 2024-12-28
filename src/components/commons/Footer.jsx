@@ -1,9 +1,10 @@
 import React from 'react';
 
 // ICONS
+import { useSelector } from 'react-redux';
+
 import { Send, Facebook, Twitter, Instagram, Linkedin } from '@icons';
 import { playStore, appleStore, qrCode } from '@images';
-import { useSelector } from 'react-redux';
 
 const Footer = () => {
   const lang = useSelector((state) => state.lang.lang);
@@ -186,9 +187,7 @@ const Footer = () => {
         {/* Download App */}
         <div className="space-y-4 order-5 md:order-none">
           <h3 className="text-base md:text-lg">{text.downloadApp}</h3>
-          <p className="text-sm text-gray-400">
-            {text.appDiscount}
-          </p>
+          <p className="text-sm text-gray-400">{text.appDiscount}</p>
           <div className="flex gap-4">
             <div>
               <img alt="Barcode" src={qrCode} />
@@ -252,9 +251,7 @@ const Footer = () => {
       </div>
 
       {/* Copyright */}
-      <p className="text-center text-gray-600">
-        &copy; {text.copyRight}
-      </p>
+      <p className="text-center text-gray-600">&copy; {text.copyRight}</p>
     </footer>
   );
 };

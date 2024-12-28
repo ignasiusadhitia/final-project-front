@@ -1,9 +1,9 @@
 import React from 'react';
 
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import { SignUpForm } from '@components';
-import { useSelector } from 'react-redux';
 
 const SignUp = () => {
   const lang = useSelector((state) => state.lang.lang);
@@ -30,7 +30,7 @@ const SignUp = () => {
       loginLink: 'Masuk',
     },
   };
-  
+
   const text = translations[lang];
 
   return (

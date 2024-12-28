@@ -1,9 +1,10 @@
 import React from 'react';
+
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import { CheckoutProductCard } from '@components';
 import { productSmall } from '@images';
-import { useSelector } from 'react-redux';
 
 const order = {
   products: [
@@ -12,7 +13,6 @@ const order = {
   ],
   shipping: 'Free',
 };
-
 
 const Success = () => {
   const lang = useSelector((state) => state.lang.lang);

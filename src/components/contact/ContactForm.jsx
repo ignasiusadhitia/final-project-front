@@ -96,7 +96,8 @@ const ContactForm = ({ onSubmitHandler }) => {
           className={`${message ? 'hidden' : 'block'} absolute top-7 mx-4 text-black text-opacity-50 transition-all duration-200 ease-in-out text-sm md:text-base`}
           htmlFor="message"
         >
-          {text.messageLabel} <span className="text-secondary-3">{text.requiredMark}</span>
+          {text.messageLabel}{' '}
+          <span className="text-secondary-3">{text.requiredMark}</span>
         </label>
 
         <textarea

@@ -1,4 +1,5 @@
 import React from 'react';
+
 import { Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
@@ -12,6 +13,7 @@ import {
   AnualGross,
 } from '@icons';
 import { aboutHero, member1, member2, member3, member4 } from '@images';
+
 import { useSelector } from 'react-redux';
 
 const About = () => {
@@ -21,7 +23,7 @@ const About = () => {
     en: {
       heroTitle: 'Our Story',
       heroDescription1:
-        'Launched in 2015, Exclusive is South Asia\'s premier online shopping marketplace with an active presence in Bangladesh. Supported by a wide range of tailored marketing, data, and service solutions, Exclusive has 10,500 sellers and 300 brands and serves 3 million customers across the region.',
+        "Launched in 2015, Exclusive is South Asia's premier online shopping marketplace with an active presence in Bangladesh. Supported by a wide range of tailored marketing, data, and service solutions, Exclusive has 10,500 sellers and 300 brands and serves 3 million customers across the region.",
       heroDescription2:
         'Exclusive has more than 1 million products to offer, growing very fast. Exclusive offers a diverse assortment in categories ranging from consumer goods.',
       sellerActiveLabel: 'Sellers active our site',
