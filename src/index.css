@@ -3,6 +3,9 @@
 @tailwind components;
 @tailwind utilities;
 /* Pagination Bullets */
+.swiper-cstm {
+  z-index: -1 !important;
+}
 .swiper-cstm .swiper-pagination-bullet {
   background-color: gray;
   opacity: 1;
@@ -20,5 +23,6 @@
 .swiper-cstm.about .swiper-pagination {
   top: 0;
   position: relative;
+  z-index: 0;
   padding-top: 3rem;
 }

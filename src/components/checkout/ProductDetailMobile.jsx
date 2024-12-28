@@ -4,8 +4,32 @@ import PropTypes from 'prop-types';
 import ReactStars from 'react-rating-stars-component';
 
 import { DeliveryPlain, Return } from '@icons';
+import { useSelector } from 'react-redux';
 
 const ProductDetailMobile = ({ product }) => {
+  const lang = useSelector((state) => state.lang.lang);
+
+  const translations = {
+    en: {
+      reviews: "Reviews",
+      freeDelivery: "Free Delivery",
+      deliveryAvailability: "Enter your postal code for Delivery Availability",
+      returnDelivery: "Return Delivery",
+      freeReturns: "Free 30 Days Delivery Returns.",
+      details: "Details",
+    },
+    id: {
+      reviews: "Ulasan",
+      freeDelivery: "Pengiriman Gratis",
+      deliveryAvailability: "Masukkan kode pos Anda untuk ketersediaan pengiriman",
+      returnDelivery: "Pengembalian Pengiriman",
+      freeReturns: "Gratis pengembalian dalam 30 hari.",
+      details: "Rinci",
+    },
+  };
+
+  const text = translations[lang];
+  
   return (
     <section className="flex gap-[37px] px-6">
       {/* Product Details */}
@@ -23,7 +47,7 @@ const ProductDetailMobile = ({ product }) => {
           />
           <div className="flex items-center gap-4">
             <span className="block text-black opacity-50 text-xs">
-              ({product.ratingCount} Reviews)
+              ({product.ratingCount} {text.reviews})
             </span>
 
             <span className="block">|</span>
@@ -43,9 +67,9 @@ const ProductDetailMobile = ({ product }) => {
               <DeliveryPlain height={32} width={32} />
             </div>
             <div>
-              <h3 className="font-medium text-sm">Free Delivery</h3>
+              <h3 className="font-medium text-sm">{text.freeDelivery}</h3>
               <p className="mt-2 text-[8px] underline cursor-pointer">
-                Enter your postal code for Delivery Availability
+                {text.deliveryAvailability}
               </p>
             </div>
           </div>
@@ -55,10 +79,10 @@ const ProductDetailMobile = ({ product }) => {
               <Return height={32} width={32} />
             </div>
             <div>
-              <h3 className="font-medium text-sm">Return Delivery</h3>
+              <h3 className="font-medium text-sm">{text.returnDelivery}</h3>
               <p className="mt-2 text-[8px]">
-                Free 30 Days Delivery Returns.{' '}
-                <span className="cursor-pointer underline">Details</span>
+                {text.freeReturns}.{' '}
+                <span className="cursor-pointer underline">{text.details}</span>
               </p>
             </div>
           </div>

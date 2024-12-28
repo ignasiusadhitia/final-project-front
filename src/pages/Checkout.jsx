@@ -3,6 +3,7 @@ import React from 'react';
 import { CheckoutProductCard } from '@components';
 import { EditAddress } from '@icons';
 import { bank, productSmall } from '@images';
+import { useSelector } from 'react-redux';
 
 const user = {
   name: 'Deni Irawan',
@@ -20,6 +21,7 @@ const order = {
 };
 
 const Checkout = () => {
+  const lang = useSelector((state) => state.lang.lang);
   const subtotal = order.products.reduce(
     (sum, current) => sum + current.price,
     0
@@ -27,16 +29,55 @@ const Checkout = () => {
 
   const total = subtotal + (order.shipping === 'Free' ? 0 : order.shipping);
 
+  const translations = {
+    en: {
+      billingDetails: "Billing Details",
+      yourAddress: "Your Address",
+      yourShipping: "Your Shipping",
+      yourNote: "Your Note",
+      messagePlaceholder: "Message for Sellers",
+      subtotal: "Subtotal",
+      shipping: "Shipping",
+      total: "Total",
+      paymentMethod: "Payment Method",
+      bank: "Bank",
+      cod: "Cash on delivery",
+      placeOrder: "Place Order",
+      regularShipping: "Regular Shipping",
+      shippingVoucher:
+        "Get voucher if your order doesn't arrive by 19 Nov 2024",
+    },
+    id: {
+      billingDetails: "Detail Tagihan",
+      yourAddress: "Alamat Anda",
+      yourShipping: "Pengiriman Anda",
+      yourNote: "Catatan Anda",
+      messagePlaceholder: "Pesan untuk Penjual",
+      subtotal: "Subtotal",
+      shipping: "Pengiriman",
+      total: "Total",
+      paymentMethod: "Metode Pembayaran",
+      bank: "Bank",
+      cod: "Bayar di Tempat",
+      placeOrder: "Pesan Sekarang",
+      regularShipping: "Pengiriman Reguler",
+      shippingVoucher:
+        "Dapatkan voucher jika pesanan Anda tidak tiba pada 19 Nov 2024",
+    },
+  };
+
+  const text = translations[lang];
+
   return (
-    <main className="container mt-6 md:mt-20 px-6 md:px-0">
-      <h1 className="text-base md:text-4xl font-medium">Billing Details</h1>
+    <main className="container lg:pb-96 mt-6 md:mt-20 px-6 md:px-0">
+      <h1 className="text-base md:text-4xl font-medium">{text.billingDetails}</h1>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-0 md:gap-[4.563rem]">
         {/* Billing Section */}
         <section className="mt-4 md:mt-10">
           {/* Address */}
           <div className="w-full">
             <h2 className="text-base md:text-xl font-medium text-secondary-3">
-              Your Address
+              {text.yourAddress}
             </h2>
             <div className="flex items-center gap-4 md:gap-[42px] mt-4 mb-[21px] bg-secondary-1 rounded pl-4 pr-[21px] md:pr-[29px]">
               <div className="pt-[13px] pb-5">
@@ -56,15 +97,15 @@ const Checkout = () => {
           {/* Shipping */}
           <div className="w-full">
             <h2 className="text-base md:text-xl font-medium text-secondary-3">
-              Your Shipping
+              {text.yourShipping}
             </h2>
             <div className="mt-[9px] mb-7 bg-secondary-1 rounded">
               <div className="py-4 px-[18px]">
                 <span className="leading-5 font-semibold">
-                  Regular Shipping
+                  {text.regularShipping}
                 </span>
                 <p className="text-sm md:text-base leading-6 text-text-2">
-                  Get voucher if your order doesn&apos;t arrive by 19 Nov 2024
+                  {text.shippingVoucher}
                 </p>
               </div>
             </div>
@@ -73,7 +114,7 @@ const Checkout = () => {
           {/* Note */}
           <div className="w-full">
             <h2 className="text-base md:text-xl font-medium text-secondary-3">
-              Your Note
+              {text.yourNote}
             </h2>
             <input
               className="w-full mt-2 border-[1px] text-sm md:text-base border-black rounded border-opacity-80 py-4 px-6"
@@ -92,12 +133,12 @@ const Checkout = () => {
           </div>
 
           <div className="flex justify-between mt-8 pb-4 border-b-[1px] border-black border-opacity-30 ">
-            <span className="block">Subtotal:</span>
+            <span className="block">{text.subtotal}:</span>
             <span className="block">${subtotal}</span>
           </div>
 
           <div className="flex justify-between py-4 border-b-[1px] border-black border-opacity-30">
-            <span className="block">Shipping:</span>
+            <span className="block">{text.shipping}:</span>
             <span className="block">
               {order?.shipping === 'Free'
                 ? order?.shipping
@@ -106,7 +147,7 @@ const Checkout = () => {
           </div>
 
           <div className="flex justify-between mt-4">
-            <span className="block">Total:</span>
+            <span className="block">{text.total}:</span>
             <span className="block">${total}</span>
           </div>
 
@@ -119,7 +160,7 @@ const Checkout = () => {
                   name="payment"
                   type="radio"
                 />
-                <label htmlFor="bank">Bank</label>
+                <label htmlFor="bank">{text.bank}</label>
               </div>
               <div>
                 <img alt="bank-payment" src={bank} />
@@ -128,12 +169,12 @@ const Checkout = () => {
 
             <div className="flex items-center gap-4">
               <input className="w-6 h-6" id="cod" name="payment" type="radio" />
-              <label htmlFor="cod">Cash on delivery</label>
+              <label htmlFor="cod">{text.cod}</label>
             </div>
           </div>
 
           <button className="w-full md:w-fit mt-8 block bg-button-2 hover:bg-button-hover-1 text-text-1 rounded py-4 px-12 text-center">
-            Place Order
+            {text.placeOrder}
           </button>
         </section>
       </div>

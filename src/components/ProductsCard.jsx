@@ -5,6 +5,7 @@ import ReactStars from 'react-rating-stars-component';
 
 import { WhiteCart, Trash, Favorite } from '@icons';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 const ProductCard = ({
   product,
@@ -40,24 +41,24 @@ const ProductCard = ({
      rounded overflow-hidden bg-white group"
     >
       <div className="relative">
-        <div className="relative bg-secondary-1">
+        <div className="relative h-[153px] md:h-auto lg:h-[250px] bg-secondary-1">
           <img
             alt={product.name}
-            className="p-10 relative"
+            className="p-8 md:p-10 relative w-full h-full object-cover"
             src={product.imageUrl}
           />
-          <div className="bg-black rounded-b-[4px] opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          <div className="bg-[#363738] h-[41px] flex justify-center items-center absolute bottom-0 w-full rounded-b-[4px] opacity-0 group-hover:opacity-100 transition-opacity duration-300">
             {product.stock > 0 ? (
-              <button className="w-full py-3 text-center">
-                <span className="bg-black text-white font-normal text-xs py-2 px-4">
-                  <WhiteCart className="inline-block mr-2" />
+              <button className="w-full text-center">
+                <span className="text-white font-normal text-[10px] md:text-xs">
+                  <WhiteCart className="inline-block mr-2 w-[20px] md:w-auto" />
                   {text.addToCart}
                 </span>
               </button>
             ) : (
-              <div className="w-full py-3 text-center">
-                <span className="text-white font-normal text-xs">
-                  <WhiteCart className="inline-block mr-2" />
+              <div className="w-full text-center">
+                <span className="text-white font-normal text-[10px] md:text-xs">
+                  <WhiteCart className="inline-block mr-2 w-[20px] md:w-auto" />
                   {text.outOfStock}
                 </span>
               </div>
@@ -93,7 +94,7 @@ const ProductCard = ({
       </div>
       <div className="px-3 py-4">
         <div className="font-medium text-sm lg:text-base line-clamp-2">
-          {product.name}
+          <Link to={"/products/1"}>{product.name}</Link>
         </div>
       </div>
       <div className="px-3">

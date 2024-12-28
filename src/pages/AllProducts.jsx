@@ -182,10 +182,10 @@ const AllProducts = () => {
       : products.filter(
           (product) => product.categoryId === selectedCategory.id
         );
-
+  
   return (
-    <div className="flex px-5 lg:px-0 justify-start lg:justify-between container lg:mt-10">
-      <div className="h-full py-5 text-left">
+    <div className="flex px-5 pb-10 lg:px-0 justify-start lg:justify-start lg:gap-14 container lg:mt-10">
+      <div className={`h-full py-5 text-left ${filteredProducts.length !== 0 && 'lg:flex-1'}`}>
         <ul className="hidden lg:flex flex-col gap-4 justify-start">
           {categories.map((category) => (
             <li
@@ -209,7 +209,7 @@ const AllProducts = () => {
         />
         <ProductGrid showRating gridCols={3} products={filteredProducts} />
 
-        {!showMore && (
+        {(!showMore && filteredProducts.length !== 0) && (
           <button
             className="my-20 bg-secondary-3 hover:opacity-85 text-white font-medium text-base w-[184px] h-[56px] rounded mx-auto block"
             onClick={handleShowMore}

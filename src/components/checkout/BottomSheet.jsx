@@ -14,10 +14,35 @@ const BottomSheet = ({
   onQuantityInputChangeHandler,
   onSetQuantityHandler,
 }) => {
+  const lang = useSelector((state) => state.lang.lang);
+
+  const translations = {
+    en: {
+      variantProduct: "Variant Product",
+      inStock: "In Stock",
+      outOfStock: "Out of Stock",
+      size: "Size",
+      quantity: "Quantity",
+      cancel: "Cancel",
+      addToCart: "Add to Cart",
+    },
+    id: {
+      variantProduct: "Varian Produk",
+      inStock: "Stok Tersedia",
+      outOfStock: "Stok Habis",
+      size: "Ukuran",
+      quantity: "Jumlah",
+      cancel: "Batal",
+      addToCart: "Keranjang",
+    },
+  };
+
+  const text = translations[lang];
+
   return (
     <div className="w-full block md:hidden fixed bottom-0 bg-white p-6 z-30 rounded-t-3xl">
       <h3 className="mb-4 text-center font-['Nunito'] font-semibold">
-        Varian Product
+        {text.variantProduct}
       </h3>
       <div className="absolute right-6 top-6">
         <Exit onClick={onBottomSheetOpenHandler} />
@@ -30,13 +55,13 @@ const BottomSheet = ({
         <div>
           <span className="block font-medium">${product.price}</span>
           <span className="block text-[10px] mt-1">
-            {product.stock > 0 ? 'In Stock' : 'Out of Stock'}
+            {product.stock > 0 ? text.inStock : text.outOfStock}
           </span>
         </div>
       </div>
       {product.variant && (
         <div className="mt-6">
-          <h3 className="text-sm font-normal">Size:</h3>
+          <h3 className="text-sm font-normal">{text.size}:</h3>
           <div className="flex items-center gap-3 mt-3">
             {product.variant.size.map((size, index) => (
               <button
@@ -52,7 +77,7 @@ const BottomSheet = ({
       )}
 
       <div className="mt-3">
-        <h3 className="text-sm font-normal">Quantity:</h3>
+        <h3 className="text-sm font-normal">{text.quantity}:</h3>
         <div className="flex items-center mt-3">
           <button
             className="flex justify-center items-center w-7 h-7 border-[1px] border-black border-opacity-50 rounded-tl rounded-bl hover:bg-button-2 text-primary-2 hover:text-white hover:border-none"
@@ -83,13 +108,13 @@ const BottomSheet = ({
           className="py-[11.5px] text-sm bg-secondary hover:bg-[#7d8184] hover:text-text-1 rounded"
           onClick={onBottomSheetOpenHandler}
         >
-          Cancel
+          {text.cancel}
         </button>
         <button
           className="py-[11.5px] text-sm text-text-1 bg-button-2 hover:bg-button-hover-1 rounded"
           onClick={onAddToCartHandler}
         >
-          Add to Cart
+          {text.addToCart}
         </button>
       </div>
     </div>

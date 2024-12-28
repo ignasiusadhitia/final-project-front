@@ -17,6 +17,7 @@ import {
 } from '@components';
 import { Arrow, Love } from '@icons';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 const Home = () => {
   const lang = useSelector((state) => state.lang.lang);
@@ -28,6 +29,8 @@ const Home = () => {
       viewAll: 'View All',
       viewAllProducts: 'View All Products',
       featured: 'Featured',
+      recommend: 'Recommend',
+      ourProduct: 'Our Products',
       bestSelling: 'Best Selling Products',
       exploreProduct: 'Explore Our Products',
       browseByCategory: 'Browse By Category'
@@ -38,9 +41,11 @@ const Home = () => {
       viewAll: 'Lihat Semua',
       viewAllProducts: 'Lihat Semua Produk',
       featured: 'Unggulan',
+      recommend: 'Rekomendasi',
+      ourProduct: 'Produk Kami',
       bestSelling: 'Produk Terlaris',
       exploreProduct: 'Jelajahi Produk Kami',
-      browseByCategory: 'Telusuri Berdasarkan Kategori'
+      browseByCategory: 'Telusuri Kategori'
     }
   }
 
@@ -366,7 +371,7 @@ const Home = () => {
     <main className="container lg:space-y-32 lg:my-6 md:my-[3.75rem]">
       {/* HERO SECTION */}
       <section>
-        <Banner data={banner1} />
+        <Banner height={"h-[220px] lg:h-[344px]"} data={banner1} />
       </section>
 
       {/* CATEGORY SECTION */}
@@ -421,9 +426,9 @@ const Home = () => {
           <SectionTitle subTitle={text.thisMonth} title={text.bestSelling} />
 
           <div className="flex gap-5 lg:self-end">
-            <button className="text-xs md:text-base lg:py-3 lg:px-10 text-button-2 md:text-white md:bg-button-2 md:hover:bg-button-hover-1 rounded-md">
+            <Link to={"/products"} className="text-xs md:text-base lg:py-3 lg:px-10 text-button-2 md:text-white md:bg-button-2 md:hover:bg-button-hover-1 rounded-md">
               {text.viewAll}
-            </button>
+            </Link>
           </div>
         </header>
         <div>
@@ -455,14 +460,14 @@ const Home = () => {
 
       {/* BANNER SECTION */}
       <section>
-        <Banner data={banner2} />
+        <Banner height={"h-[180px] lg:h-[500px]"} data={banner2} />
       </section>
 
       {/* EXPLORE OUR PRODUCT SECTION */}
       <section className="space-y-5 md:space-y-20 p-5 lg:p-0">
         {/* HEADER */}
         <header className="flex justify-between">
-          <SectionTitle subTitle="Our Products" title={text.exploreProduct} />
+          <SectionTitle subTitle={text.ourProduct} title={text.exploreProduct} />
           <div className="flex gap-2 self-end">
             <button
               className="hidden w-12 h-12 rounded-full bg-secondary-1 md:flex justify-center items-center"
@@ -476,9 +481,9 @@ const Home = () => {
             >
               <Arrow />
             </button>
-            <button className="text-button-2 text-xs md:hidden">
+            <Link to={"/products"} className="text-button-2 text-xs md:hidden">
               {text.viewAll}
-            </button>
+            </Link>
           </div>
         </header>
         {/* PRODUCTS */}
@@ -517,15 +522,17 @@ const Home = () => {
           </Swiper>
         </div>
         {/* BUTTON */}
-        <button className="hidden bg-button-2 hover:bg-button-hover-1 transition-colors text-white py-3 px-10 rounded-md mx-auto md:block">
-          {text.viewAllProducts}
-        </button>
+        <div className='hidden md:flex'>
+          <Link to={"/products"} className="hidden bg-button-2 hover:bg-button-hover-1 transition-colors text-white py-3 px-10 rounded-md mx-auto md:block">
+            {text.viewAllProducts}
+          </Link>
+        </div>
       </section>
 
       {/* FEATURED PRODUCT SECTION */}
       <section className="space-y-5 md:space-y-20 p-5 lg:p-0">
         <header className="flex justify-between">
-          <SectionTitle subTitle={text.featured} title="Recommend" />
+          <SectionTitle subTitle={text.featured} title={text.recommend}/>
         </header>
         <div className="grid grid-cols-12 gap-1 border">
           {featuredProducts.map((item, index) => (

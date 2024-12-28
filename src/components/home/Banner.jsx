@@ -1,6 +1,6 @@
 import React from 'react';
 
-import PropTypes from 'prop-types';
+import PropTypes, { string } from 'prop-types';
 import { Pagination, Autoplay } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
@@ -8,7 +8,7 @@ import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import 'swiper/css/grid';
 
-const Banner = ({ data = [] }) => {
+const Banner = ({ height, data = [] }) => {
   return (
     <>
       <Swiper
@@ -21,7 +21,7 @@ const Banner = ({ data = [] }) => {
       >
         {data.map((item, index) => (
           <SwiperSlide key={index}>
-            <div className="h-52">
+            <div className={height}>
               <a href={item.url}>
                 <img
                   alt={item.title}
@@ -38,6 +38,7 @@ const Banner = ({ data = [] }) => {
 };
 
 Banner.propTypes = {
+  height: PropTypes.string,
   data: PropTypes.arrayOf(
     PropTypes.shape({
       imageUrl: PropTypes.string.isRequired,

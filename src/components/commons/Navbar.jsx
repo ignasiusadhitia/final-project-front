@@ -32,6 +32,7 @@ const Navbar = () => {
     setNavbarOpen(false);
     setDropdownOpen(false);
 
+    window.scrollTo(0, 0);
     const handleResize = () => setIsSmallScreen(window.innerWidth <= 1024);
     window.addEventListener('resize', handleResize);
     return () => window.removeEventListener('resize', handleResize);
@@ -42,7 +43,7 @@ const Navbar = () => {
   };
 
   const handleUserClick = () => {
-    setDropdownOpen(!isNavbarOpen);
+    setDropdownOpen(!isDropdownOpen);
   };
 
   const changeLanguage = (e) => {
@@ -54,6 +55,7 @@ const Navbar = () => {
     en: {
       sale: 'Summer Sale For All Swim Suits And Free Express Delivery - OFF 50%!',
       showNow: 'Show Now',
+      showNowLower: 'ShowNow',
       home: 'Home',
       contact: 'Contact',
       about: 'About',
@@ -69,6 +71,7 @@ const Navbar = () => {
     id: {
       sale: 'Diskon Musim Panas Untuk Semua Baju Renang dan Pengiriman Ekspres Gratis - Diskon 50%!',
       showNow: 'Lihat Sekarang',
+      showNowLower: 'LihatSekarang',
       home: 'Beranda',
       contact: 'Kontak',
       about: 'Tentang',
@@ -105,7 +108,7 @@ const Navbar = () => {
                   className="hidden lg:block text-text-1 font-semibold underline"
                   to={'products'}
                 >
-                  ShowNow
+                  {text.showNowLower}
                 </Link>
               </div>
               <div className="hidden lg:block">
@@ -130,7 +133,7 @@ const Navbar = () => {
       ) : null}
 
       <div
-        className={`${isNavbarOpen ? '-translate-y-0' : '-translate-y-full'} transition ease-in duration-200 absolute z-20 bg-white shadow-md rounded-bl-3xl rounded-br-3xl left-0 right-0 top-0 h-[472px] lg:hidden`}
+        className={`${isNavbarOpen ? '-translate-y-0' : '-translate-y-full'} transition ease-in duration-200 absolute z-50 bg-white shadow-md rounded-bl-3xl rounded-br-3xl left-0 right-0 top-0 h-[472px] lg:hidden`}
       >
         <div className="flex justify-between py-8 px-5 ">
           <h1 className="text-base text-black font-semibold">Exclusive</h1>
@@ -269,13 +272,13 @@ const Navbar = () => {
 
         {(isSmallScreen && login) || (!isSmallScreen && (login || !login)) ? (
           <div className="flex items-center gap-8">
-            <div className="hidden lg:block relative">
+            <div className="hidden lg:block relative z-50">
               <input
                 className="w-[243px] text-xs h-[38px] bg-secondary-1 border border-secondary-1 rounded-md px-6 py-3 focus:border focus:outline-none focus:border-gray-300"
                 placeholder={text.searchPlaceholder}
                 type="text"
               />
-              <button className="absolute right-3 top-1/2 -translate-y-1/2">
+              <button className="absolute z-50 right-3 top-1/2 -translate-y-1/2">
                 <Search />
               </button>
             </div>
@@ -284,7 +287,7 @@ const Navbar = () => {
               <Link className="hidden lg:block" to={'wishlist'}>
                 <WishList />
               </Link>
-              <Link className="relative" to={'cart'}>
+              <Link className="relative z-50" to={'cart'}>
                 <BlackCart className="w-6 h-6 lg:w-8 lg:h-8" />
                 {login && (
                   <span className="absolute text-text-1 px-1 rounded-full text-xs -right-1 -top-1 bg-secondary-3">
@@ -294,7 +297,7 @@ const Navbar = () => {
               </Link>
 
               {login && (
-                <div className="hidden lg:block relative">
+                <div className="hidden lg:block relative z-50">
                   <button
                     className="focus:outline-none"
                     onClick={handleUserClick}
@@ -303,7 +306,7 @@ const Navbar = () => {
                   </button>
 
                   {isDropdownOpen && (
-                    <div className="absolute py-5 bg-gradient-to-b from-gray-400 to-black right-0 mt-2 w-56 rounded-md shadow-lg z-10">
+                    <div className="absolute z-50 py-5 bg-gradient-to-b from-gray-400 to-black right-0 mt-2 w-56 rounded-md shadow-lg">
                       <Link
                         className="flex items-center gap-2 px-4 py-2 text-sm font-normal text-text-1"
                         to={'/my-account'}
