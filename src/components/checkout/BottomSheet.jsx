@@ -3,6 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { Exit, Minus, Plus } from '@icons';
+import { useSelector } from 'react-redux';
 
 const BottomSheet = ({
   product,

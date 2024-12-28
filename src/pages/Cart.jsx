@@ -245,12 +245,12 @@ const Cart = () => {
           </div>
 
           <div className="flex justify-between">
-            <Link to={'/checkout'} className="hidden md:block mt-4 mx-auto py-4 px-12 bg-button-2 hover:bg-button-hover-1 rounded text-text-1">
+            <Link to={'/checkout'} className="hidden text-center md:block mt-4 mx-auto py-4 px-12 bg-button-2 hover:bg-button-hover-1 rounded text-text-1">
               {text.processToCheckout}
             </Link>
           </div>
         </div>
-        <Link to={'/checkout'} className="block md:hidden py-4 px-12 bg-button-2 hover:bg-button-hover-1 rounded text-text-1">
+        <Link to={'/checkout'} className="block text-center md:hidden py-4 px-12 bg-button-2 hover:bg-button-hover-1 rounded text-text-1">
           {text.processToCheckout}
         </Link>
       </section>

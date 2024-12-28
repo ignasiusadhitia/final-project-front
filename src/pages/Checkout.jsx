@@ -4,6 +4,7 @@ import { CheckoutProductCard } from '@components';
 import { EditAddress } from '@icons';
 import { bank, productSmall } from '@images';
 import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 const user = {
   name: 'Deni Irawan',
@@ -173,9 +174,9 @@ const Checkout = () => {
             </div>
           </div>
 
-          <button className="w-full md:w-fit mt-8 block bg-button-2 hover:bg-button-hover-1 text-text-1 rounded py-4 px-12 text-center">
+          <Link to={"/success"} className="w-full md:w-fit mt-8 block bg-button-2 hover:bg-button-hover-1 text-text-1 rounded py-4 px-12 text-center">
             {text.placeOrder}
-          </button>
+          </Link>
         </section>
       </div>
     </main>
