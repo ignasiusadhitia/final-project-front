@@ -4,9 +4,10 @@ import PropTypes from 'prop-types';
 import ReactStars from 'react-rating-stars-component';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
-import { DeliveryPlain, Minus, Plus, Return, WishList } from '@icons';
+import { DeliveryPlain, Minus, Plus, Return, Reviews, WishList } from '@icons';
 
 import 'swiper/css';
+import { useSelector } from 'react-redux';
 
 const ProductDetailDesktop = ({
   product,
@@ -19,6 +20,33 @@ const ProductDetailDesktop = ({
   onQuantityInputChangeHandler,
   onSetQuantityHandler,
 }) => {
+  const lang = useSelector((state) => state.lang.lang);
+
+  const translations = {
+    en: {
+      reviews: "Reviews",
+      size: "Size",
+      addToCart: "Add to Cart",
+      freeDelivery: "Free Delivery",
+      deliveryAvailability: "Enter your postal code for Delivery Availability",
+      returnDelivery: "Return Delivery",
+      freeReturns: "Free 30 Days Delivery Returns.",
+      details: "Details",
+    },
+    id: {
+      reviews: "Ulasan",
+      size: "Ukuran",
+      addToCart: "Keranjang",
+      freeDelivery: "Pengiriman Gratis",
+      deliveryAvailability: "Masukkan kode pos Anda untuk ketersediaan pengiriman",
+      returnDelivery: "Pengembalian Pengiriman",
+      freeReturns: "Gratis pengembalian dalam 30 hari.",
+      details: "Rinci",
+    },
+  };  
+
+  const text = translations[lang];
+
   return (
     <section className="flex gap-[37px]">
       {/* Product Image */}
@@ -78,7 +106,7 @@ const ProductDetailDesktop = ({
 
         {product.variant && (
           <div className="mt-6 flex items-center gap-6">
-            <h3 className="text-xl font-normal">Size:</h3>
+            <h3 className="text-xl font-normal">{text.size}:</h3>
             <div className="flex gap-4">
               {product.variant.size.map((size, index) => (
                 <button
@@ -122,7 +150,7 @@ const ProductDetailDesktop = ({
               className="py-[10px] px-12 text-text-1 bg-button-2 hover:bg-button-hover-1 rounded"
               onClick={onAddToCartHandler}
             >
-              Add to Cart
+              {text.addToCart}
             </button>
             <button className="w-10 h-10 flex justify-center items-center border-[1px] border-black border-opacity-50 rounded">
               <WishList />
@@ -136,9 +164,9 @@ const ProductDetailDesktop = ({
               <DeliveryPlain />
             </div>
             <div>
-              <h3 className="font-medium">Free Delivery</h3>
+              <h3 className="font-medium">{text.freeDelivery}</h3>
               <p className="mt-2 text-xs underline cursor-pointer">
-                Enter your postal code for Delivery Availability
+                {text.deliveryAvailability}
               </p>
             </div>
           </div>
@@ -148,10 +176,10 @@ const ProductDetailDesktop = ({
               <Return />
             </div>
             <div>
-              <h3 className="font-medium">Return Delivery</h3>
+              <h3 className="font-medium">{text.returnDelivery}</h3>
               <p className="mt-2 text-xs">
-                Free 30 Days Delivery Returns.{' '}
-                <span className="cursor-pointer underline">Details</span>
+                {text.freeReturns}.{' '}
+                <span className="cursor-pointer underline">{text.details}</span>
               </p>
             </div>
           </div>

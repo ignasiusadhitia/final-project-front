@@ -3,6 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import ProductCard from './ProductsCard';
+import { useSelector } from 'react-redux';
 
 const ProductGrid = ({
   products,
@@ -16,10 +17,17 @@ const ProductGrid = ({
     4: 'grid-cols-4',
   };
 
+  const lang = useSelector((state) => state.lang.lang);
+
   return (
     <div
       className={`grid grid-cols-2 md:${gridColsClass[gridCols]} gap-6 my-3 lg:my-16`}
     >
+      {products.length === 0 && (
+        <div className='min-w-full md:max-w-[270px]'>
+          <p>{lang === 'en' ? 'Empty' : 'Kosong'}</p>
+        </div>
+      )}
       {products.map((product) => (
         <ProductCard
           key={product.id}

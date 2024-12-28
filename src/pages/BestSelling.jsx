@@ -4,6 +4,7 @@ import { SectionTitle } from '@components';
 import { Love } from '@icons';
 
 import ProductCard from '../components/ProductsCard';
+import { useSelector } from 'react-redux';
 
 const initialProducts = [
   {
@@ -249,17 +250,32 @@ const anotherProducts = [
 
 const BestSelling = () => {
   const [products, setProducts] = useState(initialProducts);
+  const lang = useSelector((state) => state.lang.lang);
 
   const handleShowMore = () => {
     setProducts((prevProducts) => [...prevProducts, ...anotherProducts]);
   };
 
+
+  const translations = {
+    en: {
+      bestSelling: 'Best Selling Products',
+      showMore: "Show More"
+    },
+    id: {
+      bestSelling: 'Produk Terlaris',
+      showMore: "Lebih Banyak"
+    },
+  };
+
+  const text = translations[lang];
+
   return (
     <div className="container px-5 lg:mb-12 md:mt-16">
       <h3 className="md:hidden block text-sm text-black font-semibold">
-        Best Selling Product
+        {text.bestSelling}
       </h3>
-      <SectionTitle subTitle="Products" title="Best Selling Products" />
+      <SectionTitle subTitle="Products" title={text.bestSelling} />
       <div className="lg:px-0 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 mt-7 lg:mt-16">
         {products.map((product) => (
           <div className="relative">
@@ -276,7 +292,7 @@ const BestSelling = () => {
           className="bg-secondary-3 w-[125px] hover:opacity-85 h-[45px] text-sm md:text-base lg:w-[184px] lg:h-[56px] text-text-1 rounded-md"
           onClick={handleShowMore}
         >
-          Show More
+          {text.showMore}
         </button>
       </div>
     </div>

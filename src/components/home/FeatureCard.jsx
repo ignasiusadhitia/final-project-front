@@ -3,8 +3,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import { SectionTitle } from '@components';
+import { useSelector } from 'react-redux';
 
 const FeatureCard = ({ data }) => {
+  const lang = useSelector((state) => state.lang.lang);
+
   return (
     <div className="relative h-full w-full overflow-hidden">
       <img
@@ -19,7 +22,7 @@ const FeatureCard = ({ data }) => {
           className="text-text-1 text-base cursor-pointer underline"
           href={data.url}
         >
-          Shop Now
+          {lang === 'en' ? 'Shop Now' : "Beli Sekarang"}
         </a>
       </div>
     </div>

@@ -4,6 +4,8 @@ import PropTypes from 'prop-types';
 import ReactStars from 'react-rating-stars-component';
 
 import { WhiteCart, Trash, Favorite } from '@icons';
+import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 const ProductCard = ({
   product,
@@ -11,11 +13,27 @@ const ProductCard = ({
   showRating = false,
   showFavoriteButton = false,
 }) => {
+  const lang = useSelector((state) => state.lang.lang);
   const [isFavorite, setIsFavorite] = useState(false);
 
   const handleFavoriteClick = () => {
     setIsFavorite(!isFavorite);
   };
+
+  const translations = {
+    en: {
+      addToCart: 'Add to Cart',
+      outOfStock: 'Out of Stock',
+      newLabel: 'New',
+    },
+    id: {
+      addToCart: 'Tambahkan ke Keranjang',
+      outOfStock: 'Stok Habis',
+      newLabel: 'Baru',
+    },
+  };
+  
+  const text = translations[lang];
 
   return (
     <div
@@ -23,25 +41,25 @@ const ProductCard = ({
      rounded overflow-hidden bg-white group"
     >
       <div className="relative">
-        <div className="relative bg-secondary-1">
+        <div className="relative h-[153px] md:h-auto lg:h-[250px] bg-secondary-1">
           <img
             alt={product.name}
-            className="p-10 relative"
+            className="p-8 md:p-10 relative w-full h-full object-cover"
             src={product.imageUrl}
           />
-          <div className="bg-black rounded-b-[4px] opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          <div className="bg-[#363738] h-[41px] flex justify-center items-center absolute bottom-0 w-full rounded-b-[4px] opacity-0 group-hover:opacity-100 transition-opacity duration-300">
             {product.stock > 0 ? (
-              <button className="w-full py-3 text-center">
-                <span className="bg-black text-white font-normal text-xs py-2 px-4">
-                  <WhiteCart className="inline-block mr-2" />
-                  Add to Cart
+              <button className="w-full text-center">
+                <span className="text-white font-normal text-[10px] md:text-xs">
+                  <WhiteCart className="inline-block mr-2 w-[20px] md:w-auto" />
+                  {text.addToCart}
                 </span>
               </button>
             ) : (
-              <div className="w-full py-3 text-center">
-                <span className="text-white font-normal text-xs">
-                  <WhiteCart className="inline-block mr-2" />
-                  Out of Stock
+              <div className="w-full text-center">
+                <span className="text-white font-normal text-[10px] md:text-xs">
+                  <WhiteCart className="inline-block mr-2 w-[20px] md:w-auto" />
+                  {text.outOfStock}
                 </span>
               </div>
             )}
@@ -63,7 +81,7 @@ const ProductCard = ({
           <div className="absolute top-4 left-4 flex gap-2">
             {product.isNew && (
               <span className="bg-green-500 text-white font-normal py-1 px-3 rounded text-xs">
-                New
+                {text.newLabel}
               </span>
             )}
             {product.discount && (
@@ -76,7 +94,7 @@ const ProductCard = ({
       </div>
       <div className="px-3 py-4">
         <div className="font-medium text-sm lg:text-base line-clamp-2">
-          {product.name}
+          <Link to={"/products/1"}>{product.name}</Link>
         </div>
       </div>
       <div className="px-3">

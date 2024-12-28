@@ -7,6 +7,7 @@ import { encryptTransform } from 'redux-persist-transform-encrypt';
 import { configureStore } from '@reduxjs/toolkit';
 
 import authReducer from './features/authSlice';
+import langReducer from './features/languageSlice';
 
 const encryptor = encryptTransform({
   secretKey: import.meta.env.VITE_ENCRYPT_KEY,
@@ -18,12 +19,13 @@ const encryptor = encryptTransform({
 const rootReducer = combineReducers({
   // Add your reducers here
   auth: authReducer,
+  lang: langReducer,
 });
 
 const persistConfig = {
   key: 'root',
   storage,
-  whitelist: ['auth'],
+  whitelist: ['auth', 'lang'],
   transforms: [encryptor],
 };
 
