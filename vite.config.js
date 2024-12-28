@@ -20,6 +20,8 @@ export default defineConfig({
         description:
           'Shop the latest phones, computers, smartwatches, cameras, headphones, and gaming devices.',
         theme_color: '#db4444',
+        background_color: '#ffffff',
+        display: 'standalone',
         icons: [
           {
             src: 'windows11/SmallTile.scale-100.png',
