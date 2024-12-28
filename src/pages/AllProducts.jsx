@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 
 import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
 
 import { SectionTitle } from '@components';
 
 import ProductGrid from '../components/ProductGrid';
-import { useSelector } from 'react-redux';
 
 const AllProducts = () => {
   const lang = useSelector((state) => state.lang.lang);
@@ -157,10 +157,19 @@ const AllProducts = () => {
     { id: 3, name: lang === 'id' ? 'Elektronik' : 'Electronics' },
     { id: 4, name: lang === 'id' ? 'Rumah & Gaya Hidup' : 'Home & Lifestyle' },
     { id: 5, name: lang === 'id' ? 'Obat-obatan' : 'Medicine' },
-    { id: 6, name: lang === 'id' ? 'Olahraga & Luar Ruangan' : 'Sports & Outdoor' },
+    {
+      id: 6,
+      name: lang === 'id' ? 'Olahraga & Luar Ruangan' : 'Sports & Outdoor',
+    },
     { id: 7, name: lang === 'id' ? 'Mainan & Bayi' : 'Baby’s & Toys' },
-    { id: 8, name: lang === 'id' ? 'Groceries & Hewan Peliharaan' : 'Groceries & Pets' },
-    { id: 9, name: lang === 'id' ? 'Kesehatan & Kecantikan' : 'Health & Beauty' },
+    {
+      id: 8,
+      name: lang === 'id' ? 'Groceries & Hewan Peliharaan' : 'Groceries & Pets',
+    },
+    {
+      id: 9,
+      name: lang === 'id' ? 'Kesehatan & Kecantikan' : 'Health & Beauty',
+    },
   ];
 
   // eslint-disable-next-line
@@ -182,10 +191,12 @@ const AllProducts = () => {
       : products.filter(
           (product) => product.categoryId === selectedCategory.id
         );
-  
+
   return (
     <div className="flex px-5 pb-10 lg:px-0 justify-start lg:justify-start lg:gap-14 container lg:mt-10">
-      <div className={`h-full py-5 text-left ${filteredProducts.length !== 0 && 'lg:flex-1'}`}>
+      <div
+        className={`h-full py-5 text-left ${filteredProducts.length !== 0 && 'lg:flex-1'}`}
+      >
         <ul className="hidden lg:flex flex-col gap-4 justify-start">
           {categories.map((category) => (
             <li
@@ -209,7 +220,7 @@ const AllProducts = () => {
         />
         <ProductGrid showRating gridCols={3} products={filteredProducts} />
 
-        {(!showMore && filteredProducts.length !== 0) && (
+        {!showMore && filteredProducts.length !== 0 && (
           <button
             className="my-20 bg-secondary-3 hover:opacity-85 text-white font-medium text-base w-[184px] h-[56px] rounded mx-auto block"
             onClick={handleShowMore}

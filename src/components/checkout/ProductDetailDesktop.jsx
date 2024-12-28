@@ -24,26 +24,27 @@ const ProductDetailDesktop = ({
 
   const translations = {
     en: {
-      reviews: "Reviews",
-      size: "Size",
-      addToCart: "Add to Cart",
-      freeDelivery: "Free Delivery",
-      deliveryAvailability: "Enter your postal code for Delivery Availability",
-      returnDelivery: "Return Delivery",
-      freeReturns: "Free 30 Days Delivery Returns.",
-      details: "Details",
+      reviews: 'Reviews',
+      size: 'Size',
+      addToCart: 'Add to Cart',
+      freeDelivery: 'Free Delivery',
+      deliveryAvailability: 'Enter your postal code for Delivery Availability',
+      returnDelivery: 'Return Delivery',
+      freeReturns: 'Free 30 Days Delivery Returns.',
+      details: 'Details',
     },
     id: {
-      reviews: "Ulasan",
-      size: "Ukuran",
-      addToCart: "Keranjang",
-      freeDelivery: "Pengiriman Gratis",
-      deliveryAvailability: "Masukkan kode pos Anda untuk ketersediaan pengiriman",
-      returnDelivery: "Pengembalian Pengiriman",
-      freeReturns: "Gratis pengembalian dalam 30 hari.",
-      details: "Rinci",
+      reviews: 'Ulasan',
+      size: 'Ukuran',
+      addToCart: 'Keranjang',
+      freeDelivery: 'Pengiriman Gratis',
+      deliveryAvailability:
+        'Masukkan kode pos Anda untuk ketersediaan pengiriman',
+      returnDelivery: 'Pengembalian Pengiriman',
+      freeReturns: 'Gratis pengembalian dalam 30 hari.',
+      details: 'Rinci',
     },
-  };  
+  };
 
   const text = translations[lang];
 

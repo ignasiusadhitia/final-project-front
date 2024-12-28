@@ -1,10 +1,11 @@
 import React from 'react';
 
+import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
+
 import { CheckoutProductCard } from '@components';
 import { EditAddress } from '@icons';
 import { bank, productSmall } from '@images';
-import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
 
 const user = {
   name: 'Deni Irawan',
@@ -32,38 +33,38 @@ const Checkout = () => {
 
   const translations = {
     en: {
-      billingDetails: "Billing Details",
-      yourAddress: "Your Address",
-      yourShipping: "Your Shipping",
-      yourNote: "Your Note",
-      messagePlaceholder: "Message for Sellers",
-      subtotal: "Subtotal",
-      shipping: "Shipping",
-      total: "Total",
-      paymentMethod: "Payment Method",
-      bank: "Bank",
-      cod: "Cash on delivery",
-      placeOrder: "Place Order",
-      regularShipping: "Regular Shipping",
+      billingDetails: 'Billing Details',
+      yourAddress: 'Your Address',
+      yourShipping: 'Your Shipping',
+      yourNote: 'Your Note',
+      messagePlaceholder: 'Message for Sellers',
+      subtotal: 'Subtotal',
+      shipping: 'Shipping',
+      total: 'Total',
+      paymentMethod: 'Payment Method',
+      bank: 'Bank',
+      cod: 'Cash on delivery',
+      placeOrder: 'Place Order',
+      regularShipping: 'Regular Shipping',
       shippingVoucher:
         "Get voucher if your order doesn't arrive by 19 Nov 2024",
     },
     id: {
-      billingDetails: "Detail Tagihan",
-      yourAddress: "Alamat Anda",
-      yourShipping: "Pengiriman Anda",
-      yourNote: "Catatan Anda",
-      messagePlaceholder: "Pesan untuk Penjual",
-      subtotal: "Subtotal",
-      shipping: "Pengiriman",
-      total: "Total",
-      paymentMethod: "Metode Pembayaran",
-      bank: "Bank",
-      cod: "Bayar di Tempat",
-      placeOrder: "Pesan Sekarang",
-      regularShipping: "Pengiriman Reguler",
+      billingDetails: 'Detail Tagihan',
+      yourAddress: 'Alamat Anda',
+      yourShipping: 'Pengiriman Anda',
+      yourNote: 'Catatan Anda',
+      messagePlaceholder: 'Pesan untuk Penjual',
+      subtotal: 'Subtotal',
+      shipping: 'Pengiriman',
+      total: 'Total',
+      paymentMethod: 'Metode Pembayaran',
+      bank: 'Bank',
+      cod: 'Bayar di Tempat',
+      placeOrder: 'Pesan Sekarang',
+      regularShipping: 'Pengiriman Reguler',
       shippingVoucher:
-        "Dapatkan voucher jika pesanan Anda tidak tiba pada 19 Nov 2024",
+        'Dapatkan voucher jika pesanan Anda tidak tiba pada 19 Nov 2024',
     },
   };
 
@@ -71,7 +72,9 @@ const Checkout = () => {
 
   return (
     <main className="container lg:pb-96 mt-6 md:mt-20 px-6 md:px-0">
-      <h1 className="text-base md:text-4xl font-medium">{text.billingDetails}</h1>
+      <h1 className="text-base md:text-4xl font-medium">
+        {text.billingDetails}
+      </h1>
       <div className="grid grid-cols-1 md:grid-cols-2 gap-0 md:gap-[4.563rem]">
         {/* Billing Section */}
         <section className="mt-4 md:mt-10">
@@ -174,7 +177,10 @@ const Checkout = () => {
             </div>
           </div>
 
-          <Link to={"/success"} className="w-full md:w-fit mt-8 block bg-button-2 hover:bg-button-hover-1 text-text-1 rounded py-4 px-12 text-center">
+          <Link
+            className="w-full md:w-fit mt-8 block bg-button-2 hover:bg-button-hover-1 text-text-1 rounded py-4 px-12 text-center"
+            to={'/success'}
+          >
             {text.placeOrder}
           </Link>
         </section>

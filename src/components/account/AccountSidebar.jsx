@@ -1,6 +1,6 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 
+import { useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
 
 const AccountSidebar = () => {
@@ -21,7 +21,7 @@ const AccountSidebar = () => {
       myOrders: 'Pesanan Saya',
     },
   };
-  
+
   const text = translations[lang];
 
   return (

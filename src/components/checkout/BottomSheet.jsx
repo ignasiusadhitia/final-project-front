@@ -1,9 +1,9 @@
 import React from 'react';
 
 import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
 
 import { Exit, Minus, Plus } from '@icons';
-import { useSelector } from 'react-redux';
 
 const BottomSheet = ({
   product,
@@ -19,22 +19,22 @@ const BottomSheet = ({
 
   const translations = {
     en: {
-      variantProduct: "Variant Product",
-      inStock: "In Stock",
-      outOfStock: "Out of Stock",
-      size: "Size",
-      quantity: "Quantity",
-      cancel: "Cancel",
-      addToCart: "Add to Cart",
+      variantProduct: 'Variant Product',
+      inStock: 'In Stock',
+      outOfStock: 'Out of Stock',
+      size: 'Size',
+      quantity: 'Quantity',
+      cancel: 'Cancel',
+      addToCart: 'Add to Cart',
     },
     id: {
-      variantProduct: "Varian Produk",
-      inStock: "Stok Tersedia",
-      outOfStock: "Stok Habis",
-      size: "Ukuran",
-      quantity: "Jumlah",
-      cancel: "Batal",
-      addToCart: "Keranjang",
+      variantProduct: 'Varian Produk',
+      inStock: 'Stok Tersedia',
+      outOfStock: 'Stok Habis',
+      size: 'Ukuran',
+      quantity: 'Jumlah',
+      cancel: 'Batal',
+      addToCart: 'Keranjang',
     },
   };
 

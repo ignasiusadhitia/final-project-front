@@ -11,7 +11,9 @@ const SectionTitle = ({
     <div className="flex flex-col gap-5">
       <div className="hidden md:flex gap-4 items-center">
         <div className="w-5 h-10 bg-secondary-3 rounded"></div>
-        {(title === 'Best Selling Products' || title === 'Produk Terlaris') && (subTitle !== 'This Month' && subTitle !== 'Bulan Ini') ? (
+        {(title === 'Best Selling Products' || title === 'Produk Terlaris') &&
+        subTitle !== 'This Month' &&
+        subTitle !== 'Bulan Ini' ? (
           <h2
             className={`text-sm md:text-4xl font-semibold leading-[3rem] font-['Inter'] ${hideTitle ? 'block md:hidden' : ''}`}
           >
@@ -24,7 +26,8 @@ const SectionTitle = ({
         )}
       </div>
       {((title !== 'Best Selling Products' && title !== 'Produk Terlaris') ||
-        ((title === 'Best Selling Products' || title === 'Produk Terlaris') && (subTitle === 'This Month' || subTitle === 'Bulan Ini'))) && (
+        ((title === 'Best Selling Products' || title === 'Produk Terlaris') &&
+          (subTitle === 'This Month' || subTitle === 'Bulan Ini'))) && (
         <h2
           className={`text-sm md:text-4xl font-semibold leading-[3rem] font-['Inter'] ${hideTitle ? 'block md:hidden' : ''}`}
         >

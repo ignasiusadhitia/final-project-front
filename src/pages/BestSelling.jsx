@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 
+import { useSelector } from 'react-redux';
+
 import { SectionTitle } from '@components';
 import { Love } from '@icons';
 
 import ProductCard from '../components/ProductsCard';
-import { useSelector } from 'react-redux';
 
 const initialProducts = [
   {
@@ -256,15 +257,14 @@ const BestSelling = () => {
     setProducts((prevProducts) => [...prevProducts, ...anotherProducts]);
   };
 
-
   const translations = {
     en: {
       bestSelling: 'Best Selling Products',
-      showMore: "Show More"
+      showMore: 'Show More',
     },
     id: {
       bestSelling: 'Produk Terlaris',
-      showMore: "Lebih Banyak"
+      showMore: 'Lebih Banyak',
     },
   };
 

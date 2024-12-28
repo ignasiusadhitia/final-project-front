@@ -2,34 +2,35 @@ import React from 'react';
 
 import PropTypes from 'prop-types';
 import ReactStars from 'react-rating-stars-component';
+import { useSelector } from 'react-redux';
 
 import { DeliveryPlain, Return } from '@icons';
-import { useSelector } from 'react-redux';
 
 const ProductDetailMobile = ({ product }) => {
   const lang = useSelector((state) => state.lang.lang);
 
   const translations = {
     en: {
-      reviews: "Reviews",
-      freeDelivery: "Free Delivery",
-      deliveryAvailability: "Enter your postal code for Delivery Availability",
-      returnDelivery: "Return Delivery",
-      freeReturns: "Free 30 Days Delivery Returns.",
-      details: "Details",
+      reviews: 'Reviews',
+      freeDelivery: 'Free Delivery',
+      deliveryAvailability: 'Enter your postal code for Delivery Availability',
+      returnDelivery: 'Return Delivery',
+      freeReturns: 'Free 30 Days Delivery Returns.',
+      details: 'Details',
     },
     id: {
-      reviews: "Ulasan",
-      freeDelivery: "Pengiriman Gratis",
-      deliveryAvailability: "Masukkan kode pos Anda untuk ketersediaan pengiriman",
-      returnDelivery: "Pengembalian Pengiriman",
-      freeReturns: "Gratis pengembalian dalam 30 hari.",
-      details: "Rinci",
+      reviews: 'Ulasan',
+      freeDelivery: 'Pengiriman Gratis',
+      deliveryAvailability:
+        'Masukkan kode pos Anda untuk ketersediaan pengiriman',
+      returnDelivery: 'Pengembalian Pengiriman',
+      freeReturns: 'Gratis pengembalian dalam 30 hari.',
+      details: 'Rinci',
     },
   };
 
   const text = translations[lang];
-  
+
   return (
     <section className="flex gap-[37px] px-6">
       {/* Product Details */}

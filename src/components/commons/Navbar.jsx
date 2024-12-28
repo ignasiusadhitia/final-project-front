@@ -1,6 +1,9 @@
 import React, { useEffect, useState } from 'react';
 
+import { useDispatch, useSelector } from 'react-redux';
 import { Link, useLocation } from 'react-router-dom';
+
+import { setLanguage } from '@store/features/languageSlice';
 
 import {
   Search,
@@ -14,8 +17,6 @@ import {
   Hamburger,
   Close,
 } from '@icons';
-import { useDispatch, useSelector } from 'react-redux';
-import { setLanguage } from '@store/features/languageSlice';
 
 const Navbar = () => {
   const location = useLocation().pathname;
@@ -93,7 +94,9 @@ const Navbar = () => {
       {!isSmallScreen || location !== '/login' ? (
         <div className="bg-black py-3">
           <div className="container px-5 lg:px-0 flex justify-end items-center">
-            <div className={`${lang === 'id' ? 'w-[959px]' : 'w-[859px]'} flex justify-between`}>
+            <div
+              className={`${lang === 'id' ? 'w-[959px]' : 'w-[859px]'} flex justify-between`}
+            >
               <div className="flex items-center lg:gap-3">
                 <p className="text-xs lg:text-sm font-normal text-center lg:text-start text-text-1">
                   {text.sale}
@@ -113,11 +116,11 @@ const Navbar = () => {
               </div>
               <div className="hidden lg:block">
                 <select
-                  onChange={changeLanguage}
                   className="bg-black text-text-1"
                   id="language"
                   name="language"
                   value={lang}
+                  onChange={changeLanguage}
                 >
                   <option className="text-text-1" value="en">
                     English

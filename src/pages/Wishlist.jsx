@@ -1,10 +1,10 @@
 import React, { useState } from 'react';
 
+import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
 import { ProductsCard } from '@components';
 import { Love, Trash } from '@icons';
-import { useSelector } from 'react-redux';
 
 const Wishlist = () => {
   const navigate = useNavigate();
@@ -15,13 +15,13 @@ const Wishlist = () => {
       wishlist: 'Wishlist',
       moveAllToBag: 'Move All To Bag',
       justForYou: 'Just For You',
-      seeAll: 'See All'
+      seeAll: 'See All',
     },
     id: {
       wishlist: 'Daftar Keinginan',
       moveAllToBag: 'Pindahkan Semua',
       justForYou: 'Hanya Untuk Kamu',
-      seeAll: 'Lihat Semua'
+      seeAll: 'Lihat Semua',
     },
   };
 
