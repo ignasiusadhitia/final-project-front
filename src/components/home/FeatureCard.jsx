@@ -12,14 +12,14 @@ const FeatureCard = ({ data }) => {
     <div className="relative h-full w-full overflow-hidden">
       <img
         alt={data.title}
-        className={`object-cover w-full max-h-[175px] md:max-h-[570px] h-full filter ${SectionTitle && 'brightness-50 group-hover:scale-110 transition-all duration-500'}`}
+        className={`lg:object-cover object-fill w-full h-[175px] md:max-h-[570px] md:h-full filter ${SectionTitle && 'brightness-50 group-hover:scale-110 transition-all duration-500'}`}
         src={data.image}
       />
-      <div className="absolute p-5 grid gap-3 bottom-1 left-2 z-10">
-        <p className="text-text-1 text-2xl">{data.title}</p>
-        <p className="text-text-1 text-sm">{data.desc}</p>
+      <div className="absolute p-5 grid gap-1 md:gap-3 bottom-1 left-2 z-10">
+        <p className="text-text-1 text-[12px] md:text-2xl">{data.title}</p>
+        <p className="text-text-1 text-[8px] md:text-sm">{data.desc}</p>
         <a
-          className="text-text-1 text-base cursor-pointer underline"
+          className="text-text-1 text-[8px] md:text-base cursor-pointer underline"
           href={data.url}
         >
           {lang === 'en' ? 'Shop Now' : 'Beli Sekarang'}
