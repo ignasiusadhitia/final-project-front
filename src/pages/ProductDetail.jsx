@@ -8,6 +8,7 @@ import {
   ProductDetailMobile,
   ProductsCard,
   SectionTitle,
+  SEO,
 } from '@components';
 import { WishList } from '@icons';
 import {
@@ -105,6 +106,22 @@ const ProductDetail = () => {
   const [bottomSheetOpen, setBottomSheetOpen] = useState(false);
   const [activeSlide, setActiveSlide] = useState(1);
 
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    name: product.name,
+    image: product.images[0],
+    description: product.description,
+    sku: product.id,
+    offers: {
+      '@type': 'Offer',
+      priceCurrency: 'USD',
+      price: product.price,
+      availability: 'https://schema.org/InStock',
+      url: `https://exclusive-store-front.vercel.app/products/${product.id}`,
+    },
+  };
+
   const handleImageClick = (image) => {
     setSelectedImage(image);
   };
@@ -136,101 +153,112 @@ const ProductDetail = () => {
   };
 
   return (
-    <main className="container mt-6 md:mt-[33px] mb-6 md:mb-[140px]">
-      {/* Main Product Section */}
-      <div className="block md:hidden">
-        <Swiper
-          className="mySwiper"
-          onSlideChange={(swiper) => setActiveSlide(swiper.activeIndex + 1)}
-        >
-          {product.images.map((image, index) => (
-            <SwiperSlide key={index}>
-              <div className="w-full h-[240px] flex justify-center cursor-pointer rounded bg-secondary-1">
-                <img
-                  alt="product-image"
-                  className="h[114px] py-6"
-                  src={image}
-                />
-              </div>
-            </SwiperSlide>
-          ))}
-        </Swiper>
-        <div className="absolute flex justify-center items-center w-8 h-4 mx-6 mt-[-24px] text-[8px] border-[1px] border-black border-opacity-50 rounded-sm z-10">
-          <span className="block mt-[2.5px]">
-            {activeSlide}/{product?.images.length}
-          </span>
-        </div>
-      </div>
+    <>
+      <SEO
+        description={product.description}
+        image={product.images[0]}
+        jsonLd={jsonLd}
+        keywords={`${product.name}, exclusive, limited edition`}
+        title={`${product.name} - Exclusive`}
+        url={`https://exclusive-store-front.vercel.app/products/${product.id}`}
+      />
 
-      <div className="hidden md:block">
-        <ProductDetailDesktop
-          product={product}
-          quantity={quantity}
-          selectedImage={selectedImage}
-          selectedVariant={selectedVariant}
-          onAddToCartHandler={handleAddToCart}
-          onImageClickHandler={handleImageClick}
-          onQuantityInputChangeHandler={handleQuantityInputChange}
-          onSetQuantityHandler={handleSetQuantity}
-          onVariantClickHandler={handleVariantClick}
-        />
-      </div>
-
-      <div className="block md:hidden">
-        <ProductDetailMobile
-          product={product}
-          selectedImage={selectedImage}
-          selectedVariant={selectedVariant}
-          onBottomSheetOpenHandler={handleBottomSheetOpen}
-          onImageClickHandler={handleImageClick}
-          onVariantClickHandler={handleVariantClick}
-        />
-      </div>
-
-      {/* Related Product Section */}
-      <section className="mt-6 px-6 md:px-0">
-        <SectionTitle
-          hideTitle
-          subTitle="Related Items"
-          title="Related Items"
-        />
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-[26px] md:gap-30">
-          {relatedProducts.map((product) => (
-            <ProductsCard
-              key={product.id}
-              showFavoriteButton
-              showRating
-              product={product}
-            />
-          ))}
-        </div>
-      </section>
-      <div className="w-full px-6 py-4 mt-[58px] fixed bottom-0 bg-white flex md:hidden items-center gap-[13px] z-10">
-        <div className="w-full flex items-center gap-3">
-          <button className="w-10 h-10 flex justify-center items-center border-[1px] border-black border-opacity-50 rounded">
-            <WishList />
-          </button>
-          <button
-            className="grow py-[10px] px-12 text-text-1 bg-button-2 hover:bg-button-hover-1 rounded"
-            onClick={handleBottomSheetOpen}
+      <main className="container mt-6 md:mt-[33px] mb-6 md:mb-[140px]">
+        {/* Main Product Section */}
+        <div className="block md:hidden">
+          <Swiper
+            className="mySwiper"
+            onSlideChange={(swiper) => setActiveSlide(swiper.activeIndex + 1)}
           >
-            Add to Cart
-          </button>
+            {product.images.map((image, index) => (
+              <SwiperSlide key={index}>
+                <div className="w-full h-[240px] flex justify-center cursor-pointer rounded bg-secondary-1">
+                  <img
+                    alt="product-image"
+                    className="h[114px] py-6"
+                    src={image}
+                  />
+                </div>
+              </SwiperSlide>
+            ))}
+          </Swiper>
+          <div className="absolute flex justify-center items-center w-8 h-4 mx-6 mt-[-24px] text-[8px] border-[1px] border-black border-opacity-50 rounded-sm z-10">
+            <span className="block mt-[2.5px]">
+              {activeSlide}/{product?.images.length}
+            </span>
+          </div>
         </div>
-      </div>
-      {bottomSheetOpen && (
-        <BottomSheet
-          product={product}
-          quantity={quantity}
-          selectedVariant={selectedVariant}
-          onAddToCartHandler={handleAddToCart}
-          onBottomSheetOpenHandler={handleBottomSheetOpen}
-          onQuantityInputChangeHandler={handleQuantityInputChange}
-          onSetQuantityHandler={handleSetQuantity}
-          onVariantClickHandler={handleVariantClick}
-        />
-      )}
-    </main>
+
+        <div className="hidden md:block">
+          <ProductDetailDesktop
+            product={product}
+            quantity={quantity}
+            selectedImage={selectedImage}
+            selectedVariant={selectedVariant}
+            onAddToCartHandler={handleAddToCart}
+            onImageClickHandler={handleImageClick}
+            onQuantityInputChangeHandler={handleQuantityInputChange}
+            onSetQuantityHandler={handleSetQuantity}
+            onVariantClickHandler={handleVariantClick}
+          />
+        </div>
+
+        <div className="block md:hidden">
+          <ProductDetailMobile
+            product={product}
+            selectedImage={selectedImage}
+            selectedVariant={selectedVariant}
+            onBottomSheetOpenHandler={handleBottomSheetOpen}
+            onImageClickHandler={handleImageClick}
+            onVariantClickHandler={handleVariantClick}
+          />
+        </div>
+
+        {/* Related Product Section */}
+        <section className="mt-6 px-6 md:px-0">
+          <SectionTitle
+            hideTitle
+            subTitle="Related Items"
+            title="Related Items"
+          />
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-[26px] md:gap-30">
+            {relatedProducts.map((product) => (
+              <ProductsCard
+                key={product.id}
+                showFavoriteButton
+                showRating
+                product={product}
+              />
+            ))}
+          </div>
+        </section>
+        <div className="w-full px-6 py-4 mt-[58px] fixed bottom-0 bg-white flex md:hidden items-center gap-[13px] z-10">
+          <div className="w-full flex items-center gap-3">
+            <button className="w-10 h-10 flex justify-center items-center border-[1px] border-black border-opacity-50 rounded">
+              <WishList />
+            </button>
+            <button
+              className="grow py-[10px] px-12 text-text-1 bg-button-2 hover:bg-button-hover-1 rounded"
+              onClick={handleBottomSheetOpen}
+            >
+              Add to Cart
+            </button>
+          </div>
+        </div>
+        {bottomSheetOpen && (
+          <BottomSheet
+            product={product}
+            quantity={quantity}
+            selectedVariant={selectedVariant}
+            onAddToCartHandler={handleAddToCart}
+            onBottomSheetOpenHandler={handleBottomSheetOpen}
+            onQuantityInputChangeHandler={handleQuantityInputChange}
+            onSetQuantityHandler={handleSetQuantity}
+            onVariantClickHandler={handleVariantClick}
+          />
+        )}
+      </main>
+    </>
   );
 };
 
