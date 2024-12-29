@@ -3,14 +3,14 @@ import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 
 import { SectionTitle } from '@components';
-import { Love } from '@icons';
 
 import ProductCard from '../components/ProductsCard';
 
 const initialProducts = [
   {
     id: 1,
-    imageUrl: 'https://picsum.photos/400/300',
+    imageUrl:
+      'https://res.cloudinary.com/dfcpbiabw/image/upload/v1735473518/product-4_igwvhe.webp',
     name: 'ASUS FHD Gaming Laptop',
     description:
       'Powerful gaming laptop with high-performance specs for a smooth gaming experience.',
@@ -25,7 +25,8 @@ const initialProducts = [
   },
   {
     id: 2,
-    imageUrl: 'https://picsum.photos/400/300',
+    imageUrl:
+      'https://res.cloudinary.com/dfcpbiabw/image/upload/v1735473528/product-16_ubcw7e.webp',
     name: 'IPS LCD Gaming Monitor',
     description:
       'Stunning visuals and crisp images with a high refresh rate for gaming and professional use.',
@@ -40,7 +41,8 @@ const initialProducts = [
   },
   {
     id: 3,
-    imageUrl: 'https://picsum.photos/400/300',
+    imageUrl:
+      'https://res.cloudinary.com/dfcpbiabw/image/upload/v1735473526/product-13_r9jkdq.webp',
     name: 'HAVIT HV-G92 Gamepad',
     description:
       'Ergonomic gamepad with high precision controls and vibration feedback for immersive gaming.',
@@ -55,196 +57,179 @@ const initialProducts = [
   },
   {
     id: 4,
-    imageUrl: 'https://picsum.photos/400/300',
-    name: 'Modern Sofa Set',
+    imageUrl:
+      'https://res.cloudinary.com/dfcpbiabw/image/upload/v1735473519/product-6_jhqlkr.webp',
+    name: 'The North Coat',
     description:
-      'Comfortable and stylish sofa set perfect for your living room.',
+      'Warm, durable, and stylish winter coat for outdoor activities.',
     price: '899',
     originalPrice: '999',
     discount: '-10%',
     rating: 4.6,
     ratingCount: 42,
     categoryId: 2,
-    category: 'Home & Lifestyle',
+    category: 'Fashion',
     stock: 8,
   },
   {
     id: 5,
-    imageUrl: 'https://picsum.photos/400/300',
-    name: 'Kitchen Blender Pro',
-    description: 'High-powered blender for all your kitchen needs.',
-    price: '79',
-    originalPrice: '99',
-    discount: '-20%',
-    rating: 4.3,
-    ratingCount: 28,
+    imageUrl:
+      'https://res.cloudinary.com/dfcpbiabw/image/upload/v1735473519/product-7_husrah.webp',
+    name: 'Gucci Duffle Bag',
+    description: 'Luxury duffle bag with premium materials and stylish design.',
+    price: '960',
+    originalPrice: '1160',
+    discount: '-35%',
+    rating: 4.7,
+    ratingCount: 65,
     categoryId: 2,
-    category: 'Home & Lifestyle',
-    stock: 25,
+    category: 'Fashion',
+    stock: 5,
   },
   {
     id: 6,
-    imageUrl: 'https://picsum.photos/400/300',
-    name: 'Smart LED Lamp',
-    description: 'WiFi-enabled LED lamp with multiple color options.',
-    price: '45',
-    originalPrice: '60',
-    discount: '-25%',
-    rating: 4.8,
-    ratingCount: 50,
-    categoryId: 2,
-    category: 'Home & Lifestyle',
-    stock: 40,
-  },
-  {
-    id: 7,
-    imageUrl: 'https://picsum.photos/400/300',
-    name: 'Professional Tennis Racket',
-    description: 'Tournament-grade tennis racket for serious players.',
+    imageUrl:
+      'https://res.cloudinary.com/dfcpbiabw/image/upload/v1735473526/product-12_fxy9am.webp',
+    name: 'RGB Liquid CPU Cooler',
+    description:
+      'Efficient cooling solution with customizable RGB lighting for high-performance PCs.',
     price: '120',
     originalPrice: '150',
     discount: '-20%',
-    rating: 4.7,
-    ratingCount: 35,
+    rating: 4.5,
+    ratingCount: 45,
+    categoryId: 1,
+    category: 'Electronics',
+    stock: 12,
+  },
+  {
+    id: 7,
+    imageUrl:
+      'https://res.cloudinary.com/dfcpbiabw/image/upload/v1735473527/product-15_aai15u.webp',
+    name: 'Small Bookshelf',
+    description:
+      'Compact and sturdy bookshelf, ideal for small spaces and organization.',
+    price: '60',
+    originalPrice: '75',
+    discount: '-20%',
+    rating: 4.3,
+    ratingCount: 28,
     categoryId: 3,
-    category: 'Sports & Outdoor',
-    stock: 18,
+    category: 'Home & Lifestyle',
+    stock: 15,
   },
   {
     id: 8,
-    imageUrl: 'https://picsum.photos/400/300',
-    name: 'Mountain Bike Pro',
-    description: 'Durable mountain bike for adventure enthusiasts.',
-    price: '499',
-    originalPrice: '599',
+    imageUrl:
+      'https://res.cloudinary.com/dfcpbiabw/image/upload/v1735473519/product-5_ymwkfq.webp',
+    name: 'Breed Dry Dog Food',
+    description:
+      'Nutritious dry dog food for all breeds, promoting health and vitality.',
+    price: '25',
+    originalPrice: '30',
     discount: '-17%',
-    rating: 4.9,
-    ratingCount: 45,
-    categoryId: 3,
-    category: 'Sports & Outdoor',
-    stock: 12,
+    rating: 4.6,
+    ratingCount: 50,
+    categoryId: 4,
+    category: 'Pet Supplies',
+    stock: 40,
   },
 ];
 
 const anotherProducts = [
   {
-    id: 1,
-    imageUrl: 'https://picsum.photos/400/300',
-    name: 'HP Spectre x360 Laptop',
+    id: 9,
+    imageUrl:
+      'https://res.cloudinary.com/dfcpbiabw/image/upload/v1735473518/product-2_rct6xf.webp',
+    name: 'CANON EOS DSLR Camera',
     description:
-      'Premium convertible laptop with sleek design and exceptional performance for work and play.',
-    price: '1200',
-    originalPrice: '1400',
-    discount: '-15%',
-    rating: 4.8,
-    ratingCount: 120,
+      'High-quality DSLR camera with advanced features for photography enthusiasts.',
+    price: '960',
+    originalPrice: '1160',
+    discount: '-17%',
+    rating: 4.7,
+    ratingCount: 85,
     categoryId: 1,
     category: 'Electronics',
     stock: 10,
   },
   {
-    id: 2,
-    imageUrl: 'https://picsum.photos/400/300',
-    name: 'Samsung QLED 4K Smart TV',
-    description:
-      'Stunning 4K resolution with a rich color experience for an immersive viewing experience.',
-    price: '850',
-    originalPrice: '1100',
-    discount: '-23%',
-    rating: 4.7,
-    ratingCount: 95,
-    categoryId: 1,
-    category: 'Electronics',
-    stock: 5,
+    id: 10,
+    imageUrl:
+      'https://res.cloudinary.com/dfcpbiabw/image/upload/v1735473534/product-1_djetbh.webp',
+    name: 'Curology Product Set',
+    description: 'Complete skincare set tailored for all skin types.',
+    price: '50',
+    originalPrice: '60',
+    discount: '-17%',
+    rating: 4.8,
+    ratingCount: 150,
+    categoryId: 5,
+    category: 'Beauty & Personal Care',
+    stock: 25,
   },
   {
-    id: 3,
-    imageUrl: 'https://picsum.photos/400/300',
-    name: 'Razer Kraken Gaming Headset',
+    id: 11,
+    imageUrl:
+      'https://res.cloudinary.com/dfcpbiabw/image/upload/v1735473521/product-11_gepaxy.webp',
+    name: 'Kids Electric Car',
     description:
-      'High-quality gaming headset with surround sound and a comfortable fit for long gaming sessions.',
-    price: '80',
-    originalPrice: '100',
-    discount: '-20%',
-    rating: 4.6,
-    ratingCount: 80,
+      'Fun and safe electric car for kids, with realistic design and features.',
+    price: '300',
+    originalPrice: '350',
+    discount: '-15%',
+    rating: 4.5,
+    ratingCount: 40,
+    categoryId: 6,
+    category: 'Toys & Games',
+    stock: 8,
+  },
+  {
+    id: 12,
+    imageUrl:
+      'https://res.cloudinary.com/dfcpbiabw/image/upload/v1735473520/product-8_d3somb.webp',
+    name: 'Jr. Zoom Soccer Cleats',
+    description:
+      'Lightweight and durable soccer cleats designed for young players.',
+    price: '45',
+    originalPrice: '55',
+    discount: '-18%',
+    rating: 4.4,
+    ratingCount: 25,
+    categoryId: 7,
+    category: 'Sports & Outdoors',
+    stock: 20,
+  },
+  {
+    id: 13,
+    imageUrl:
+      'https://res.cloudinary.com/dfcpbiabw/image/upload/v1735473520/product-9_fwcsjw.webp',
+    name: 'GP11 Shooter USB Gamepad',
+    description:
+      'Compact USB gamepad with responsive controls for an enhanced gaming experience.',
+    price: '35',
+    originalPrice: '45',
+    discount: '-22%',
+    rating: 4.3,
+    ratingCount: 30,
     categoryId: 1,
     category: 'Electronics',
     stock: 50,
   },
   {
-    id: 4,
-    imageUrl: 'https://picsum.photos/400/300',
-    name: 'Leather Reclining Sofa',
+    id: 14,
+    imageUrl:
+      'https://res.cloudinary.com/dfcpbiabw/image/upload/v1735473521/product-10_tc4ykt.webp',
+    name: 'Quilted Satin Jacket',
     description:
-      'Luxurious leather recliner for maximum comfort and relaxation.',
-    price: '1250',
-    originalPrice: '1500',
-    discount: '-17%',
-    rating: 4.5,
-    ratingCount: 60,
-    categoryId: 2,
-    category: 'Home & Lifestyle',
-    stock: 15,
-  },
-  {
-    id: 5,
-    imageUrl: 'https://picsum.photos/400/300',
-    name: 'Vitamix Professional Blender',
-    description:
-      'Powerful blender designed for quick and efficient blending, ideal for smoothies and soups.',
-    price: '150',
-    originalPrice: '200',
-    discount: '-25%',
-    rating: 4.9,
-    ratingCount: 40,
-    categoryId: 2,
-    category: 'Home & Lifestyle',
-    stock: 30,
-  },
-  {
-    id: 6,
-    imageUrl: 'https://picsum.photos/400/300',
-    name: 'Philips Hue Smart Bulb',
-    description:
-      'Smart lighting with adjustable brightness and a range of colors to set the perfect ambiance.',
-    price: '35',
-    originalPrice: '45',
-    discount: '-22%',
-    rating: 4.8,
-    ratingCount: 70,
-    categoryId: 2,
-    category: 'Home & Lifestyle',
-    stock: 60,
-  },
-  {
-    id: 7,
-    imageUrl: 'https://picsum.photos/400/300',
-    name: 'Wilson Ultra Tennis Racket',
-    description:
-      'High-performance racket designed for intermediate to advanced players looking to elevate their game.',
-    price: '150',
-    originalPrice: '180',
-    discount: '-17%',
+      'Elegant and warm quilted satin jacket, perfect for casual outings.',
+    price: '120',
+    originalPrice: '150',
+    discount: '-20%',
     rating: 4.6,
-    ratingCount: 50,
-    categoryId: 3,
-    category: 'Sports & Outdoor',
-    stock: 20,
-  },
-  {
-    id: 8,
-    imageUrl: 'https://picsum.photos/400/300',
-    name: 'Schwinn Mountain Bike',
-    description:
-      'Durable and reliable mountain bike built for all-terrain riding and outdoor adventures.',
-    price: '550',
-    originalPrice: '650',
-    discount: '-15%',
-    rating: 4.7,
-    ratingCount: 55,
-    categoryId: 3,
-    category: 'Sports & Outdoor',
+    ratingCount: 35,
+    categoryId: 2,
+    category: 'Fashion',
     stock: 10,
   },
 ];
@@ -278,11 +263,8 @@ const BestSelling = () => {
       <SectionTitle subTitle="Products" title={text.bestSelling} />
       <div className="lg:px-0 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 mt-7 lg:mt-16">
         {products.map((product) => (
-          <div className="relative">
-            <ProductCard key={product.id} product={product} showRating={true} />
-            <button className="flex justify-center items-center absolute right-2 top-2 lg:right-5 lg:top-5 bg-white rounded-full w-6 h-6 md:w-8 md:h-8">
-              <Love className="block md:hidden" />
-            </button>
+          <div key={product.id} className="relative">
+            <ProductCard showFavoriteButton showRating product={product} />
           </div>
         ))}
       </div>
