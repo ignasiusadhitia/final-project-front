@@ -631,35 +631,51 @@ const Home = () => {
       title: 'example 3',
     },
   ];
-  const featuredProducts = [
+  const featuredProductsSm = [
     {
       url: '#1',
-      image: 'https://picsum.photos/100/200',
-      title: 'Play Station 5',
-      desc: 'Black and White version of the PS5 coming out on sale.',
+      image:
+        'https://res.cloudinary.com/dfcpbiabw/image/upload/v1735495916/Frame_684_maazev.png',
     },
     {
       url: '#2',
       image:
-        'https://images.tokopedia.net/img/KRMmCm/2023/8/23/de714108-8126-4458-8efc-ba57023fbf74.jpg',
-      title: 'Woman Collections',
-      desc: 'Featured woman collections that give you another vibe.',
+        'https://res.cloudinary.com/dfcpbiabw/image/upload/v1735495915/Frame_685_gudtoy.png',
     },
     {
       url: '#3',
       image:
-        'https://images.tokopedia.net/img/KRMmCm/2023/8/21/0b782512-f8ff-49b4-8fc6-81364d662e4d.jpg',
-      title: 'Speakers',
-      desc: 'Amazon wireless speakers',
+        'https://res.cloudinary.com/dfcpbiabw/image/upload/v1735495916/Frame_684-1_kwmqvi.png',
     },
     {
       url: '#4',
       image:
-        'https://images.tokopedia.net/img/KRMmCm/2023/7/24/c88c2aa0-528a-436f-b279-2bf3df8db674.jpg',
-      title: 'Perfume',
-      desc: 'Perfume for you',
+        'https://res.cloudinary.com/dfcpbiabw/image/upload/v1735495916/Frame_685-1_byonmb.png',
     },
   ];
+  const featuredProductsLg = [
+    {
+      url: '#1',
+      image:
+        'https://res.cloudinary.com/dfcpbiabw/image/upload/v1735495906/recommended-product-1_rfp0wm.webp',
+    },
+    {
+      url: '#2',
+      image:
+        'https://res.cloudinary.com/dfcpbiabw/image/upload/v1735495906/recommended-product-2_dbumhq.webp',
+    },
+    {
+      url: '#3',
+      image:
+        'https://res.cloudinary.com/dfcpbiabw/image/upload/v1735495906/recommended-product-3_kmtv7l.webp',
+    },
+    {
+      url: '#4',
+      image:
+        'https://res.cloudinary.com/dfcpbiabw/image/upload/v1735495906/recommended-product-4_fuzfir.webp',
+    },
+  ];
+  const [featuredProducts, setFeaturedProducts] = useState(featuredProductsLg);
 
   const [topBanner, setTopBanner] = useState(topBannerSm);
   const [middleBanner, setMiddleBanner] = useState(middleBannerSm);
@@ -668,9 +684,11 @@ const Home = () => {
       if (window.matchMedia('(min-width: 1024px)').matches) {
         setTopBanner(topBannerLg);
         setMiddleBanner(middleBannerLg);
+        setFeaturedProducts(featuredProductsLg);
       } else {
         setTopBanner(topBannerSm);
         setMiddleBanner(middleBannerSm);
+        setFeaturedProducts(featuredProductsSm);
       }
     };
     updateBanner();
@@ -859,12 +877,12 @@ const Home = () => {
         <header className="flex justify-between">
           <SectionTitle subTitle={text.featured} title={text.recommend} />
         </header>
-        <div className="grid grid-cols-12 gap-2 border">
+        <div className="grid grid-cols-12 gap-2">
           {featuredProducts.map((item, index) => (
             <div
               key={index}
               // onClick={() => navigate(`/post/${item.slug}`)}
-              className={`group ${index === 0 ? 'lg:row-span-2 col-span-6' : index === 1 ? 'col-span-6' : 'col-span-6 lg:col-span-3'}`}
+              className={`group h-full rounded-md overflow-hidden ${index === 0 ? 'lg:row-span-2 col-span-6' : index === 1 ? 'col-span-6' : 'col-span-6 lg:col-span-3'}`}
             >
               <FeatureCard data={item} />
             </div>
