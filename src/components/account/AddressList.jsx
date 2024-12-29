@@ -1,16 +1,32 @@
 import React from 'react';
 
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import { EditAddress, DeleteAddress, AddAddress } from '@icons';
 
 const AddressList = () => {
+  const lang = useSelector((state) => state.lang.lang);
+
+  const translations = {
+    en: {
+      yourAddress: 'Your Address',
+      addNewAddress: 'Add New Address',
+    },
+    id: {
+      yourAddress: 'Alamat Anda',
+      addNewAddress: 'Tambah Alamat Baru',
+    },
+  };
+
+  const text = translations[lang];
+
   return (
     <section className="mt-5 lg:mt-20 flex flex-col px-5 lg:px-20 justify-between py-5 lg:py-12 gap-7 lg:gap-4 w-full lg:w-[870px] h-full lg:h-[630px]">
       <div className="flex flex-col gap-5">
         <div className="flex justify-between items-center">
           <h3 className="text-base lg:text-xl font-medium text-secondary-3">
-            Your Address
+            {text.yourAddress}
           </h3>
           <Link className="block lg:hidden" to={'/my-account/address/add'}>
             <AddAddress />
@@ -67,7 +83,7 @@ const AddressList = () => {
             className="flex justify-center items-center w-[181px] h-11 lg:w-[214px] lg:h-14 bg-secondary-3 rounded-md text-sm lg:text-base font-medium text-text-1"
             to={'/my-account/address/add'}
           >
-            Add New Address
+            {text.addNewAddress}
           </Link>
         </div>
       </div>

@@ -1,10 +1,57 @@
 import React from 'react';
 
 // ICONS
+import { useSelector } from 'react-redux';
+
 import { Send, Facebook, Twitter, Instagram, Linkedin } from '@icons';
 import { playStore, appleStore, qrCode } from '@images';
 
 const Footer = () => {
+  const lang = useSelector((state) => state.lang.lang);
+
+  const translations = {
+    en: {
+      subscribe: 'Subscribe',
+      discount: 'Get 10% off your first order',
+      support: 'Support',
+      account: 'Account',
+      myAccount: 'My Account',
+      loginRegister: 'Login / Register',
+      cart: 'Cart',
+      wishlist: 'Wishlist',
+      shop: 'Shop',
+      quickLinks: 'Quick Link',
+      privacyPolicy: 'Privacy Policy',
+      termsOfUse: 'Terms Of Use',
+      faq: 'FAQ',
+      contact: 'Contact',
+      downloadApp: 'Download App',
+      appDiscount: 'Save $3 with App New User Only',
+      copyRight: 'Copyright Lumoshive. All rights reserved',
+    },
+    id: {
+      subscribe: 'Berlangganan',
+      discount: 'Dapatkan diskon 10% untuk pembelian pertama Anda',
+      support: 'Dukungan',
+      account: 'Akun',
+      myAccount: 'Akun Saya',
+      loginRegister: 'Masuk / Daftar',
+      cart: 'Keranjang',
+      wishlist: 'Daftar Keinginan',
+      shop: 'Toko',
+      quickLinks: 'Tautan Cepat',
+      privacyPolicy: 'Kebijakan Privasi',
+      termsOfUse: 'Syarat Penggunaan',
+      faq: 'FAQ',
+      contact: 'Kontak',
+      downloadApp: 'Unduh Aplikasi',
+      appDiscount: 'Hemat $3 hanya untuk Pengguna Baru Aplikasi',
+      copyRight: 'Copyright Lumoshive. Semua hak dilindungi',
+    },
+  };
+
+  const text = translations[lang];
+
   return (
     <footer className="bg-black text-white p-5">
       <div className="container p-5 md:px-0 grid gap-10 grid-cols-2 lg:grid-cols-5">
@@ -13,8 +60,8 @@ const Footer = () => {
           {/* TEXT, LOGO & INPUT */}
           <div className="flex justify-between flex-col gap-4 md:justify-normal">
             <h2 className="text-base md:text-xl font-semibold">Exclusive</h2>
-            <p className="text-sm md:text-base font-medium">Subscribe</p>
-            <p className="text-sm">Get 10% off your first order</p>
+            <p className="text-sm md:text-base font-medium">{text.subscribe}</p>
+            <p className="text-sm">{text.discount}</p>
             <div className="flex justify-between items-center relative">
               <label className="hidden" htmlFor="email-input"></label>
               <input
@@ -71,7 +118,7 @@ const Footer = () => {
 
         {/* Support */}
         <div className="space-y-4 order-3 md:order-none">
-          <h3 className="text-base md:text-lg">Support</h3>
+          <h3 className="text-base md:text-lg">{text.support}</h3>
           <ul className="text-base space-y-2 font-light">
             <li>
               Jl. Gatot Subroto <br /> Jakarta, 12930, <br /> Indonesia.
@@ -89,60 +136,58 @@ const Footer = () => {
 
         {/* Account */}
         <div className="space-y-4 order-4 md:order-none">
-          <h3 className="text-base md:text-lg">Account</h3>
+          <h3 className="text-base md:text-lg">{text.account}</h3>
           <ul className="text-base space-y-2 font-light">
             <li>
               {' '}
-              <a href="#">My Account</a>
+              <a href="#">{text.myAccount}</a>
             </li>
             <li>
               {' '}
-              <a href="#">Login / Register</a>
+              <a href="#">{text.loginRegister}</a>
             </li>
             <li>
               {' '}
-              <a href="#">Cart</a>
+              <a href="#">{text.cart}</a>
             </li>
             <li>
               {' '}
-              <a href="#">Wishlist</a>
+              <a href="#">{text.wishlist}</a>
             </li>
             <li>
               {' '}
-              <a href="#">Shop</a>
+              <a href="#">{text.shop}</a>
             </li>
           </ul>
         </div>
 
         {/* Quick Link */}
         <div className="space-y-4 order-2 md:order-none">
-          <h3 className="text-base md:text-lg">Quick Link</h3>
+          <h3 className="text-base md:text-lg">{text.quickLinks}</h3>
           <ul className="text-base space-y-2 font-light">
             <li>
               {' '}
-              <a href="#">Privacy Policy</a>
+              <a href="#">{text.privacyPolicy}</a>
             </li>
             <li>
               {' '}
-              <a href="#">Terms Of Use</a>
+              <a href="#">{text.termsOfUse}</a>
             </li>
             <li>
               {' '}
-              <a href="#">FAQ</a>
+              <a href="#">{text.faq}</a>
             </li>
             <li>
               {' '}
-              <a href="#">Contact</a>
+              <a href="#">{text.contact}</a>
             </li>
           </ul>
         </div>
 
         {/* Download App */}
         <div className="space-y-4 order-5 md:order-none">
-          <h3 className="text-base md:text-lg">Download App</h3>
-          <p className="text-sm text-gray-400">
-            Save $3 with App New User Only
-          </p>
+          <h3 className="text-base md:text-lg">{text.downloadApp}</h3>
+          <p className="text-sm text-gray-400">{text.appDiscount}</p>
           <div className="flex gap-4">
             <div>
               <img alt="Barcode" src={qrCode} />
@@ -206,9 +251,7 @@ const Footer = () => {
       </div>
 
       {/* Copyright */}
-      <p className="text-center text-gray-600">
-        &copy; Copyright Lumoshive. All right reserved
-      </p>
+      <p className="text-center text-gray-600">&copy; {text.copyRight}</p>
     </footer>
   );
 };

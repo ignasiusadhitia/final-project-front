@@ -1,4 +1,4 @@
-import { Route, Routes, useLocation, useParams } from 'react-router-dom';
+import { Route, Routes, useLocation } from 'react-router-dom';
 
 import { Breadcrumb, Footer, Navbar } from '@components';
 import {
@@ -18,9 +18,9 @@ import {
   Home,
   Login,
   NotFound,
-  Product,
+  ProductDetail,
+  Success,
   SignUp,
-  ThankYou,
   Wishlist,
   Error,
 } from '@pages';
@@ -40,7 +40,7 @@ const routes = [
   },
   {
     path: '/products/:id',
-    element: <Product />,
+    element: <ProductDetail />,
   },
   {
     path: '/best-selling',
@@ -55,6 +55,10 @@ const routes = [
     element: <Checkout />,
   },
   {
+    path: '/success',
+    element: <Success />,
+  },
+  {
     path: '/contact',
     element: <Contact />,
   },
@@ -65,10 +69,6 @@ const routes = [
   {
     path: '/sign-up',
     element: <SignUp />,
-  },
-  {
-    path: '/thank-you',
-    element: <ThankYou />,
   },
   {
     path: '/wishlist',
@@ -89,7 +89,8 @@ const routes = [
   {
     path: '*',
     element: <Error code={404} />,
-  },];
+  },
+];
 
 const App = () => {
   const location = useLocation();

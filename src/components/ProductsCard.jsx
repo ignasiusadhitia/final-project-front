@@ -1,37 +1,66 @@
-import { WhiteCart, Trash, Favorite } from '@icons';
 import React, { useState } from 'react';
+
 import PropTypes from 'prop-types';
 import ReactStars from 'react-rating-stars-component';
+import { useSelector } from 'react-redux';
+import { Link } from 'react-router-dom';
 
+import { WhiteCart, Trash, Favorite } from '@icons';
 
-const ProductCard = ({ product, showTrashButton = false, showRating = false, showFavoriteButton = false }) => {
+const ProductCard = ({
+  product,
+  showTrashButton = false,
+  showRating = false,
+  showFavoriteButton = false,
+}) => {
+  const lang = useSelector((state) => state.lang.lang);
   const [isFavorite, setIsFavorite] = useState(false);
 
   const handleFavoriteClick = () => {
     setIsFavorite(!isFavorite);
   };
+
+  const translations = {
+    en: {
+      addToCart: 'Add to Cart',
+      outOfStock: 'Out of Stock',
+      newLabel: 'New',
+    },
+    id: {
+      addToCart: 'Tambahkan ke Keranjang',
+      outOfStock: 'Stok Habis',
+      newLabel: 'Baru',
+    },
+  };
+
+  const text = translations[lang];
+
   return (
-    <div className="min-w-[173px] md:max-w-[270px] rounded overflow-hidden bg-white group">
+    <div
+      className="min-w-[173px] md:max-w-[270px]
+     rounded overflow-hidden bg-white group"
+    >
       <div className="relative">
-        <div className="relative bg-secondary-1">
+        <div className="relative h-[153px] md:h-auto lg:h-[250px] bg-secondary-1">
           <img
             alt={product.name}
-            className="p-10 relative"
+            className="p-8 md:p-10 relative w-full h-full object-cover"
             src={product.imageUrl}
           />
-          <div className="bg-black rounded-b-[4px] opacity-0 group-hover:opacity-100 transition-opacity duration-300">
+          <div className="bg-[#363738] h-[41px] flex justify-center items-center absolute bottom-0 w-full rounded-b-[4px] opacity-0 group-hover:opacity-100 transition-opacity duration-300">
             {product.stock > 0 ? (
-              <button className="w-full py-3 text-center">
-                <span className="bg-black text-white font-normal text-xs py-2 px-4">
-                  <WhiteCart className="inline-block mr-2" />
-                  Add to Cart
+              <button className="w-full text-center">
+                <span className="text-white font-normal text-[10px] md:text-xs">
+                  <WhiteCart className="inline-block mr-2 w-[20px] md:w-auto" />
+                  {text.addToCart}
                 </span>
               </button>
             ) : (
-              <div className="w-full py-3 text-center">
-                <span className="text-white font-normal text-xs">
-                  <WhiteCart className="inline-block mr-2" />
-                  Out of Stock</span>
+              <div className="w-full text-center">
+                <span className="text-white font-normal text-[10px] md:text-xs">
+                  <WhiteCart className="inline-block mr-2 w-[20px] md:w-auto" />
+                  {text.outOfStock}
+                </span>
               </div>
             )}
           </div>
@@ -40,10 +69,11 @@ const ProductCard = ({ product, showTrashButton = false, showRating = false, sho
               <Trash />
             </button>
           )}
+
           {showFavoriteButton && (
             <button
+              className={`absolute top-4 right-4 hover:bg-gray-200 rounded-full h-fit shadow-lg ${isFavorite ? 'bg-secondary-3' : 'bg-white'} p-2`}
               onClick={handleFavoriteClick}
-              className={`absolute top-4 right-4 hover:bg-gray-200 rounded-full h-fit shadow-lg ${isFavorite ? "bg-secondary-3" : "bg-white"} p-2`}
             >
               <Favorite />
             </button>
@@ -51,7 +81,7 @@ const ProductCard = ({ product, showTrashButton = false, showRating = false, sho
           <div className="absolute top-4 left-4 flex gap-2">
             {product.isNew && (
               <span className="bg-green-500 text-white font-normal py-1 px-3 rounded text-xs">
-                New
+                {text.newLabel}
               </span>
             )}
             {product.discount && (
@@ -63,7 +93,9 @@ const ProductCard = ({ product, showTrashButton = false, showRating = false, sho
         </div>
       </div>
       <div className="px-3 py-4">
-        <div className="font-medium text-sm lg:text-base line-clamp-2">{product.name}</div>
+        <div className="font-medium text-sm lg:text-base line-clamp-2">
+          <Link to={'/products/1'}>{product.name}</Link>
+        </div>
       </div>
       <div className="px-3">
         <span className="inline-block text-sm lg:text-base font-medium text-secondary-3 me-3">
@@ -75,35 +107,39 @@ const ProductCard = ({ product, showTrashButton = false, showRating = false, sho
           </span>
         )}
       </div>
+
       <div className="flex items-center px-3 pb-4">
         {showRating && (
           <div className="flex gap-2 items-center mt-1">
-            <div className='hidden lg:block'>
+            <div className="hidden lg:block">
               <ReactStars
+                activeColor="#FBBF24"
                 count={5}
-                value={product.rating}
-                isHalf={true}
                 edit={false}
+                isHalf={true}
                 size={24}
-                activeColor="#FBBF24"
-              />
-            </div>
-            <div className='blok lg:hidden'>
-              <ReactStars
-                count={5}
                 value={product.rating}
-                isHalf={true}
-                edit={false}
-                size={16}
-                activeColor="#FBBF24"
               />
             </div>
-            <span className="text-gray-600 text-xs lg:text-sm font-semibold">({product.ratingCount})</span>
+            <div className="blok lg:hidden">
+              <ReactStars
+                activeColor="#FBBF24"
+                count={5}
+                edit={false}
+                isHalf={true}
+                size={16}
+                value={product.rating}
+              />
+            </div>
+            <span className="text-gray-600 text-xs lg:text-sm font-semibold">
+              ({product.ratingCount})
+            </span>
           </div>
         )}
       </div>
-    </div>);
-}
+    </div>
+  );
+};
 
 ProductCard.propTypes = {
   product: PropTypes.shape({
@@ -119,7 +155,7 @@ ProductCard.propTypes = {
     categoryId: PropTypes.number.isRequired,
     category: PropTypes.string.isRequired,
     stock: PropTypes.number.isRequired,
-    isNew: PropTypes.bool
+    isNew: PropTypes.bool,
   }).isRequired,
   showTrashButton: PropTypes.bool,
   showRating: PropTypes.bool,

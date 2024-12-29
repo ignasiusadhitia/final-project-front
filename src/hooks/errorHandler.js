@@ -5,7 +5,7 @@ export const useErrorHandler = () => {
 
   const handleError = (error) => {
     const status = error?.response?.status;
-    
+
     switch (status) {
       case 401:
         navigate('/401');

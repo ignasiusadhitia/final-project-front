@@ -1,12 +1,35 @@
 import React, { useState } from 'react';
 
 import PropTypes from 'prop-types';
+import { useSelector } from 'react-redux';
 
 const ContactForm = ({ onSubmitHandler }) => {
+  const lang = useSelector((state) => state.lang.lang);
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
   const [message, setMessage] = useState('');
+
+  const translations = {
+    en: {
+      nameLabel: 'Your Name',
+      emailLabel: 'Your Email',
+      phoneLabel: 'Your Phone',
+      messageLabel: 'Your Message',
+      requiredMark: '*',
+      submitButton: 'Send Message',
+    },
+    id: {
+      nameLabel: 'Nama Anda',
+      emailLabel: 'Email Anda',
+      phoneLabel: 'Nomor Telepon Anda',
+      messageLabel: 'Pesan Anda',
+      requiredMark: '*',
+      submitButton: 'Kirim Pesan',
+    },
+  };
+
+  const text = translations[lang];
 
   return (
     <form
@@ -19,7 +42,7 @@ const ContactForm = ({ onSubmitHandler }) => {
             className={`${name ? 'hidden' : 'block'} absolute top-3 mx-4 text-black text-opacity-50 transition-all duration-200 ease-in-out text-sm md:text-base`}
             htmlFor="name"
           >
-            Your Name <span className="text-secondary-3">*</span>
+            {text.nameLabel} <span className="text-secondary-3">*</span>
           </label>
 
           <input
@@ -37,7 +60,7 @@ const ContactForm = ({ onSubmitHandler }) => {
             className={`${email ? 'hidden' : 'block'} absolute top-3 mx-4 text-black text-opacity-50 transition-all duration-200 ease-in-out text-sm md:text-base`}
             htmlFor="email"
           >
-            Your Email <span className="text-secondary-3">*</span>
+            {text.emailLabel} <span className="text-secondary-3">*</span>
           </label>
 
           <input
@@ -55,7 +78,7 @@ const ContactForm = ({ onSubmitHandler }) => {
             className={`${phone ? 'hidden' : 'block'} absolute top-3 mx-4 text-black text-opacity-50 transition-all duration-200 ease-in-out text-sm md:text-base`}
             htmlFor="phone"
           >
-            Your Phone <span className="text-secondary-3">*</span>
+            {text.phoneLabel} <span className="text-secondary-3">*</span>
           </label>
 
           <input
@@ -73,7 +96,8 @@ const ContactForm = ({ onSubmitHandler }) => {
           className={`${message ? 'hidden' : 'block'} absolute top-7 mx-4 text-black text-opacity-50 transition-all duration-200 ease-in-out text-sm md:text-base`}
           htmlFor="message"
         >
-          Your Message <span className="text-secondary-3">*</span>
+          {text.messageLabel}{' '}
+          <span className="text-secondary-3">{text.requiredMark}</span>
         </label>
 
         <textarea
@@ -89,7 +113,7 @@ const ContactForm = ({ onSubmitHandler }) => {
           className="w-full md:w-fit py-4 px-12 rounded bg-button-2 hover:bg-button-hover-1 text-text-1"
           type="submit"
         >
-          Send Message
+          {text.submitButton}
         </button>
       </div>
     </form>
