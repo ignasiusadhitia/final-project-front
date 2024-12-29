@@ -1,5 +1,6 @@
 import { useState } from 'react';
 
+import { useParams } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 import {
@@ -20,7 +21,6 @@ import {
 } from '@images';
 
 import 'swiper/css';
-import { useParams } from 'react-router-dom';
 
 const product = {
   images: [productImg1, productImg2, productImg3, productImg4, productImg5],
