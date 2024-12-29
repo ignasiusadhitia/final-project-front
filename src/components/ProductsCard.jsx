@@ -36,10 +36,7 @@ const ProductCard = ({
   const text = translations[lang];
 
   return (
-    <div
-      className="min-w-[173px] md:max-w-[270px]
-     rounded overflow-hidden bg-white group"
-    >
+    <div className="rounded overflow-hidden bg-white group">
       <div className="relative">
         <div className="relative h-[153px] md:h-auto lg:h-[250px] bg-secondary-1">
           <img
