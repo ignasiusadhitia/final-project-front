@@ -18,7 +18,9 @@ import {
   productImg4,
   productImg5,
 } from '@images';
+
 import 'swiper/css';
+import { useParams } from 'react-router-dom';
 
 const product = {
   images: [productImg1, productImg2, productImg3, productImg4, productImg5],
@@ -106,19 +108,21 @@ const ProductDetail = () => {
   const [bottomSheetOpen, setBottomSheetOpen] = useState(false);
   const [activeSlide, setActiveSlide] = useState(1);
 
+  const { id } = useParams();
+
   const jsonLd = {
     '@context': 'https://schema.org',
     '@type': 'Product',
     name: product.name,
     image: product.images[0],
     description: product.description,
-    sku: product.id,
+    sku: id,
     offers: {
       '@type': 'Offer',
       priceCurrency: 'USD',
       price: product.price,
       availability: 'https://schema.org/InStock',
-      url: `https://exclusive-store-front.vercel.app/products/${product.id}`,
+      url: `https://exclusive-store-front.vercel.app/products/${id}`,
     },
   };
 
@@ -160,7 +164,7 @@ const ProductDetail = () => {
         jsonLd={jsonLd}
         keywords={`${product.name}, exclusive, limited edition`}
         title={`${product.name} - Exclusive`}
-        url={`https://exclusive-store-front.vercel.app/products/${product.id}`}
+        url={`https://exclusive-store-front.vercel.app/products/${id}`}
       />
 
       <main className="container mt-6 md:mt-[33px] mb-6 md:mb-[140px]">
