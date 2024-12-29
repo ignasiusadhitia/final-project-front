@@ -1,6 +1,6 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 
+import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 const ErrorPage = ({ code }) => {
@@ -39,9 +39,7 @@ const ErrorPage = ({ code }) => {
       <h2 className="text-2xl font-bold lg:text-[110px] lg:font-medium mb-3 lg:mb-20">
         {error.errorCode}
       </h2>
-      <p className="text-[8px] lg:text-sm mb-8 text-gray-600">
-        {message}
-      </p>
+      <p className="text-[8px] lg:text-sm mb-8 text-gray-600">{message}</p>
       <Link
         className="lg:mt-10 text-sm lg:text-base bg-button-2 hover:bg-button-hover-1 text-text-1 font-medium py-3 px-6 rounded transition duration-300"
         to="/"

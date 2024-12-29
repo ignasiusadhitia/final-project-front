@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react';
 
 import PropTypes from 'prop-types';
-import { Link, useLocation } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import { Link, useLocation } from 'react-router-dom';
 
 const Breadcrumb = ({ userName }) => {
   const location = useLocation();
@@ -72,7 +72,8 @@ const Breadcrumb = ({ userName }) => {
       {/* Welcome Message */}
       {userName && (
         <div className="hidden md:block text-sm">
-          {lang === 'id' ? 'Welcome!' : 'Selamat datang!'} <span className="text-secondary-3">{userName}</span>
+          {lang === 'id' ? 'Welcome!' : 'Selamat datang!'}{' '}
+          <span className="text-secondary-3">{userName}</span>
         </div>
       )}
     </nav>

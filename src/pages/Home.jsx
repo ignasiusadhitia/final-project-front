@@ -16,6 +16,7 @@ import {
   FeatureCard,
 } from '@components';
 import { Arrow, Love } from '@icons';
+
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
@@ -33,7 +34,7 @@ const Home = () => {
       ourProduct: 'Our Products',
       bestSelling: 'Best Selling Products',
       exploreProduct: 'Explore Our Products',
-      browseByCategory: 'Browse By Category'
+      browseByCategory: 'Browse By Category',
     },
     id: {
       category: 'Kategori',
@@ -45,9 +46,9 @@ const Home = () => {
       ourProduct: 'Produk Kami',
       bestSelling: 'Produk Terlaris',
       exploreProduct: 'Jelajahi Produk Kami',
-      browseByCategory: 'Telusuri Kategori'
-    }
-  }
+      browseByCategory: 'Telusuri Kategori',
+    },
+  };
 
   const text = translations[lang];
 
@@ -371,13 +372,16 @@ const Home = () => {
     <main className="container lg:space-y-32 lg:my-6 md:my-[3.75rem]">
       {/* HERO SECTION */}
       <section>
-        <Banner height={"h-[220px] lg:h-[344px]"} data={banner1} />
+        <Banner data={banner1} height={'h-[220px] lg:h-[344px]'} />
       </section>
 
       {/* CATEGORY SECTION */}
       <section className="space-y-3 px-5 py-3 lg:p-0 md:space-y-20">
         <header className="flex justify-between">
-          <SectionTitle subTitle={text.category} title={text.browseByCategory} />
+          <SectionTitle
+            subTitle={text.category}
+            title={text.browseByCategory}
+          />
           <div className="hidden md:flex gap-2 self-end">
             <button
               className="w-12 h-12 rounded-full bg-secondary-1 flex justify-center items-center"
@@ -426,7 +430,10 @@ const Home = () => {
           <SectionTitle subTitle={text.thisMonth} title={text.bestSelling} />
 
           <div className="flex gap-5 lg:self-end">
-            <Link to={"/products"} className="text-xs md:text-base lg:py-3 lg:px-10 text-button-2 md:text-white md:bg-button-2 md:hover:bg-button-hover-1 rounded-md">
+            <Link
+              className="text-xs md:text-base lg:py-3 lg:px-10 text-button-2 md:text-white md:bg-button-2 md:hover:bg-button-hover-1 rounded-md"
+              to={'/products'}
+            >
               {text.viewAll}
             </Link>
           </div>
@@ -460,14 +467,17 @@ const Home = () => {
 
       {/* BANNER SECTION */}
       <section>
-        <Banner height={"h-[180px] lg:h-[500px]"} data={banner2} />
+        <Banner data={banner2} height={'h-[180px] lg:h-[500px]'} />
       </section>
 
       {/* EXPLORE OUR PRODUCT SECTION */}
       <section className="space-y-5 md:space-y-20 p-5 lg:p-0">
         {/* HEADER */}
         <header className="flex justify-between">
-          <SectionTitle subTitle={text.ourProduct} title={text.exploreProduct} />
+          <SectionTitle
+            subTitle={text.ourProduct}
+            title={text.exploreProduct}
+          />
           <div className="flex gap-2 self-end">
             <button
               className="hidden w-12 h-12 rounded-full bg-secondary-1 md:flex justify-center items-center"
@@ -481,7 +491,7 @@ const Home = () => {
             >
               <Arrow />
             </button>
-            <Link to={"/products"} className="text-button-2 text-xs md:hidden">
+            <Link className="text-button-2 text-xs md:hidden" to={'/products'}>
               {text.viewAll}
             </Link>
           </div>
@@ -522,8 +532,11 @@ const Home = () => {
           </Swiper>
         </div>
         {/* BUTTON */}
-        <div className='hidden md:flex'>
-          <Link to={"/products"} className="hidden bg-button-2 hover:bg-button-hover-1 transition-colors text-white py-3 px-10 rounded-md mx-auto md:block">
+        <div className="hidden md:flex">
+          <Link
+            className="hidden bg-button-2 hover:bg-button-hover-1 transition-colors text-white py-3 px-10 rounded-md mx-auto md:block"
+            to={'/products'}
+          >
             {text.viewAllProducts}
           </Link>
         </div>
@@ -532,7 +545,7 @@ const Home = () => {
       {/* FEATURED PRODUCT SECTION */}
       <section className="space-y-5 md:space-y-20 p-5 lg:p-0">
         <header className="flex justify-between">
-          <SectionTitle subTitle={text.featured} title={text.recommend}/>
+          <SectionTitle subTitle={text.featured} title={text.recommend} />
         </header>
         <div className="grid grid-cols-12 gap-1 border">
           {featuredProducts.map((item, index) => (
