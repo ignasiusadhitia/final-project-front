@@ -1,11 +1,12 @@
 import React from 'react';
 
+import { useSelector } from 'react-redux';
 import { Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 
-import { Guarantee, TeamsCard } from '@components';
+import { Guarantee, SEO, TeamsCard } from '@components';
 import {
   SellersActive,
   MonthlyProductSales,
@@ -13,8 +14,6 @@ import {
   AnualGross,
 } from '@icons';
 import { aboutHero, member1, member2, member3, member4 } from '@images';
-
-import { useSelector } from 'react-redux';
 
 const About = () => {
   const lang = useSelector((state) => state.lang.lang);
@@ -50,136 +49,166 @@ const About = () => {
     },
   };
 
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Organization',
+    name: 'Exclusive - Limited Edition Store',
+    url: 'https://exclusive-store-front.vercel.app/about',
+    logo: 'https://exclusive-store-front.vercel.app/favicon.ico',
+    contactPoint: {
+      '@type': 'ContactPoint',
+      telephone: '+8801611112222',
+      contactType: 'Customer Service',
+    },
+    sameAs: [
+      'https://www.facebook.com',
+      'https://twitter.com',
+      'https://www.instagram.com',
+    ],
+    description:
+      'Exclusive offers limited edition products including electronics, fashion, collectibles, and more.',
+  };
+
   return (
-    <div className="overflow-hidden lg:mt-12 md:mt-[3.75rem]">
-      <div>
-        {/* HERO SECTION */}
-        <div className="flex justify-start">
-          <div className="flex container flex-col justify-center h-full lg:h-[609px] gap-5 md:gap-20 p-10 lg:p-0">
-            {/* DESCRIPTIONS */}
-            <div className="w-full lg:w-[525px] flex flex-col justify-center items-start gap-4 lg:gap-10">
-              <h1 className="text-2xl md:text-5xl text-center md:text-left font-semibold w-full">
-                {translations[lang].heroTitle}
-              </h1>
-              <p className="text-[8px] lg:text-base font-normal">
-                {translations[lang].heroDescription1}
+    <>
+      <SEO
+        description="Learn more about Exclusive and our offerings of limited edition electronics, fashion, and collectibles."
+        image="https://exclusive-store-front.vercel.app/favicon.ico"
+        jsonLd={jsonLd}
+        keywords="about exclusive, limited edition, electronics, fashion, collectibles"
+        title="About Us - Exclusive Limited Edition Store"
+        url="https://exclusive-store-front.vercel.app/about"
+      />
+      <div className="overflow-hidden lg:mt-12 md:mt-[3.75rem]">
+        <div>
+          {/* HERO SECTION */}
+          <div className="flex justify-start">
+            <div className="flex container flex-col justify-center h-full lg:h-[609px] gap-5 md:gap-20 p-10 lg:p-0">
+              {/* DESCRIPTIONS */}
+              <div className="w-full lg:w-[525px] flex flex-col justify-center items-start gap-4 lg:gap-10">
+                <h1 className="text-2xl md:text-5xl text-center md:text-left font-semibold w-full">
+                  {translations[lang].heroTitle}
+                </h1>
+                <p className="text-[8px] lg:text-base font-normal">
+                  {translations[lang].heroDescription1}
+                </p>
+                <p className="text-[8px] lg:text-base">
+                  {translations[lang].heroDescription2}
+                </p>
+              </div>
+
+              {/* IMAGE */}
+              <div className="overflow-hidden mt-4 lg:mt-0 rounded-xl lg:absolute right-0 flex justify-end items-center">
+                <img
+                  alt="About's hero image"
+                  className="h-full w-full lg:w-[705px] lg:h-[609px] lg:object-cover rounded-xl md:rounded-sm md:object-cover"
+                  src={aboutHero}
+                />
+              </div>
+            </div>
+          </div>
+
+          {/* SERVICE SECTION */}
+          <div className="container p-5 lg:p-0 grid grid-cols-2 lg:grid-cols-4 gap-5 mt-10 md:mt-40">
+            <div className="text-center border rounded-lg flex flex-col justify-center items-center p-5 gap-5">
+              <SellersActive className="w-[50px] h-[50px] lg:w-20 lg:h-20" />
+              <p className="text-base font-semibold lg:text-3xl lg:font-bold">
+                10.5k
               </p>
-              <p className="text-[8px] lg:text-base">
-                {translations[lang].heroDescription2}
+              <p className="text-xs font-normal lg:text-base">
+                {translations[lang].sellerActiveLabel}
               </p>
             </div>
-
-            {/* IMAGE */}
-            <div className="overflow-hidden mt-4 lg:mt-0 rounded-xl lg:absolute right-0 flex justify-end items-center">
-              <img
-                alt="About's hero image"
-                className="h-full w-full lg:w-[705px] lg:h-[609px] lg:object-cover rounded-xl md:rounded-sm md:object-cover"
-                src={aboutHero}
-              />
+            <div className="text-center border rounded-lg flex flex-col justify-center items-center p-5 gap-5 bg-secondary-3 text-white">
+              <MonthlyProductSales className="w-[50px] h-[50px] lg:w-20 lg:h-20" />
+              <p className="text-base font-semibold lg:text-3xl lg:font-bold">
+                33k
+              </p>
+              <p className="text-xs font-normal lg:text-base">
+                {translations[lang].monthlySalesLabel}
+              </p>
+            </div>
+            <div className="text-center border rounded-lg flex flex-col justify-center items-center p-5 gap-5">
+              <CustomersActive className="w-[50px] h-[50px] lg:w-20 lg:h-20" />
+              <p className="text-base font-semibold lg:text-3xl lg:font-bold">
+                45.5k
+              </p>
+              <p className="text-xs font-normal lg:text-base">
+                {translations[lang].customerActiveLabel}
+              </p>
+            </div>
+            <div className="text-center border rounded-lg flex flex-col justify-center items-center p-5 gap-5">
+              <AnualGross className="w-[50px] h-[50px] lg:w-20 lg:h-20" />
+              <p className="text-base font-semibold lg:text-3xl lg:font-bold">
+                25k
+              </p>
+              <p className="text-xs font-normal lg:text-base">
+                {translations[lang].annualGrossLabel}
+              </p>
             </div>
           </div>
-        </div>
 
-        {/* SERVICE SECTION */}
-        <div className="container p-5 lg:p-0 grid grid-cols-2 lg:grid-cols-4 gap-5 mt-10 md:mt-40">
-          <div className="text-center border rounded-lg flex flex-col justify-center items-center p-5 gap-5">
-            <SellersActive className="w-[50px] h-[50px] lg:w-20 lg:h-20" />
-            <p className="text-base font-semibold lg:text-3xl lg:font-bold">
-              10.5k
-            </p>
-            <p className="text-xs font-normal lg:text-base">
-              {translations[lang].sellerActiveLabel}
-            </p>
+          {/* TEAM SECTION */}
+          <div className="container p-5 lg:p-0 gap-5 mt-10 md:mt-40">
+            <h2 className="text-2xl md:text-3xl font-semibold text-center mb-5">
+              {translations[lang].teamSectionTitle}
+            </h2>
+            <Swiper
+              className="swiper-cstm about"
+              loop={true}
+              modules={[Pagination]}
+              pagination={{ clickable: true }}
+              slidesPerView={3}
+              spaceBetween={50}
+            >
+              <SwiperSlide>
+                {/* MEMBER 1 */}
+                <TeamsCard
+                  image={member1}
+                  name="Tom Cruise"
+                  title="Founder & Chairman"
+                />
+              </SwiperSlide>
+
+              <SwiperSlide>
+                {/* MEMBER 2 */}
+                <TeamsCard
+                  image={member2}
+                  name="Emma Watson"
+                  title="Managing Director"
+                />
+              </SwiperSlide>
+
+              <SwiperSlide>
+                {/* MEMBER 3 */}
+                <TeamsCard
+                  image={member3}
+                  name="Will Smith"
+                  title="Product Designer"
+                />
+              </SwiperSlide>
+
+              <SwiperSlide>
+                {/* MEMBER 4 */}
+                <TeamsCard
+                  image={member4}
+                  name="Joana Doe"
+                  title="Product Designer"
+                />
+              </SwiperSlide>
+            </Swiper>
           </div>
-          <div className="text-center border rounded-lg flex flex-col justify-center items-center p-5 gap-5 bg-secondary-3 text-white">
-            <MonthlyProductSales className="w-[50px] h-[50px] lg:w-20 lg:h-20" />
-            <p className="text-base font-semibold lg:text-3xl lg:font-bold">
-              33k
-            </p>
-            <p className="text-xs font-normal lg:text-base">
-              {translations[lang].monthlySalesLabel}
-            </p>
+
+          {/* Guarantee */}
+          <div className="container p-5 md:p-0 mt-10 md:my-40">
+            <h2 className="text-2xl md:text-3xl font-semibold text-center mb-5">
+              {translations[lang].guaranteeSectionTitle}
+            </h2>
+            <Guarantee />
           </div>
-          <div className="text-center border rounded-lg flex flex-col justify-center items-center p-5 gap-5">
-            <CustomersActive className="w-[50px] h-[50px] lg:w-20 lg:h-20" />
-            <p className="text-base font-semibold lg:text-3xl lg:font-bold">
-              45.5k
-            </p>
-            <p className="text-xs font-normal lg:text-base">
-              {translations[lang].customerActiveLabel}
-            </p>
-          </div>
-          <div className="text-center border rounded-lg flex flex-col justify-center items-center p-5 gap-5">
-            <AnualGross className="w-[50px] h-[50px] lg:w-20 lg:h-20" />
-            <p className="text-base font-semibold lg:text-3xl lg:font-bold">
-              25k
-            </p>
-            <p className="text-xs font-normal lg:text-base">
-              {translations[lang].annualGrossLabel}
-            </p>
-          </div>
-        </div>
-
-        {/* TEAM SECTION */}
-        <div className="container p-5 lg:p-0 gap-5 mt-10 md:mt-40">
-          <h2 className="text-2xl md:text-3xl font-semibold text-center mb-5">
-            {translations[lang].teamSectionTitle}
-          </h2>
-          <Swiper
-            className="swiper-cstm about"
-            loop={true}
-            modules={[Pagination]}
-            pagination={{ clickable: true }}
-            slidesPerView={3}
-            spaceBetween={50}
-          >
-            <SwiperSlide>
-              {/* MEMBER 1 */}
-              <TeamsCard
-                image={member1}
-                name="Tom Cruise"
-                title="Founder & Chairman"
-              />
-            </SwiperSlide>
-
-            <SwiperSlide>
-              {/* MEMBER 2 */}
-              <TeamsCard
-                image={member2}
-                name="Emma Watson"
-                title="Managing Director"
-              />
-            </SwiperSlide>
-
-            <SwiperSlide>
-              {/* MEMBER 3 */}
-              <TeamsCard
-                image={member3}
-                name="Will Smith"
-                title="Product Designer"
-              />
-            </SwiperSlide>
-
-            <SwiperSlide>
-              {/* MEMBER 4 */}
-              <TeamsCard
-                image={member4}
-                name="Joana Doe"
-                title="Product Designer"
-              />
-            </SwiperSlide>
-          </Swiper>
-        </div>
-
-        {/* Guarantee */}
-        <div className="container p-5 md:p-0 mt-10 md:my-40">
-          <h2 className="text-2xl md:text-3xl font-semibold text-center mb-5">
-            {translations[lang].guaranteeSectionTitle}
-          </h2>
-          <Guarantee />
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
