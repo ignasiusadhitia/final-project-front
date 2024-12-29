@@ -15,10 +15,11 @@ export default defineConfig({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.ico'],
       manifest: {
-        name: 'Exclusive - Electronics Store',
+        name: 'Exclusive - Limited Edition Store',
         short_name: 'Exclusive',
         description:
-          'Shop the latest phones, computers, smartwatches, cameras, headphones, and gaming devices.',
+          'Discover exclusive and limited edition items including electronics, fashion, collectibles, and more.',
+
         theme_color: '#db4444',
         background_color: '#ffffff',
         display: 'standalone',
