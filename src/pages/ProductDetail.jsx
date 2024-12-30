@@ -1,6 +1,8 @@
 import { useState } from 'react';
 
+import { useSelector } from 'react-redux';
 import { useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 import {
@@ -115,6 +117,10 @@ const ProductDetail = () => {
   const [quantity, setQuantity] = useState(1);
   const [bottomSheetOpen, setBottomSheetOpen] = useState(false);
   const [activeSlide, setActiveSlide] = useState(1);
+  const { isAuthenticated } = useSelector((state) => state.auth);
+
+  const navigate = useNavigate();
+  const { id } = useParams();
 
   const handleImageClick = (image) => {
     setSelectedImage(image);
@@ -143,10 +149,16 @@ const ProductDetail = () => {
   };
 
   const handleAddToCart = () => {
-    console.log(quantity);
+    if (!isAuthenticated) {
+      return navigate('/login');
+    }
   };
 
-  const { id } = useParams();
+  const handleAddToWishlist = () => {
+    if (!isAuthenticated) {
+      return navigate('/login');
+    }
+  };
 
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -174,7 +186,6 @@ const ProductDetail = () => {
         title={`${product.name} - Exclusive`}
         url={`https://exclusive-store-front.vercel.app/products/${id}`}
       />
-
       <main className="container mt-6 md:mt-[33px] mb-6 md:mb-[140px]">
         {/* Main Product Section */}
         <div className="block md:hidden">
@@ -208,6 +219,7 @@ const ProductDetail = () => {
             selectedImage={selectedImage}
             selectedVariant={selectedVariant}
             onAddToCartHandler={handleAddToCart}
+            onAddToWishlistHandler={handleAddToWishlist}
             onImageClickHandler={handleImageClick}
             onQuantityInputChangeHandler={handleQuantityInputChange}
             onSetQuantityHandler={handleSetQuantity}

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 
 const LogInForm = ({ onSubmitHandler, onInputChangeHandler }) => {
   const lang = useSelector((state) => state.lang.lang);
+  const { error } = useSelector((state) => state.auth);
 
   const translations = {
     en: {
@@ -42,6 +43,7 @@ const LogInForm = ({ onSubmitHandler, onInputChangeHandler }) => {
         type="password"
         onChange={onInputChangeHandler}
       />
+      <p className="text-secondary-3">{error && error}</p>
 
       <div className="flex flex-col-reverse md:flex-row items-end md:items-center justify-between mt-2">
         <button

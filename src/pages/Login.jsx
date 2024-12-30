@@ -1,15 +1,40 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+
+import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+
+import { errorLogin, loginSuccess } from '@store/features/authSlice';
 
 import { LogInForm } from '@components';
 
 const Login = () => {
+  const [inputForm, setInputForm] = useState({
+    email: '',
+    password: '',
+  });
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { isAuthenticated } = useSelector((state) => state.auth);
+
+  useEffect(() => {
+    if (isAuthenticated) return navigate('/');
+  }, []);
+
   const inputChangeHandler = (event) => {
-    console.log(event.target.value);
+    const { name, value } = event.target;
+    setInputForm({ ...inputForm, [name]: value });
   };
 
   const submitHandler = (event) => {
     event.preventDefault();
-    console.log('Submitted');
+    const { email, password } = inputForm;
+    if (email !== 'user@gmail.com' || password !== 'user1234') {
+      dispatch(errorLogin('Invalid email or password!'));
+      return;
+    }
+
+    dispatch(loginSuccess(inputForm));
+    navigate('/');
   };
 
   return (

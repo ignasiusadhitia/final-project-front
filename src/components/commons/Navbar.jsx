@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
+import { logout } from '@store/features/authSlice';
 import { setLanguage } from '@store/features/languageSlice';
 
 import {
@@ -22,12 +23,14 @@ const Navbar = () => {
   const location = useLocation().pathname;
   const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth <= 1024);
   // login simulation
-  const login = true;
+  const { isAuthenticated, user } = useSelector((state) => state.auth);
+  const login = isAuthenticated;
 
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const [isNavbarOpen, setNavbarOpen] = useState(false);
   const lang = useSelector((state) => state.lang.lang);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     setNavbarOpen(false);
@@ -50,6 +53,18 @@ const Navbar = () => {
   const changeLanguage = (e) => {
     const selectedLang = e.target.value;
     dispatch(setLanguage(selectedLang));
+  };
+
+  const handleLogout = () => {
+    dispatch(logout());
+  };
+
+  const handleToCart = () => {
+    if (!login) {
+      navigate('/login');
+    } else {
+      navigate('/cart');
+    }
   };
 
   const translations = {
@@ -99,19 +114,19 @@ const Navbar = () => {
             >
               <div className="flex items-center lg:gap-3">
                 <p className="text-xs lg:text-sm font-normal text-center lg:text-start text-text-1">
-                  {text.sale}
+                  {text?.sale}
                   <Link
                     className="lg:hidden text-text-1 font-semibold ml-2"
                     to={'products'}
                   >
-                    {text.showNow}
+                    {text?.showNow}
                   </Link>
                 </p>
                 <Link
                   className="hidden lg:block text-text-1 font-semibold underline"
                   to={'products'}
                 >
-                  {text.showNowLower}
+                  {text?.showNowLower}
                 </Link>
               </div>
               <div className="hidden lg:block">
@@ -150,7 +165,7 @@ const Navbar = () => {
           <div className="block lg:hidden relative">
             <input
               className="w-full text-xs bg-secondary-1 border border-secondary-1 rounded-md px-6 py-3 focus:border focus:outline-none focus:border-gray-300"
-              placeholder={text.searchPlaceholder}
+              placeholder={text?.searchPlaceholder}
               type="text"
             />
             <button className="absolute right-3 top-1/2 -translate-y-1/2">
@@ -165,7 +180,7 @@ const Navbar = () => {
                 className={`${location === '/' ? 'text-black font-medium border-secondary-3' : 'text-text-2 font-normal border-transparent'} border-l-8 py-2 px-3 text-sm font-normal`}
                 to={''}
               >
-                {text.home}
+                {text?.home}
               </Link>
             </li>
             <li>
@@ -173,7 +188,7 @@ const Navbar = () => {
                 className={`${location === '/contact' ? 'text-black font-medium border-secondary-3' : 'text-text-2 font-normal border-transparent'} border-l-8 py-2 px-3 text-sm font-normal`}
                 to={'contact'}
               >
-                {text.contact}
+                {text?.contact}
               </Link>
             </li>
             <li>
@@ -181,7 +196,7 @@ const Navbar = () => {
                 className={`${location === '/about' ? 'text-black font-medium border-secondary-3' : 'text-text-2 font-normal border-transparent'} border-l-8 py-2 px-3 text-sm font-normal`}
                 to={'about'}
               >
-                {text.about}
+                {text?.about}
               </Link>
             </li>
             <li>
@@ -189,7 +204,7 @@ const Navbar = () => {
                 className={`${location === '/wishlist' ? 'text-black font-medium border-secondary-3' : 'text-text-2 font-normal border-transparent'} border-l-8 py-2 px-3 text-sm font-normal`}
                 to={'wishlist'}
               >
-                {text.wishlist}
+                {text?.wishlist}
               </Link>
             </li>
           </ul>
@@ -197,13 +212,43 @@ const Navbar = () => {
 
         {login ? (
           <div className="px-5">
-            <div className="border-b-2 pb-6 flex items-center gap-3">
-              <img
-                alt="user-image"
-                className="border border-text-2 rounded-full w-8 h-8"
-                src="https://picsum.photos/200/300"
-              />
-              <p className="text-text-2 text-sm font-normal">Andre Gunawan</p>
+            <div className="border-b-2 pb-6 flex items-center justify-between">
+              <div className="flex gap-3 items-center">
+                <img
+                  alt="user-image"
+                  className="border border-text-2 rounded-full w-8 h-8"
+                  src="https://picsum.photos/200/300"
+                />
+                <Link
+                  className="text-text-2 text-sm font-normal"
+                  to={'/my-account'}
+                >
+                  {user?.profile ? user.profile : user?.email}
+                </Link>
+              </div>
+
+              <div className="flex gap-3">
+                <select
+                  className="text-text-2 focus:outline-none text-sm font-norma border py-1 px-3 border-secondary-3 rounded-lg"
+                  id="language"
+                  name="language"
+                  value={lang}
+                  onChange={changeLanguage}
+                >
+                  <option className="text-text-1 bg-text-2" value="en">
+                    English
+                  </option>
+                  <option className="text-text-1 bg-text-2" value="id">
+                    Indonesia
+                  </option>
+                </select>
+                <button
+                  className="text-white text-sm font-norma border py-1 px-3 bg-secondary-3 rounded-lg"
+                  onClick={handleLogout}
+                >
+                  {text?.logout}
+                </button>
+              </div>
             </div>
           </div>
         ) : (
@@ -243,7 +288,7 @@ const Navbar = () => {
                 className={`${location === '/' && 'border-b border-black'} text-base font-normal`}
                 to={''}
               >
-                {text.home}
+                {text?.home}
               </Link>
             </li>
             <li>
@@ -251,7 +296,7 @@ const Navbar = () => {
                 className={`${location === '/contact' && 'border-b border-black'} text-base font-normal`}
                 to={'contact'}
               >
-                {text.contact}
+                {text?.contact}
               </Link>
             </li>
             <li>
@@ -259,17 +304,19 @@ const Navbar = () => {
                 className={`${location === '/about' && 'border-b border-black'} text-base font-normal`}
                 to={'about'}
               >
-                {text.about}
+                {text?.about}
               </Link>
             </li>
-            <li>
-              <Link
-                className={`${location === '/sign-up' && 'border-b border-black'} text-base font-normal`}
-                to={'sign-up'}
-              >
-                {text.signUp}
-              </Link>
-            </li>
+            {!login && (
+              <li>
+                <Link
+                  className={`${location === '/sign-up' && 'border-b border-black'} text-base font-normal`}
+                  to={'sign-up'}
+                >
+                  {text?.signUp}
+                </Link>
+              </li>
+            )}
           </ul>
         </div>
 
@@ -278,7 +325,7 @@ const Navbar = () => {
             <div className="hidden lg:block relative z-50">
               <input
                 className="w-[243px] text-xs h-[38px] bg-secondary-1 border border-secondary-1 rounded-md px-6 py-3 focus:border focus:outline-none focus:border-gray-300"
-                placeholder={text.searchPlaceholder}
+                placeholder={text?.searchPlaceholder}
                 type="text"
               />
               <button className="absolute z-50 right-3 top-1/2 -translate-y-1/2">
@@ -290,14 +337,14 @@ const Navbar = () => {
               <Link className="hidden lg:block" to={'wishlist'}>
                 <WishList />
               </Link>
-              <Link className="relative z-50" to={'cart'}>
+              <button className="relative z-50" onClick={handleToCart}>
                 <BlackCart className="w-6 h-6 lg:w-8 lg:h-8" />
                 {login && (
                   <span className="absolute text-text-1 px-1 rounded-full text-xs -right-1 -top-1 bg-secondary-3">
                     2
                   </span>
                 )}
-              </Link>
+              </button>
 
               {login && (
                 <div className="hidden lg:block relative z-50">
@@ -314,22 +361,25 @@ const Navbar = () => {
                         className="flex items-center gap-2 px-4 py-2 text-sm font-normal text-text-1"
                         to={'/my-account'}
                       >
-                        <User /> {text.manageAccount}
+                        <User /> {text?.manageAccount}
                       </Link>
                       <Link
                         className="flex items-center gap-2 px-4 py-2 text-sm font-normal text-text-1"
                         to={'/my-account/my-orders'}
                       >
-                        <Order /> {text.myOrder}
+                        <Order /> {text?.myOrder}
                       </Link>
                       <Link
                         className="flex items-center gap-2 px-4 py-2 text-sm font-normal text-text-1"
                         to={'/reviews'}
                       >
-                        <Reviews /> {text.myReviews}
+                        <Reviews /> {text?.myReviews}
                       </Link>
-                      <button className="flex items-center gap-2 px-4 py-2 w-full text-left text-sm font-normal text-text-1">
-                        <Logout /> {text.logout}
+                      <button
+                        className="flex items-center gap-2 px-4 py-2 w-full text-left text-sm font-normal text-text-1"
+                        onClick={handleLogout}
+                      >
+                        <Logout /> {text?.logout}
                       </button>
                     </div>
                   )}
