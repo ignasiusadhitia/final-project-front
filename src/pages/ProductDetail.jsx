@@ -1,6 +1,5 @@
 import { useState } from 'react';
 
-import { useParams } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 import {
@@ -21,6 +20,7 @@ import {
 } from '@images';
 
 import 'swiper/css';
+import { useParams } from 'react-router-dom';
 
 const product = {
   images: [productImg1, productImg2, productImg3, productImg4, productImg5],
@@ -39,63 +39,71 @@ const product = {
 const relatedProducts = [
   {
     id: 1,
-    imageUrl: 'https://picsum.photos/400/300',
+    imageUrl:
+      'https://res.cloudinary.com/dfcpbiabw/image/upload/v1735473518/product-4_igwvhe.webp',
     name: 'ASUS FHD Gaming Laptop',
     description:
       'Powerful gaming laptop with high-performance specs for a smooth gaming experience.',
     price: '960',
     originalPrice: '1160',
-    discount: '-35%',
+    discount: '35',
     rating: 4.7,
     ratingCount: 65,
-    categoryId: 1,
+    categoryId: 3,
     category: 'Electronics',
     stock: 0,
+    isNew: true,
   },
   {
     id: 2,
-    imageUrl: 'https://picsum.photos/400/300',
+    imageUrl:
+      'https://res.cloudinary.com/dfcpbiabw/image/upload/v1735473528/product-16_ubcw7e.webp',
     name: 'IPS LCD Gaming Monitor',
     description:
       'Stunning visuals and crisp images with a high refresh rate for gaming and professional use.',
     price: '160',
     originalPrice: '200',
-    discount: '-20%',
+    discount: '20',
     rating: 4.5,
     ratingCount: 55,
-    categoryId: 1,
+    categoryId: 3,
     category: 'Electronics',
     stock: 20,
+    isNew: true,
   },
   {
     id: 3,
-    imageUrl: 'https://picsum.photos/400/300',
+    imageUrl:
+      'https://res.cloudinary.com/dfcpbiabw/image/upload/v1735473526/product-13_r9jkdq.webp',
     name: 'HAVIT HV-G92 Gamepad',
     description:
       'Ergonomic gamepad with high precision controls and vibration feedback for immersive gaming.',
     price: '56',
     originalPrice: '70',
-    discount: '-20%',
+    discount: '20',
     rating: 4.4,
     ratingCount: 30,
-    categoryId: 1,
+    categoryId: 3,
     category: 'Electronics',
     stock: 30,
+    isNew: true,
   },
   {
     id: 4,
-    imageUrl: 'https://picsum.photos/400/300',
-    name: 'Modern Sofa Set',
+    imageUrl:
+      'https://res.cloudinary.com/dfcpbiabw/image/upload/v1735473519/product-6_jhqlkr.webp',
+    name: 'The North Coat',
     description:
-      'Comfortable and stylish sofa set perfect for your living room.',
+      'Warm, durable, and stylish winter coat for outdoor activities.',
     price: '899',
     originalPrice: '999',
-    discount: '-10%',
+    discount: '10',
     rating: 4.6,
     ratingCount: 42,
-    categoryId: 2,
-    category: 'Home & Lifestyle',
+    categoryId: 1,
+    category: "Woman's Fashion",
     stock: 8,
+    isNew: false,
   },
 ];
 
@@ -107,24 +115,6 @@ const ProductDetail = () => {
   const [quantity, setQuantity] = useState(1);
   const [bottomSheetOpen, setBottomSheetOpen] = useState(false);
   const [activeSlide, setActiveSlide] = useState(1);
-
-  const { id } = useParams();
-
-  const jsonLd = {
-    '@context': 'https://schema.org',
-    '@type': 'Product',
-    name: product.name,
-    image: product.images[0],
-    description: product.description,
-    sku: id,
-    offers: {
-      '@type': 'Offer',
-      priceCurrency: 'USD',
-      price: product.price,
-      availability: 'https://schema.org/InStock',
-      url: `https://exclusive-store-front.vercel.app/products/${id}`,
-    },
-  };
 
   const handleImageClick = (image) => {
     setSelectedImage(image);
@@ -154,6 +144,24 @@ const ProductDetail = () => {
 
   const handleAddToCart = () => {
     console.log(quantity);
+  };
+
+  const { id } = useParams();
+
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'Product',
+    name: product.name,
+    image: product.images[0],
+    description: product.description,
+    sku: id,
+    offers: {
+      '@type': 'Offer',
+      priceCurrency: 'USD',
+      price: product.price,
+      availability: 'https://schema.org/InStock',
+      url: `https://exclusive-store-front.vercel.app/products/${id}`,
+    },
   };
 
   return (
@@ -219,13 +227,13 @@ const ProductDetail = () => {
         </div>
 
         {/* Related Product Section */}
-        <section className="mt-6 px-6 md:px-0">
+        <section className="mt-20 px-6 md:px-0">
           <SectionTitle
             hideTitle
             subTitle="Related Items"
             title="Related Items"
           />
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-[26px] md:gap-30">
+          <div className="grid grid-cols-2 md:grid-cols-4 gap-[26px] md:gap-30 mt-10">
             {relatedProducts.map((product) => (
               <ProductsCard
                 key={product.id}

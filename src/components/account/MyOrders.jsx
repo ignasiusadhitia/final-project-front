@@ -51,7 +51,11 @@ const MyOrders = () => {
             >
               <div className="flex flex-col lg:flex-row gap-7 lg:gap-12">
                 <div>
-                  <img alt="order-item" src="https://picsum.photos/80/80" />
+                  <img
+                    alt="order-item"
+                    className="w-20 h-20"
+                    src="https://res.cloudinary.com/dfcpbiabw/image/upload/v1735473518/product-4_igwvhe.webp"
+                  />
                 </div>
                 <div className="flex flex-col gap-1">
                   <p className="text-base font-semibold">

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
@@ -18,7 +18,7 @@ import {
   FeatureCard,
   SEO,
 } from '@components';
-import { Arrow, Love } from '@icons';
+import { Arrow } from '@icons';
 
 const Home = () => {
   const lang = useSelector((state) => state.lang.lang);
@@ -55,7 +55,8 @@ const Home = () => {
   const bestSellingProducts = [
     {
       id: 1,
-      imageUrl: 'https://picsum.photos/400/300',
+      imageUrl:
+        'https://res.cloudinary.com/dfcpbiabw/image/upload/v1735473518/product-4_igwvhe.webp',
       name: 'ASUS FHD Gaming Laptop',
       description:
         'Powerful gaming laptop with high-performance specs for a smooth gaming experience.',
@@ -70,7 +71,8 @@ const Home = () => {
     },
     {
       id: 2,
-      imageUrl: 'https://picsum.photos/400/300',
+      imageUrl:
+        'https://res.cloudinary.com/dfcpbiabw/image/upload/v1735473528/product-16_ubcw7e.webp',
       name: 'IPS LCD Gaming Monitor',
       description:
         'Stunning visuals and crisp images with a high refresh rate for gaming and professional use.',
@@ -85,7 +87,8 @@ const Home = () => {
     },
     {
       id: 3,
-      imageUrl: 'https://picsum.photos/400/300',
+      imageUrl:
+        'https://res.cloudinary.com/dfcpbiabw/image/upload/v1735473526/product-13_r9jkdq.webp',
       name: 'HAVIT HV-G92 Gamepad',
       description:
         'Ergonomic gamepad with high precision controls and vibration feedback for immersive gaming.',
@@ -100,273 +103,599 @@ const Home = () => {
     },
     {
       id: 4,
-      imageUrl: 'https://picsum.photos/400/300',
-      name: 'Modern Sofa Set',
+      imageUrl:
+        'https://res.cloudinary.com/dfcpbiabw/image/upload/v1735473519/product-6_jhqlkr.webp',
+      name: 'The North Coat',
       description:
-        'Comfortable and stylish sofa set perfect for your living room.',
+        'Warm, durable, and stylish winter coat for outdoor activities.',
       price: '899',
       originalPrice: '999',
       discount: '-10%',
       rating: 4.6,
       ratingCount: 42,
       categoryId: 2,
-      category: 'Home & Lifestyle',
+      category: 'Fashion',
       stock: 8,
     },
     {
       id: 5,
-      imageUrl: 'https://picsum.photos/400/300',
-      name: 'ASUS FHD Gaming Laptop',
+      imageUrl:
+        'https://res.cloudinary.com/dfcpbiabw/image/upload/v1735473519/product-7_husrah.webp',
+      name: 'Gucci Duffle Bag',
       description:
-        'Powerful gaming laptop with high-performance specs for a smooth gaming experience.',
+        'Luxury duffle bag with premium materials and stylish design.',
       price: '960',
       originalPrice: '1160',
       discount: '-35%',
       rating: 4.7,
       ratingCount: 65,
-      categoryId: 1,
-      category: 'Electronics',
-      stock: 0,
-    },
-  ];
-  const exploreOurProducts = [
-    {
-      id: 1,
-      imageUrl: 'https://picsum.photos/400/300',
-      name: 'ASUS FHD Gaming Laptop',
-      description:
-        'Powerful gaming laptop with high-performance specs for a smooth gaming experience.',
-      price: '960',
-      originalPrice: '1160',
-      discount: '-35%',
-      rating: 4.7,
-      ratingCount: 65,
-      categoryId: 1,
-      category: 'Electronics',
-      stock: 0,
-    },
-    {
-      id: 2,
-      imageUrl: 'https://picsum.photos/400/300',
-      name: 'IPS LCD Gaming Monitor',
-      description:
-        'Stunning visuals and crisp images with a high refresh rate for gaming and professional use.',
-      price: '160',
-      originalPrice: '200',
-      discount: '-20%',
-      rating: 4.5,
-      ratingCount: 55,
-      categoryId: 1,
-      category: 'Electronics',
-      stock: 20,
-    },
-    {
-      id: 3,
-      imageUrl: 'https://picsum.photos/400/300',
-      name: 'HAVIT HV-G92 Gamepad',
-      description:
-        'Ergonomic gamepad with high precision controls and vibration feedback for immersive gaming.',
-      price: '56',
-      originalPrice: '70',
-      discount: '-20%',
-      rating: 4.4,
-      ratingCount: 30,
-      categoryId: 1,
-      category: 'Electronics',
-      stock: 30,
-    },
-    {
-      id: 4,
-      imageUrl: 'https://picsum.photos/400/300',
-      name: 'Modern Sofa Set',
-      description:
-        'Comfortable and stylish sofa set perfect for your living room.',
-      price: '899',
-      originalPrice: '999',
-      discount: '-10%',
-      rating: 4.6,
-      ratingCount: 42,
       categoryId: 2,
-      category: 'Home & Lifestyle',
-      stock: 8,
-    },
-    {
-      id: 5,
-      imageUrl: 'https://picsum.photos/400/300',
-      name: 'Kitchen Blender Pro',
-      description: 'High-powered blender for all your kitchen needs.',
-      price: '79',
-      originalPrice: '99',
-      discount: '-20%',
-      rating: 4.3,
-      ratingCount: 28,
-      categoryId: 2,
-      category: 'Home & Lifestyle',
-      stock: 25,
+      category: 'Fashion',
+      stock: 5,
     },
     {
       id: 6,
-      imageUrl: 'https://picsum.photos/400/300',
-      name: 'Smart LED Lamp',
-      description: 'WiFi-enabled LED lamp with multiple color options.',
-      price: '45',
-      originalPrice: '60',
-      discount: '-25%',
-      rating: 4.8,
-      ratingCount: 50,
-      categoryId: 2,
-      category: 'Home & Lifestyle',
-      stock: 40,
-    },
-    {
-      id: 7,
-      imageUrl: 'https://picsum.photos/400/300',
-      name: 'Professional Tennis Racket',
-      description: 'Tournament-grade tennis racket for serious players.',
+      imageUrl:
+        'https://res.cloudinary.com/dfcpbiabw/image/upload/v1735473526/product-12_fxy9am.webp',
+      name: 'RGB Liquid CPU Cooler',
+      description:
+        'Efficient cooling solution with customizable RGB lighting for high-performance PCs.',
       price: '120',
       originalPrice: '150',
       discount: '-20%',
-      rating: 4.7,
-      ratingCount: 35,
-      categoryId: 3,
-      category: 'Sports & Outdoor',
-      stock: 18,
-    },
-    {
-      id: 8,
-      imageUrl: 'https://picsum.photos/400/300',
-      name: 'Mountain Bike Pro',
-      description: 'Durable mountain bike for adventure enthusiasts.',
-      price: '499',
-      originalPrice: '599',
-      discount: '-17%',
-      rating: 4.9,
+      rating: 4.5,
       ratingCount: 45,
-      categoryId: 3,
-      category: 'Sports & Outdoor',
+      categoryId: 1,
+      category: 'Electronics',
       stock: 12,
     },
     {
+      id: 7,
+      imageUrl:
+        'https://res.cloudinary.com/dfcpbiabw/image/upload/v1735473527/product-15_aai15u.webp',
+      name: 'Small Bookshelf',
+      description:
+        'Compact and sturdy bookshelf, ideal for small spaces and organization.',
+      price: '60',
+      originalPrice: '75',
+      discount: '-20%',
+      rating: 4.3,
+      ratingCount: 28,
+      categoryId: 3,
+      category: 'Home & Lifestyle',
+      stock: 15,
+    },
+    {
+      id: 8,
+      imageUrl:
+        'https://res.cloudinary.com/dfcpbiabw/image/upload/v1735473519/product-5_ymwkfq.webp',
+      name: 'Breed Dry Dog Food',
+      description:
+        'Nutritious dry dog food for all breeds, promoting health and vitality.',
+      price: '25',
+      originalPrice: '30',
+      discount: '-17%',
+      rating: 4.6,
+      ratingCount: 50,
+      categoryId: 4,
+      category: 'Pet Supplies',
+      stock: 40,
+    },
+    {
       id: 9,
-      imageUrl: 'https://picsum.photos/400/300',
-      name: 'Camping Tent XL',
-      description: 'Spacious waterproof tent for family camping trips.',
-      price: '199',
-      originalPrice: '249',
+      imageUrl:
+        'https://res.cloudinary.com/dfcpbiabw/image/upload/v1735473518/product-2_rct6xf.webp',
+      name: 'CANON EOS DSLR Camera',
+      description:
+        'High-quality DSLR camera with advanced features for photography enthusiasts.',
+      price: '960',
+      originalPrice: '1160',
+      discount: '-17%',
+      rating: 4.7,
+      ratingCount: 85,
+      categoryId: 1,
+      category: 'Electronics',
+      stock: 10,
+    },
+    {
+      id: 10,
+      imageUrl:
+        'https://res.cloudinary.com/dfcpbiabw/image/upload/v1735473534/product-1_djetbh.webp',
+      name: 'Curology Product Set',
+      description: 'Complete skincare set tailored for all skin types.',
+      price: '50',
+      originalPrice: '60',
+      discount: '-17%',
+      rating: 4.8,
+      ratingCount: 150,
+      categoryId: 5,
+      category: 'Beauty & Personal Care',
+      stock: 25,
+    },
+    {
+      id: 11,
+      imageUrl:
+        'https://res.cloudinary.com/dfcpbiabw/image/upload/v1735473521/product-11_gepaxy.webp',
+      name: 'Kids Electric Car',
+      description:
+        'Fun and safe electric car for kids, with realistic design and features.',
+      price: '300',
+      originalPrice: '350',
+      discount: '-15%',
+      rating: 4.5,
+      ratingCount: 40,
+      categoryId: 6,
+      category: 'Toys & Games',
+      stock: 8,
+    },
+    {
+      id: 12,
+      imageUrl:
+        'https://res.cloudinary.com/dfcpbiabw/image/upload/v1735473520/product-8_d3somb.webp',
+      name: 'Jr. Zoom Soccer Cleats',
+      description:
+        'Lightweight and durable soccer cleats designed for young players.',
+      price: '45',
+      originalPrice: '55',
+      discount: '-18%',
+      rating: 4.4,
+      ratingCount: 25,
+      categoryId: 7,
+      category: 'Sports & Outdoors',
+      stock: 20,
+    },
+    {
+      id: 13,
+      imageUrl:
+        'https://res.cloudinary.com/dfcpbiabw/image/upload/v1735473520/product-9_fwcsjw.webp',
+      name: 'GP11 Shooter USB Gamepad',
+      description:
+        'Compact USB gamepad with responsive controls for an enhanced gaming experience.',
+      price: '35',
+      originalPrice: '45',
+      discount: '-22%',
+      rating: 4.3,
+      ratingCount: 30,
+      categoryId: 1,
+      category: 'Electronics',
+      stock: 50,
+    },
+    {
+      id: 14,
+      imageUrl:
+        'https://res.cloudinary.com/dfcpbiabw/image/upload/v1735473521/product-10_tc4ykt.webp',
+      name: 'Quilted Satin Jacket',
+      description:
+        'Elegant and warm quilted satin jacket, perfect for casual outings.',
+      price: '120',
+      originalPrice: '150',
       discount: '-20%',
       rating: 4.6,
-      ratingCount: 38,
-      categoryId: 3,
-      category: 'Sports & Outdoor',
-      stock: 22,
-    },
-  ];
-  const banner1 = [
-    {
-      imageUrl: 'https://picsum.photos/300/200',
-      url: '#1',
-      title: 'example 1',
-    },
-    {
-      imageUrl: 'https://picsum.photos/300/200',
-      url: '#2',
-      title: 'example 2',
-    },
-    {
-      imageUrl: 'https://picsum.photos/300/200',
-      url: '#3',
-      title: 'example 3',
-    },
-  ];
-  const banner2 = [
-    {
-      imageUrl: 'https://picsum.photos/300/200',
-      url: '#1',
-      title: 'example 1',
-    },
-    {
-      imageUrl: 'https://picsum.photos/300/200',
-      url: '#2',
-      title: 'example 2',
-    },
-    {
-      imageUrl: 'https://picsum.photos/300/200',
-      url: '#3',
-      title: 'example 3',
+      ratingCount: 35,
+      categoryId: 2,
+      category: 'Fashion',
+      stock: 10,
     },
   ];
   const category = [
     {
       id: 1,
       name: 'Phone',
-      imageUrl: 'https://picsum.photos/300/200',
+      imageUrl:
+        'https://res.cloudinary.com/dfcpbiabw/image/upload/v1735471173/cellphone_remrhe.svg',
     },
     {
       id: 2,
       name: 'Computer',
-      imageUrl: 'https://picsum.photos/300/200',
+      imageUrl:
+        'https://res.cloudinary.com/dfcpbiabw/image/upload/v1735471174/computer_g5pzu4.svg',
       url: '#',
     },
     {
       id: 3,
       name: 'SmartWatch',
-      imageUrl: 'https://picsum.photos/300/200',
+      imageUrl:
+        'https://res.cloudinary.com/dfcpbiabw/image/upload/v1735471174/smartwatch_dr8dil.svg',
       url: '#',
     },
     {
       id: 4,
       name: 'Camera',
-      imageUrl: 'https://picsum.photos/300/200',
+      imageUrl:
+        'https://res.cloudinary.com/dfcpbiabw/image/upload/v1735471174/camera_urfoyt.svg',
       url: '#',
     },
     {
       id: 5,
       name: 'Headphone',
-      imageUrl: 'https://picsum.photos/300/200',
+      imageUrl:
+        'https://res.cloudinary.com/dfcpbiabw/image/upload/v1735471208/headphone_cerq9k.svg',
       url: '#',
     },
     {
       id: 6,
       name: 'Gaming',
-      imageUrl: 'https://picsum.photos/300/200',
+      imageUrl:
+        'https://res.cloudinary.com/dfcpbiabw/image/upload/v1735471174/gamepad_q8kzm2.svg',
       url: '#',
     },
     {
       id: 7,
       name: 'Fashion',
-      imageUrl: 'https://picsum.photos/300/200',
+      imageUrl:
+        'https://res.cloudinary.com/dfcpbiabw/image/upload/v1735476157/fashion_dhq3id.svg',
       url: '#',
     },
   ];
-  const featuredProducts = [
+  const exploreOurProducts = [
+    {
+      id: 1,
+      imageUrl:
+        'https://res.cloudinary.com/dfcpbiabw/image/upload/v1735473518/product-4_igwvhe.webp',
+      name: 'ASUS FHD Gaming Laptop',
+      description:
+        'Powerful gaming laptop with high-performance specs for a smooth gaming experience.',
+      price: '960',
+      originalPrice: '1160',
+      discount: '-35%',
+      rating: 4.7,
+      ratingCount: 65,
+      categoryId: 1,
+      category: 'Electronics',
+      stock: 0,
+    },
+    {
+      id: 2,
+      imageUrl:
+        'https://res.cloudinary.com/dfcpbiabw/image/upload/v1735473528/product-16_ubcw7e.webp',
+      name: 'IPS LCD Gaming Monitor',
+      description:
+        'Stunning visuals and crisp images with a high refresh rate for gaming and professional use.',
+      price: '160',
+      originalPrice: '200',
+      discount: '-20%',
+      rating: 4.5,
+      ratingCount: 55,
+      categoryId: 1,
+      category: 'Electronics',
+      stock: 20,
+    },
+    {
+      id: 3,
+      imageUrl:
+        'https://res.cloudinary.com/dfcpbiabw/image/upload/v1735473526/product-13_r9jkdq.webp',
+      name: 'HAVIT HV-G92 Gamepad',
+      description:
+        'Ergonomic gamepad with high precision controls and vibration feedback for immersive gaming.',
+      price: '56',
+      originalPrice: '70',
+      discount: '-20%',
+      rating: 4.4,
+      ratingCount: 30,
+      categoryId: 1,
+      category: 'Electronics',
+      stock: 30,
+    },
+    {
+      id: 4,
+      imageUrl:
+        'https://res.cloudinary.com/dfcpbiabw/image/upload/v1735473519/product-6_jhqlkr.webp',
+      name: 'The North Coat',
+      description:
+        'Warm, durable, and stylish winter coat for outdoor activities.',
+      price: '899',
+      originalPrice: '999',
+      discount: '-10%',
+      rating: 4.6,
+      ratingCount: 42,
+      categoryId: 2,
+      category: 'Fashion',
+      stock: 8,
+    },
+    {
+      id: 5,
+      imageUrl:
+        'https://res.cloudinary.com/dfcpbiabw/image/upload/v1735473519/product-7_husrah.webp',
+      name: 'Gucci Duffle Bag',
+      description:
+        'Luxury duffle bag with premium materials and stylish design.',
+      price: '960',
+      originalPrice: '1160',
+      discount: '-35%',
+      rating: 4.7,
+      ratingCount: 65,
+      categoryId: 2,
+      category: 'Fashion',
+      stock: 5,
+    },
+    {
+      id: 6,
+      imageUrl:
+        'https://res.cloudinary.com/dfcpbiabw/image/upload/v1735473526/product-12_fxy9am.webp',
+      name: 'RGB Liquid CPU Cooler',
+      description:
+        'Efficient cooling solution with customizable RGB lighting for high-performance PCs.',
+      price: '120',
+      originalPrice: '150',
+      discount: '-20%',
+      rating: 4.5,
+      ratingCount: 45,
+      categoryId: 1,
+      category: 'Electronics',
+      stock: 12,
+    },
+    {
+      id: 7,
+      imageUrl:
+        'https://res.cloudinary.com/dfcpbiabw/image/upload/v1735473527/product-15_aai15u.webp',
+      name: 'Small Bookshelf',
+      description:
+        'Compact and sturdy bookshelf, ideal for small spaces and organization.',
+      price: '60',
+      originalPrice: '75',
+      discount: '-20%',
+      rating: 4.3,
+      ratingCount: 28,
+      categoryId: 3,
+      category: 'Home & Lifestyle',
+      stock: 15,
+    },
+    {
+      id: 8,
+      imageUrl:
+        'https://res.cloudinary.com/dfcpbiabw/image/upload/v1735473519/product-5_ymwkfq.webp',
+      name: 'Breed Dry Dog Food',
+      description:
+        'Nutritious dry dog food for all breeds, promoting health and vitality.',
+      price: '25',
+      originalPrice: '30',
+      discount: '-17%',
+      rating: 4.6,
+      ratingCount: 50,
+      categoryId: 4,
+      category: 'Pet Supplies',
+      stock: 40,
+    },
+    {
+      id: 9,
+      imageUrl:
+        'https://res.cloudinary.com/dfcpbiabw/image/upload/v1735473518/product-2_rct6xf.webp',
+      name: 'CANON EOS DSLR Camera',
+      description:
+        'High-quality DSLR camera with advanced features for photography enthusiasts.',
+      price: '960',
+      originalPrice: '1160',
+      discount: '-17%',
+      rating: 4.7,
+      ratingCount: 85,
+      categoryId: 1,
+      category: 'Electronics',
+      stock: 10,
+    },
+    {
+      id: 10,
+      imageUrl:
+        'https://res.cloudinary.com/dfcpbiabw/image/upload/v1735473534/product-1_djetbh.webp',
+      name: 'Curology Product Set',
+      description: 'Complete skincare set tailored for all skin types.',
+      price: '50',
+      originalPrice: '60',
+      discount: '-17%',
+      rating: 4.8,
+      ratingCount: 150,
+      categoryId: 5,
+      category: 'Beauty & Personal Care',
+      stock: 25,
+    },
+    {
+      id: 11,
+      imageUrl:
+        'https://res.cloudinary.com/dfcpbiabw/image/upload/v1735473521/product-11_gepaxy.webp',
+      name: 'Kids Electric Car',
+      description:
+        'Fun and safe electric car for kids, with realistic design and features.',
+      price: '300',
+      originalPrice: '350',
+      discount: '-15%',
+      rating: 4.5,
+      ratingCount: 40,
+      categoryId: 6,
+      category: 'Toys & Games',
+      stock: 8,
+    },
+    {
+      id: 12,
+      imageUrl:
+        'https://res.cloudinary.com/dfcpbiabw/image/upload/v1735473520/product-8_d3somb.webp',
+      name: 'Jr. Zoom Soccer Cleats',
+      description:
+        'Lightweight and durable soccer cleats designed for young players.',
+      price: '45',
+      originalPrice: '55',
+      discount: '-18%',
+      rating: 4.4,
+      ratingCount: 25,
+      categoryId: 7,
+      category: 'Sports & Outdoors',
+      stock: 20,
+    },
+    {
+      id: 13,
+      imageUrl:
+        'https://res.cloudinary.com/dfcpbiabw/image/upload/v1735473520/product-9_fwcsjw.webp',
+      name: 'GP11 Shooter USB Gamepad',
+      description:
+        'Compact USB gamepad with responsive controls for an enhanced gaming experience.',
+      price: '35',
+      originalPrice: '45',
+      discount: '-22%',
+      rating: 4.3,
+      ratingCount: 30,
+      categoryId: 1,
+      category: 'Electronics',
+      stock: 50,
+    },
+    {
+      id: 14,
+      imageUrl:
+        'https://res.cloudinary.com/dfcpbiabw/image/upload/v1735473521/product-10_tc4ykt.webp',
+      name: 'Quilted Satin Jacket',
+      description:
+        'Elegant and warm quilted satin jacket, perfect for casual outings.',
+      price: '120',
+      originalPrice: '150',
+      discount: '-20%',
+      rating: 4.6,
+      ratingCount: 35,
+      categoryId: 2,
+      category: 'Fashion',
+      stock: 10,
+    },
+  ];
+  const topBannerSm = [
+    {
+      imageUrl:
+        'https://res.cloudinary.com/dfcpbiabw/image/upload/v1735498054/banner-1-sm_dshnsu.png',
+      url: '#1',
+      title: 'example 1',
+    },
+    {
+      imageUrl:
+        'https://res.cloudinary.com/dfcpbiabw/image/upload/v1735498054/banner-1-sm_dshnsu.png',
+      url: '#2',
+      title: 'example 2',
+    },
+    {
+      imageUrl:
+        'https://res.cloudinary.com/dfcpbiabw/image/upload/v1735498054/banner-1-sm_dshnsu.png',
+      url: '#3',
+      title: 'example 3',
+    },
+  ];
+  const topBannerLg = [
+    {
+      imageUrl:
+        'https://res.cloudinary.com/dfcpbiabw/image/upload/v1735471956/banner-1_izj8ao.webp',
+      url: '#1',
+      title: 'example 1',
+    },
+    {
+      imageUrl:
+        'https://res.cloudinary.com/dfcpbiabw/image/upload/v1735471956/banner-1_izj8ao.webp',
+      url: '#2',
+      title: 'example 2',
+    },
+    {
+      imageUrl:
+        'https://res.cloudinary.com/dfcpbiabw/image/upload/v1735471956/banner-1_izj8ao.webp',
+      url: '#3',
+      title: 'example 3',
+    },
+  ];
+  const middleBannerSm = [
+    {
+      imageUrl:
+        'https://res.cloudinary.com/dfcpbiabw/image/upload/v1735498054/banner-2-sm_wz9wyr.png',
+      url: '#1',
+      title: 'example 1',
+    },
+    {
+      imageUrl:
+        'https://res.cloudinary.com/dfcpbiabw/image/upload/v1735498054/banner-2-sm_wz9wyr.png',
+      url: '#2',
+      title: 'example 2',
+    },
+    {
+      imageUrl:
+        'https://res.cloudinary.com/dfcpbiabw/image/upload/v1735498054/banner-2-sm_wz9wyr.png',
+      url: '#3',
+      title: 'example 3',
+    },
+  ];
+  const middleBannerLg = [
+    {
+      imageUrl:
+        'https://res.cloudinary.com/dfcpbiabw/image/upload/v1735471956/banner-2_ezctdq.webp',
+      url: '#1',
+      title: 'example 1',
+    },
+    {
+      imageUrl:
+        'https://res.cloudinary.com/dfcpbiabw/image/upload/v1735471956/banner-2_ezctdq.webp',
+      url: '#2',
+      title: 'example 2',
+    },
+    {
+      imageUrl:
+        'https://res.cloudinary.com/dfcpbiabw/image/upload/v1735471956/banner-2_ezctdq.webp',
+      url: '#3',
+      title: 'example 3',
+    },
+  ];
+  const featuredProductsSm = [
     {
       url: '#1',
-      image: 'https://picsum.photos/100/200',
-      title: 'Play Station 5',
-      desc: 'Black and White version of the PS5 coming out on sale.',
+      image:
+        'https://res.cloudinary.com/dfcpbiabw/image/upload/v1735495916/Frame_684_maazev.png',
     },
     {
       url: '#2',
       image:
-        'https://images.tokopedia.net/img/KRMmCm/2023/8/23/de714108-8126-4458-8efc-ba57023fbf74.jpg',
-      title: 'Woman Collections',
-      desc: 'Featured woman collections that give you another vibe.',
+        'https://res.cloudinary.com/dfcpbiabw/image/upload/v1735495915/Frame_685_gudtoy.png',
     },
     {
       url: '#3',
       image:
-        'https://images.tokopedia.net/img/KRMmCm/2023/8/21/0b782512-f8ff-49b4-8fc6-81364d662e4d.jpg',
-      title: 'Speakers',
-      desc: 'Amazon wireless speakers',
+        'https://res.cloudinary.com/dfcpbiabw/image/upload/v1735495916/Frame_684-1_kwmqvi.png',
     },
     {
       url: '#4',
       image:
-        'https://images.tokopedia.net/img/KRMmCm/2023/7/24/c88c2aa0-528a-436f-b279-2bf3df8db674.jpg',
-      title: 'Perfume',
-      desc: 'Perfume for you',
+        'https://res.cloudinary.com/dfcpbiabw/image/upload/v1735495916/Frame_685-1_byonmb.png',
     },
   ];
+  const featuredProductsLg = [
+    {
+      url: '#1',
+      image:
+        'https://res.cloudinary.com/dfcpbiabw/image/upload/v1735495906/recommended-product-1_rfp0wm.webp',
+    },
+    {
+      url: '#2',
+      image:
+        'https://res.cloudinary.com/dfcpbiabw/image/upload/v1735495906/recommended-product-2_dbumhq.webp',
+    },
+    {
+      url: '#3',
+      image:
+        'https://res.cloudinary.com/dfcpbiabw/image/upload/v1735495906/recommended-product-3_kmtv7l.webp',
+    },
+    {
+      url: '#4',
+      image:
+        'https://res.cloudinary.com/dfcpbiabw/image/upload/v1735495906/recommended-product-4_fuzfir.webp',
+    },
+  ];
+  const [featuredProducts, setFeaturedProducts] = useState(featuredProductsLg);
+
+  const [topBanner, setTopBanner] = useState(topBannerSm);
+  const [middleBanner, setMiddleBanner] = useState(middleBannerSm);
+  useEffect(() => {
+    const updateBanner = () => {
+      if (window.matchMedia('(min-width: 1024px)').matches) {
+        setTopBanner(topBannerLg);
+        setMiddleBanner(middleBannerLg);
+        setFeaturedProducts(featuredProductsLg);
+      } else {
+        setTopBanner(topBannerSm);
+        setMiddleBanner(middleBannerSm);
+        setFeaturedProducts(featuredProductsSm);
+      }
+    };
+    updateBanner();
+    window.addEventListener('resize', updateBanner);
+    return () => window.removeEventListener('resize', updateBanner);
+  }, []);
 
   const jsonLd = {
     '@context': 'https://schema.org',
@@ -403,7 +732,7 @@ const Home = () => {
       <main className="container lg:space-y-32 lg:my-6 md:my-[3.75rem]">
         {/* HERO SECTION */}
         <section>
-          <Banner data={banner1} height={'h-[220px] lg:h-[344px]'} />
+          <Banner data={topBanner} />
         </section>
 
         {/* CATEGORY SECTION */}
@@ -485,10 +814,11 @@ const Home = () => {
               {bestSellingProducts.map((product) => (
                 <SwiperSlide key={product.id}>
                   <div className="relative">
-                    <ProductsCard product={product} showRating={true} />
-                    <button className="flex justify-center items-center absolute right-2 top-2 lg:right-5 lg:top-5 bg-white rounded-full w-6 h-6 md:w-8 md:h-8">
-                      <Love className="block md:hidden" />
-                    </button>
+                    <ProductsCard
+                      showFavoriteButton
+                      showRating
+                      product={product}
+                    />
                   </div>
                 </SwiperSlide>
               ))}
@@ -498,7 +828,7 @@ const Home = () => {
 
         {/* BANNER SECTION */}
         <section>
-          <Banner data={banner2} height={'h-[180px] lg:h-[500px]'} />
+          <Banner data={middleBanner} />
         </section>
 
         {/* EXPLORE OUR PRODUCT SECTION */}
@@ -556,10 +886,11 @@ const Home = () => {
               {exploreOurProducts.map((product) => (
                 <SwiperSlide key={product.id}>
                   <div className="relative">
-                    <ProductsCard product={product} showRating={true} />
-                    <button className="flex justify-center items-center absolute right-2 top-2 lg:right-5 lg:top-5 bg-white rounded-full w-6 h-6 md:w-8 md:h-8">
-                      <Love className="block md:hidden" />
-                    </button>
+                    <ProductsCard
+                      showFavoriteButton
+                      showRating
+                      product={product}
+                    />
                   </div>
                 </SwiperSlide>
               ))}
@@ -581,12 +912,12 @@ const Home = () => {
           <header className="flex justify-between">
             <SectionTitle subTitle={text.featured} title={text.recommend} />
           </header>
-          <div className="grid grid-cols-12 gap-1 border">
+          <div className="grid grid-cols-12 gap-2">
             {featuredProducts.map((item, index) => (
               <div
                 key={index}
                 // onClick={() => navigate(`/post/${item.slug}`)}
-                className={`group ${index === 0 ? 'lg:row-span-2 col-span-6' : index === 1 ? 'col-span-6' : 'col-span-6 lg:col-span-3'}`}
+                className={`group h-full rounded-md overflow-hidden ${index === 0 ? 'lg:row-span-2 col-span-6' : index === 1 ? 'col-span-6' : 'col-span-6 lg:col-span-3'}`}
               >
                 <FeatureCard data={item} />
               </div>

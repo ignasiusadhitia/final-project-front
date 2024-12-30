@@ -31,7 +31,8 @@ const Wishlist = () => {
   const wishLists = [
     {
       id: 1,
-      imageUrl: 'https://picsum.photos/400/300',
+      imageUrl:
+        'https://res.cloudinary.com/dfcpbiabw/image/upload/v1735473518/product-4_igwvhe.webp',
       name: 'ASUS FHD Gaming Laptop',
       description:
         'Powerful gaming laptop with high-performance specs for a smooth gaming experience.',
@@ -46,7 +47,8 @@ const Wishlist = () => {
     },
     {
       id: 2,
-      imageUrl: 'https://picsum.photos/400/300',
+      imageUrl:
+        'https://res.cloudinary.com/dfcpbiabw/image/upload/v1735473528/product-16_ubcw7e.webp',
       name: 'IPS LCD Gaming Monitor',
       description:
         'Stunning visuals and crisp images with a high refresh rate for gaming and professional use.',
@@ -61,7 +63,8 @@ const Wishlist = () => {
     },
     {
       id: 3,
-      imageUrl: 'https://picsum.photos/400/300',
+      imageUrl:
+        'https://res.cloudinary.com/dfcpbiabw/image/upload/v1735473526/product-13_r9jkdq.webp',
       name: 'HAVIT HV-G92 Gamepad',
       description:
         'Ergonomic gamepad with high precision controls and vibration feedback for immersive gaming.',
@@ -76,76 +79,85 @@ const Wishlist = () => {
     },
     {
       id: 4,
-      imageUrl: 'https://picsum.photos/400/300',
-      name: 'Modern Sofa Set',
+      imageUrl:
+        'https://res.cloudinary.com/dfcpbiabw/image/upload/v1735473519/product-6_jhqlkr.webp',
+      name: 'The North Coat',
       description:
-        'Comfortable and stylish sofa set perfect for your living room.',
+        'Warm, durable, and stylish winter coat for outdoor activities.',
       price: '899',
       originalPrice: '999',
       discount: '-10%',
       rating: 4.6,
       ratingCount: 42,
       categoryId: 2,
-      category: 'Home & Lifestyle',
+      category: 'Fashion',
       stock: 8,
     },
   ];
   const justForYouProducts = [
     {
       id: 5,
-      imageUrl: 'https://picsum.photos/400/300',
-      name: 'Kitchen Blender Pro',
-      description: 'High-powered blender for all your kitchen needs.',
-      price: '79',
-      originalPrice: '99',
-      discount: '-20%',
-      rating: 4.3,
-      ratingCount: 28,
+      imageUrl:
+        'https://res.cloudinary.com/dfcpbiabw/image/upload/v1735473519/product-7_husrah.webp',
+      name: 'Gucci Duffle Bag',
+      description:
+        'Luxury duffle bag with premium materials and stylish design.',
+      price: '960',
+      originalPrice: '1160',
+      discount: '-35%',
+      rating: 4.7,
+      ratingCount: 65,
       categoryId: 2,
-      category: 'Home & Lifestyle',
-      stock: 25,
+      category: 'Fashion',
+      stock: 5,
     },
     {
       id: 6,
-      imageUrl: 'https://picsum.photos/400/300',
-      name: 'Smart LED Lamp',
-      description: 'WiFi-enabled LED lamp with multiple color options.',
-      price: '45',
-      originalPrice: '60',
-      discount: '-25%',
-      rating: 4.8,
-      ratingCount: 50,
-      categoryId: 2,
-      category: 'Home & Lifestyle',
-      stock: 40,
-    },
-    {
-      id: 7,
-      imageUrl: 'https://picsum.photos/400/300',
-      name: 'Professional Tennis Racket',
-      description: 'Tournament-grade tennis racket for serious players.',
+      imageUrl:
+        'https://res.cloudinary.com/dfcpbiabw/image/upload/v1735473526/product-12_fxy9am.webp',
+      name: 'RGB Liquid CPU Cooler',
+      description:
+        'Efficient cooling solution with customizable RGB lighting for high-performance PCs.',
       price: '120',
       originalPrice: '150',
       discount: '-20%',
-      rating: 4.7,
-      ratingCount: 35,
+      rating: 4.5,
+      ratingCount: 45,
+      categoryId: 1,
+      category: 'Electronics',
+      stock: 12,
+    },
+    {
+      id: 7,
+      imageUrl:
+        'https://res.cloudinary.com/dfcpbiabw/image/upload/v1735473527/product-15_aai15u.webp',
+      name: 'Small Bookshelf',
+      description:
+        'Compact and sturdy bookshelf, ideal for small spaces and organization.',
+      price: '60',
+      originalPrice: '75',
+      discount: '-20%',
+      rating: 4.3,
+      ratingCount: 28,
       categoryId: 3,
-      category: 'Sports & Outdoor',
-      stock: 18,
+      category: 'Home & Lifestyle',
+      stock: 15,
     },
     {
       id: 8,
-      imageUrl: 'https://picsum.photos/400/300',
-      name: 'Mountain Bike Pro',
-      description: 'Durable mountain bike for adventure enthusiasts.',
-      price: '499',
-      originalPrice: '599',
+      imageUrl:
+        'https://res.cloudinary.com/dfcpbiabw/image/upload/v1735473519/product-5_ymwkfq.webp',
+      name: 'Breed Dry Dog Food',
+      description:
+        'Nutritious dry dog food for all breeds, promoting health and vitality.',
+      price: '25',
+      originalPrice: '30',
       discount: '-17%',
-      rating: 4.9,
-      ratingCount: 45,
-      categoryId: 3,
-      category: 'Sports & Outdoor',
-      stock: 12,
+      rating: 4.6,
+      ratingCount: 50,
+      categoryId: 4,
+      category: 'Pet Supplies',
+      stock: 40,
     },
   ];
 
@@ -172,8 +184,8 @@ const Wishlist = () => {
         </div>
         <div className="grid grid-cols-2 md:flex flex-wrap justify-between gap-5 mt-5">
           {wishLists.map((product) => (
-            <div className="relative">
-              <ProductsCard key={product.id} product={product} />
+            <div key={product.id} className="relative">
+              <ProductsCard product={product} />
               <button className="flex justify-center items-center absolute right-2 top-2 lg:right-5 lg:top-5 bg-white rounded-full w-6 h-6 md:w-8 md:h-8">
                 <Trash className="hidden md:block" />
                 <Love className="block md:hidden" />
