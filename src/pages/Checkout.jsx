@@ -3,6 +3,8 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
+import { selectCartSubtotal } from '@store/features/productSlice';
+
 import { CheckoutProductCard } from '@components';
 import { EditAddress } from '@icons';
 import { bank, productSmall } from '@images';
@@ -24,10 +26,8 @@ const order = {
 
 const Checkout = () => {
   const lang = useSelector((state) => state.lang.lang);
-  const subtotal = order.products.reduce(
-    (sum, current) => sum + current.price,
-    0
-  );
+  const subtotal = useSelector(selectCartSubtotal);
+  const { cart } = useSelector((state) => state.product);
 
   const total = subtotal + (order.shipping === 'Free' ? 0 : order.shipping);
 
@@ -131,7 +131,7 @@ const Checkout = () => {
         {/* Order Section */}
         <section className="max-w-[427px] mt-12 md:mt-10 mb-6 md:mb-0">
           <div className=" flex flex-col gap-8">
-            {order.products.map((item) => (
+            {cart.map((item) => (
               <CheckoutProductCard key={item.id} product={item} />
             ))}
           </div>

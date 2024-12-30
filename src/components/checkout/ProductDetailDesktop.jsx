@@ -2,12 +2,12 @@ import React from 'react';
 
 import PropTypes from 'prop-types';
 import ReactStars from 'react-rating-stars-component';
+import { useSelector } from 'react-redux';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
-import { DeliveryPlain, Minus, Plus, Return, Reviews, WishList } from '@icons';
+import { DeliveryPlain, Minus, Plus, Return, WishList } from '@icons';
 
 import 'swiper/css';
-import { useSelector } from 'react-redux';
 
 const ProductDetailDesktop = ({
   product,
@@ -21,6 +21,7 @@ const ProductDetailDesktop = ({
   onSetQuantityHandler,
 }) => {
   const lang = useSelector((state) => state.lang.lang);
+  const { product: selectedProduct } = useSelector((state) => state.product);
 
   const translations = {
     en: {
@@ -63,12 +64,12 @@ const ProductDetailDesktop = ({
               <SwiperSlide key={index}>
                 <div
                   className="w-full h-[138px] flex justify-center cursor-pointer rounded bg-secondary-1"
-                  onClick={() => onImageClickHandler(image)}
+                  onClick={() => onImageClickHandler(selectedProduct.imageUrl)}
                 >
                   <img
                     alt="product-image"
                     className="h[114px] p-3"
-                    src={image}
+                    src={selectedProduct.imageUrl}
                   />
                 </div>
               </SwiperSlide>
@@ -78,7 +79,9 @@ const ProductDetailDesktop = ({
       </div>
       {/* Product Details */}
       <div className="w-[405px] mt-[47px]">
-        <h1 className="text-2xl leading-6 font-semibold">{product.name}</h1>
+        <h1 className="text-2xl leading-6 font-semibold">
+          {selectedProduct.name}
+        </h1>
         <div className="mt-4 flex items-center gap-2">
           <ReactStars
             activeColor="#FBBF24"
@@ -86,23 +89,23 @@ const ProductDetailDesktop = ({
             edit={false}
             isHalf={true}
             size={24}
-            value={product.rating}
+            value={selectedProduct.rating}
           />
           <div className="flex items-center gap-4">
             <span className="block text-black opacity-50 text-sm">
-              ({product.ratingCount} Reviews)
+              ({selectedProduct.ratingCount} Reviews)
             </span>
 
             <span className="block">|</span>
             <span
-              className={`block text-sm ${product.stock > 0 ? 'text-button-1' : 'text-button-2'}`}
+              className={`block text-sm ${selectedProduct.stock > 0 ? 'text-button-1' : 'text-button-2'}`}
             >
-              {product.stock > 0 ? 'In Stock' : 'Out of Stock'}
+              {selectedProduct.stock > 0 ? 'In Stock' : 'Out of Stock'}
             </span>
           </div>
         </div>
-        <h2 className="mt-4 text-2xl">${product.price}</h2>
-        <p className="mt-6 mb-6 text-sm">{product.desc}</p>
+        <h2 className="mt-4 text-2xl">${selectedProduct.price}</h2>
+        <p className="mt-6 mb-6 text-sm">{selectedProduct.description}</p>
         <hr className="border-t-[1px] border-black opacity-50" />
 
         {product.variant && (
@@ -125,22 +128,25 @@ const ProductDetailDesktop = ({
         <div className="mt-[58px] flex items-center gap-[13px]">
           <div className="flex items-center">
             <button
-              className="flex justify-center items-center w-10 h-11 border-[1px] border-black border-opacity-50 rounded-tl rounded-bl hover:bg-button-2 text-primary-2 hover:text-white hover:border-none"
-              disabled={quantity < 2}
+              className="flex justify-center items-center w-10 h-11 border-[1px] border-black border-opacity-50 rounded-tl rounded-bl hover:bg-button-2 text-primary-2 hover:text-white hover:border-none disabled:bg-[#7d8184] disabled:border-none disabled:text-white"
+              disabled={quantity === 1}
               onClick={() => onSetQuantityHandler('dec')}
             >
               <Minus />
             </button>
             <input
-              className="w-20 h-11 text-center border-y-[1px] border-black border-opacity-50"
+              className="w-20 h-11 text-center border-y-[1px]  border-black border-opacity-50"
+              disabled={selectedProduct.stock === 0}
               id="quantity"
+              maxLength={selectedProduct.stock.toString().length}
               name="quantity"
               type="text"
-              value={quantity}
+              value={selectedProduct.stock === 0 ? 0 : quantity}
               onChange={onQuantityInputChangeHandler}
             />
             <button
-              className="flex justify-center items-center w-10 h-11 border-[1px] border-black border-opacity-50 rounded-tr rounded-br hover:bg-button-2 text-primary-2 hover:text-white hover:border-none"
+              className="flex justify-center items-center w-10 h-11 border-[1px] border-black border-opacity-50 rounded-tr rounded-br disabled:bg-[#7d8184] disabled:border-none disabled:text-white hover:bg-button-2 text-primary-2 hover:text-white hover:border-none"
+              disabled={quantity >= selectedProduct.stock}
               onClick={() => onSetQuantityHandler('inc')}
             >
               <Plus />
@@ -148,7 +154,8 @@ const ProductDetailDesktop = ({
           </div>
           <div className="w-full flex items-center gap-[2px]">
             <button
-              className="py-[10px] px-12 text-text-1 bg-button-2 hover:bg-button-hover-1 rounded"
+              className="py-[10px] px-12 text-text-1 bg-button-2 hover:bg-button-hover-1 rounded disabled:bg-[#7d8184] disabled:border-none disabled:text-white"
+              disabled={selectedProduct.stock === 0}
               onClick={onAddToCartHandler}
             >
               {text.addToCart}

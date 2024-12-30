@@ -2,8 +2,10 @@ import React, { useState } from 'react';
 
 import PropTypes from 'prop-types';
 import ReactStars from 'react-rating-stars-component';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+
+import { addToCart, setProduct } from '@store/features/productSlice';
 
 import { WhiteCart, Trash, Favorite } from '@icons';
 
@@ -15,6 +17,7 @@ const ProductCard = ({
 }) => {
   const lang = useSelector((state) => state.lang.lang);
   const [isFavorite, setIsFavorite] = useState(false);
+  const dispatch = useDispatch();
 
   const handleFavoriteClick = () => {
     setIsFavorite(!isFavorite);
@@ -46,7 +49,10 @@ const ProductCard = ({
           />
           <div className="bg-[#363738] h-[41px] flex justify-center items-center absolute bottom-0 w-full rounded-b-[4px] opacity-0 group-hover:opacity-100 transition-opacity duration-300">
             {product.stock > 0 ? (
-              <button className="w-full text-center">
+              <button
+                className="w-full text-center"
+                onClick={() => dispatch(addToCart({ product, quantity: 1 }))}
+              >
                 <span className="text-white font-normal text-[10px] md:text-xs">
                   <WhiteCart className="inline-block mr-2 w-[20px] md:w-auto" />
                   {text.addToCart}
@@ -91,7 +97,12 @@ const ProductCard = ({
       </div>
       <div className="px-3 py-4">
         <div className="font-medium text-sm lg:text-base line-clamp-2">
-          <Link to={'/products/1'}>{product.name}</Link>
+          <Link
+            to={`/products/${product.name.split(' ').join('-')}`}
+            onClick={() => dispatch(setProduct(product))}
+          >
+            {product.name}
+          </Link>
         </div>
       </div>
       <div className="px-3">

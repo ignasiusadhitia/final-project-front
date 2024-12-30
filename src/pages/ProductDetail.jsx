@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
+import { useDispatch, useSelector } from 'react-redux';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 import {
@@ -17,7 +18,11 @@ import {
   productImg4,
   productImg5,
 } from '@images';
+
 import 'swiper/css';
+import { useNavigate } from 'react-router-dom';
+
+import { addToCart } from '@store/features/productSlice';
 
 const product = {
   images: [productImg1, productImg2, productImg3, productImg4, productImg5],
@@ -105,13 +110,18 @@ const relatedProducts = [
 ];
 
 const ProductDetail = () => {
-  const [selectedImage, setSelectedImage] = useState(product.images[0]);
+  const { product: selectedProduct } = useSelector((state) => state.product);
+
+  const [selectedImage, setSelectedImage] = useState(selectedProduct.imageUrl);
   const [selectedVariant, setSelectedVariant] = useState(
     product.variant.size[0]
   );
   const [quantity, setQuantity] = useState(1);
   const [bottomSheetOpen, setBottomSheetOpen] = useState(false);
   const [activeSlide, setActiveSlide] = useState(1);
+
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleImageClick = (image) => {
     setSelectedImage(image);
@@ -140,8 +150,13 @@ const ProductDetail = () => {
   };
 
   const handleAddToCart = () => {
-    console.log(quantity);
+    dispatch(addToCart({ product: selectedProduct, quantity }));
+    navigate('/cart');
   };
+
+  useEffect(() => {
+    setSelectedImage(selectedProduct.imageUrl);
+  }, [selectedProduct]);
 
   return (
     <main className="container mt-6 md:mt-[33px] mb-6 md:mb-[140px]">
@@ -157,7 +172,7 @@ const ProductDetail = () => {
                 <img
                   alt="product-image"
                   className="h[114px] py-6"
-                  src={image}
+                  src={selectedProduct.imageUrl}
                 />
               </div>
             </SwiperSlide>
@@ -186,7 +201,7 @@ const ProductDetail = () => {
 
       <div className="block md:hidden">
         <ProductDetailMobile
-          product={product}
+          product={selectedProduct}
           selectedImage={selectedImage}
           selectedVariant={selectedVariant}
           onBottomSheetOpenHandler={handleBottomSheetOpen}
@@ -219,7 +234,8 @@ const ProductDetail = () => {
             <WishList />
           </button>
           <button
-            className="grow py-[10px] px-12 text-text-1 bg-button-2 hover:bg-button-hover-1 rounded"
+            className="grow py-[10px] px-12 text-text-1 bg-button-2 hover:bg-button-hover-1 rounded disabled:bg-[#7d8184] disabled:border-none disabled:text-white"
+            disabled={selectedProduct.stock === 0}
             onClick={handleBottomSheetOpen}
           >
             Add to Cart
@@ -228,7 +244,7 @@ const ProductDetail = () => {
       </div>
       {bottomSheetOpen && (
         <BottomSheet
-          product={product}
+          product={selectedProduct}
           quantity={quantity}
           selectedVariant={selectedVariant}
           onAddToCartHandler={handleAddToCart}
