@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 
+import { logout } from '@store/features/authSlice';
 import { setLanguage } from '@store/features/languageSlice';
 import { selectCartTotalItems } from '@store/features/productSlice';
 
@@ -23,7 +24,8 @@ const Navbar = () => {
   const location = useLocation().pathname;
   const [isSmallScreen, setIsSmallScreen] = useState(window.innerWidth <= 1024);
   // login simulation
-  const login = true;
+  const { isAuthenticated, user } = useSelector((state) => state.auth);
+  const login = isAuthenticated;
 
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const [isNavbarOpen, setNavbarOpen] = useState(false);
@@ -31,6 +33,7 @@ const Navbar = () => {
   const { cartItemsCount } = useSelector((state) => state.product);
   const totalItems = useSelector(selectCartTotalItems);
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   useEffect(() => {
     setNavbarOpen(false);
@@ -53,6 +56,18 @@ const Navbar = () => {
   const changeLanguage = (e) => {
     const selectedLang = e.target.value;
     dispatch(setLanguage(selectedLang));
+  };
+
+  const handleLogout = () => {
+    dispatch(logout());
+  };
+
+  const handleToCart = () => {
+    if (!login) {
+      navigate('/login');
+    } else {
+      navigate('/cart');
+    }
   };
 
   const translations = {
@@ -206,7 +221,12 @@ const Navbar = () => {
                 className="border border-text-2 rounded-full w-8 h-8"
                 src="https://picsum.photos/200/300"
               />
-              <p className="text-text-2 text-sm font-normal">Andre Gunawan</p>
+              <Link
+                className="text-text-2 text-sm font-normal"
+                to={'/my-account'}
+              >
+                {user?.profile ? user.profile : user?.email}
+              </Link>
             </div>
           </div>
         ) : (
@@ -265,14 +285,16 @@ const Navbar = () => {
                 {text.about}
               </Link>
             </li>
-            <li>
-              <Link
-                className={`${location === '/sign-up' && 'border-b border-black'} text-base font-normal`}
-                to={'sign-up'}
-              >
-                {text.signUp}
-              </Link>
-            </li>
+            {!login && (
+              <li>
+                <Link
+                  className={`${location === '/sign-up' && 'border-b border-black'} text-base font-normal`}
+                  to={'sign-up'}
+                >
+                  {text.signUp}
+                </Link>
+              </li>
+            )}
           </ul>
         </div>
 
@@ -293,14 +315,14 @@ const Navbar = () => {
               <Link className="hidden lg:block" to={'wishlist'}>
                 <WishList />
               </Link>
-              <Link className="relative z-50" to={'cart'}>
+              <button className="relative z-50" onClick={handleToCart}>
                 <BlackCart className="w-6 h-6 lg:w-8 lg:h-8" />
                 {login && (
                   <span className="absolute text-text-1 px-1 rounded-full text-xs -right-1 -top-1 bg-secondary-3">
                     {totalItems > 0 ? totalItems : ''}
                   </span>
                 )}
-              </Link>
+              </button>
 
               {login && (
                 <div className="hidden lg:block relative z-50">
@@ -331,7 +353,10 @@ const Navbar = () => {
                       >
                         <Reviews /> {text.myReviews}
                       </Link>
-                      <button className="flex items-center gap-2 px-4 py-2 w-full text-left text-sm font-normal text-text-1">
+                      <button
+                        className="flex items-center gap-2 px-4 py-2 w-full text-left text-sm font-normal text-text-1"
+                        onClick={handleLogout}
+                      >
                         <Logout /> {text.logout}
                       </button>
                     </div>

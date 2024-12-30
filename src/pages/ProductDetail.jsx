@@ -20,6 +20,7 @@ import {
 } from '@images';
 
 import 'swiper/css';
+
 import { useNavigate } from 'react-router-dom';
 
 import { addToCart } from '@store/features/productSlice';
@@ -119,6 +120,7 @@ const ProductDetail = () => {
   const [quantity, setQuantity] = useState(1);
   const [bottomSheetOpen, setBottomSheetOpen] = useState(false);
   const [activeSlide, setActiveSlide] = useState(1);
+  const { isAuthenticated } = useSelector((state) => state.auth);
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -150,8 +152,18 @@ const ProductDetail = () => {
   };
 
   const handleAddToCart = () => {
-    dispatch(addToCart({ product: selectedProduct, quantity }));
-    navigate('/cart');
+    if (!isAuthenticated) {
+      return navigate('/login');
+    } else {
+      dispatch(addToCart({ product: selectedProduct, quantity }));
+      navigate('/cart');
+    }
+  };
+
+  const handleAddToWishlist = () => {
+    if (!isAuthenticated) {
+      return navigate('/login');
+    }
   };
 
   useEffect(() => {
@@ -192,6 +204,7 @@ const ProductDetail = () => {
           selectedImage={selectedImage}
           selectedVariant={selectedVariant}
           onAddToCartHandler={handleAddToCart}
+          onAddToWishlistHandler={handleAddToWishlist}
           onImageClickHandler={handleImageClick}
           onQuantityInputChangeHandler={handleQuantityInputChange}
           onSetQuantityHandler={handleSetQuantity}
