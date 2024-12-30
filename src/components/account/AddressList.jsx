@@ -1,12 +1,20 @@
 import React from 'react';
 
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
 import { EditAddress, DeleteAddress, AddAddress } from '@icons';
+import { deleteAddress } from '@store/features/authSlice';
 
 const AddressList = () => {
   const lang = useSelector((state) => state.lang.lang);
+  const { user } = useSelector((state) => state.auth);
+  const dispatch = useDispatch();
+  const address = user?.address;
+
+  const handleDelete = (id) => {
+    dispatch(deleteAddress(id))
+  }
 
   const translations = {
     en: {
@@ -33,47 +41,28 @@ const AddressList = () => {
           </Link>
         </div>
         <div className="flex flex-col gap-4 justify-between">
-          <div className="flex flex-row items-center w-full lg:w-[710px] justify-between p-4 bg-secondary-1">
-            <div className="flex flex-col gap-1">
-              <p className="text-sm font-medium line-clamp-1">
-                Deni Irawan | user@lumoshive.com
-              </p>
-              <p className="text-sm line-clamp-1">
-                Komp. Ruko Green Garden Blk. Z, Jl. Panjang Arteri Klp. Dua Raya
-                No.5
-              </p>
-            </div>
+          {address && address.map((item) => (
+            <div key={item.id} className="flex flex-row items-center w-full lg:w-[710px] justify-between p-4 bg-secondary-1">
+              <div className="flex flex-col gap-1">
+                <p className="text-sm font-medium line-clamp-1">
+                  {item.name} | {item.email}
+                </p>
+                <p className="text-sm line-clamp-1">
+                  {item.address}
+                </p>
+              </div>
 
-            <div className="flex items-center gap-2">
-              <Link to={'/my-account/address/edit/1'}>
-                <EditAddress />
-              </Link>
-              <button>
-                <DeleteAddress />
-              </button>
+              <div className="flex items-center gap-2">
+                <Link to={`/my-account/address/edit/${item.id}`}>
+                  <EditAddress />
+                </Link>
+                <button onClick={() => handleDelete(item.id)}>
+                  <DeleteAddress />
+                </button>
+              </div>
             </div>
-          </div>
-
-          <div className="flex flex-row items-center w-full lg:w-[710px] justify-between p-4 bg-secondary-1">
-            <div className="flex flex-col gap-1">
-              <p className="text-sm font-medium line-clamp-1">
-                Deni Irawan | user@lumoshive.com
-              </p>
-              <p className="text-sm line-clamp-1">
-                Komp. Ruko Green Garden Blk. Z, Jl. Panjang Arteri Klp. Dua Raya
-                No.5
-              </p>
-            </div>
-
-            <div className="flex items-center gap-2">
-              <Link to={'/my-account/address/edit/2'}>
-                <EditAddress />
-              </Link>
-              <button>
-                <DeleteAddress />
-              </button>
-            </div>
-          </div>
+          ))
+        }
         </div>
       </div>
 
