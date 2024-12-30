@@ -1,9 +1,15 @@
-import React from 'react';
+import { updateProfile } from '@store/features/authSlice';
+import React, { useState } from 'react';
 
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 const UpdateProfile = () => {
   const lang = useSelector((state) => state.lang.lang);
+  const { user } = useSelector((state) => state.auth);
+  const [profileName, setProfileName] = useState(user?.profile);
+  const dispatch = useDispatch();
+  const [isSuccess, setIsSuccess] = useState(false);
+  const [isError, setIsError] = useState(false);
 
   const translations = {
     en: {
@@ -32,6 +38,17 @@ const UpdateProfile = () => {
 
   const text = translations[lang];
 
+  const handleUpdateProfile = () => {
+    if (profileName.trim() === "") {
+      setIsSuccess(false);
+      setIsError("Name cannot be empty!")
+      return;
+    }
+    setIsError(false);
+    setIsSuccess("Name successfully updated!")
+    dispatch(updateProfile(profileName));
+  }
+
   return (
     <section className="mt-5 lg:mt-20 flex flex-col px-5 lg:px-20 justify-between py-5 lg:py-12 gap-7 lg:gap-4 w-full lg:w-[870px] h-full lg:h-[630px]">
       <div className="flex flex-col gap-8">
@@ -48,6 +65,8 @@ const UpdateProfile = () => {
               id="name"
               placeholder="Deni Irawan"
               type="text"
+              onChange={(e) => setProfileName(e.target.value)}
+              value={profileName ? profileName : ""}
             />
           </div>
 
@@ -60,6 +79,8 @@ const UpdateProfile = () => {
               id="email"
               placeholder="deni@lumoshive.com"
               type="email"
+              value={user?.email ? user.email : ""}
+              disabled
             />
           </div>
         </div>
@@ -93,13 +114,14 @@ const UpdateProfile = () => {
           />
         </div>
       </div>
-
+      {isSuccess && <p className='text-xs md:text-sm text-green-700'>{isSuccess}</p>}
+      {isError && <p className='text-xs md:text-sm text-secondary-3'>{isError}</p>}
       <div className="flex justify-end items-end">
         <div className="w-full lg:w-auto flex justify-between lg:justify-center lg:items-center gap-2 lg:gap-8">
           <button className="bg-secondary-1 lg:bg-transparent w-[181px] h-11 lg:w-auto lg:h-auto border-none text-sm lg:text-base font-medium rounded-md lg:font-normal text-black">
             {text.cancel}
           </button>
-          <button className="w-[181px] h-11 lg:w-[214px] lg:h-14 bg-secondary-3 rounded-md text-sm lg:text-base font-medium text-text-1">
+          <button onClick={handleUpdateProfile} className="w-[181px] h-11 lg:w-[214px] lg:h-14 bg-secondary-3 rounded-md text-sm lg:text-base font-medium text-text-1">
             {text.saveChanges}
           </button>
         </div>

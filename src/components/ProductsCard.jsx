@@ -2,10 +2,11 @@ import React, { useState } from 'react';
 
 import PropTypes from 'prop-types';
 import ReactStars from 'react-rating-stars-component';
-import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { useDispatch, useSelector } from 'react-redux';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { WhiteCart, Trash, Favorite } from '@icons';
+import { addToWishlist } from '@store/features/authSlice';
 
 const ProductCard = ({
   product,
@@ -15,10 +16,23 @@ const ProductCard = ({
 }) => {
   const lang = useSelector((state) => state.lang.lang);
   const [isFavorite, setIsFavorite] = useState(false);
+  const { isAuthenticated, user } = useSelector((state) => state.auth);
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleFavoriteClick = () => {
+    if (!isAuthenticated) {
+      return navigate("/login")
+    }
+    dispatch(addToWishlist(product))
     setIsFavorite(!isFavorite);
   };
+
+  const handleAddToCart = () => {
+    if (!isAuthenticated) {
+      return navigate("/login")
+    }
+  }
 
   const translations = {
     en: {
@@ -46,7 +60,7 @@ const ProductCard = ({
           />
           <div className="bg-[#363738] h-[41px] flex justify-center items-center absolute bottom-0 w-full rounded-b-[4px] opacity-0 group-hover:opacity-100 transition-opacity duration-300">
             {product.stock > 0 ? (
-              <button className="w-full text-center">
+              <button onClick={handleAddToCart} className="w-full cursor-pointer text-center">
                 <span className="text-white font-normal text-[10px] md:text-xs">
                   <WhiteCart className="inline-block mr-2 w-[20px] md:w-auto" />
                   {text.addToCart}
@@ -69,7 +83,7 @@ const ProductCard = ({
 
           {showFavoriteButton && (
             <button
-              className={`absolute top-4 right-4 hover:bg-gray-200 rounded-full h-fit shadow-lg ${isFavorite ? 'bg-secondary-3' : 'bg-white'} p-2`}
+              className={`absolute top-4 right-4 hover:bg-gray-200 rounded-full h-fit shadow-lg ${isFavorite ? 'bg-secondary-3 text-white' : 'bg-white'} p-2`}
               onClick={handleFavoriteClick}
             >
               <Favorite />

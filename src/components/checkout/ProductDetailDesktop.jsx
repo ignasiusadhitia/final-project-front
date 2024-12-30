@@ -17,6 +17,7 @@ const ProductDetailDesktop = ({
   onVariantClickHandler,
   quantity,
   onAddToCartHandler,
+  onAddToWishlistHandler,
   onQuantityInputChangeHandler,
   onSetQuantityHandler,
 }) => {
@@ -153,7 +154,7 @@ const ProductDetailDesktop = ({
             >
               {text.addToCart}
             </button>
-            <button className="w-10 h-10 flex justify-center items-center border-[1px] border-black border-opacity-50 rounded">
+            <button onClick={onAddToWishlistHandler} className="w-10 h-10 flex justify-center items-center border-[1px] border-black border-opacity-50 rounded">
               <WishList />
             </button>
           </div>
@@ -199,6 +200,7 @@ ProductDetailDesktop.propTypes = {
   quantity: PropTypes.number,
   onQuantityInputChangeHandler: PropTypes.func,
   onAddToCartHandler: PropTypes.func,
+  onAddToWishlistHandler: PropTypes.func,
   onSetQuantityHandler: PropTypes.func,
 };
 
