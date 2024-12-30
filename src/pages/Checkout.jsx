@@ -94,8 +94,7 @@ const Checkout = () => {
                   onClick={() =>
                     navigate(
                       `/my-account/address/edit/${user?.address[addressIndex].id}`
-                    )
-                  }
+                    )}
                 />
               </div>
             </div>

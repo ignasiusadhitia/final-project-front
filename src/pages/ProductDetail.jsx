@@ -24,6 +24,7 @@ import 'swiper/css';
 import { useNavigate } from 'react-router-dom';
 
 import { addToCart } from '@store/features/productSlice';
+import { addToWishlist } from '@store/features/authSlice';
 
 const product = {
   images: [productImg1, productImg2, productImg3, productImg4, productImg5],
@@ -112,6 +113,8 @@ const relatedProducts = [
 
 const ProductDetail = () => {
   const { product: selectedProduct } = useSelector((state) => state.product);
+  const { user } = useSelector((state) => state.auth);
+  console.log(user);
 
   const [selectedImage, setSelectedImage] = useState(selectedProduct.imageUrl);
   const [selectedVariant, setSelectedVariant] = useState(
@@ -163,6 +166,9 @@ const ProductDetail = () => {
   const handleAddToWishlist = () => {
     if (!isAuthenticated) {
       return navigate('/login');
+    } else {
+      dispatch(addToWishlist(selectedProduct));
+      navigate('/wishlist');
     }
   };
 
@@ -243,7 +249,10 @@ const ProductDetail = () => {
       </section>
       <div className="w-full px-6 py-4 mt-[58px] fixed bottom-0 bg-white flex md:hidden items-center gap-[13px] z-10">
         <div className="w-full flex items-center gap-3">
-          <button className="w-10 h-10 flex justify-center items-center border-[1px] border-black border-opacity-50 rounded">
+          <button
+            className="w-10 h-10 flex justify-center items-center border-[1px] border-black border-opacity-50 rounded"
+            onClick={handleAddToWishlist}
+          >
             <WishList />
           </button>
           <button

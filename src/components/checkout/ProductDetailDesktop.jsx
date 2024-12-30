@@ -2,12 +2,15 @@ import React from 'react';
 
 import PropTypes from 'prop-types';
 import ReactStars from 'react-rating-stars-component';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Swiper, SwiperSlide } from 'swiper/react';
+
+import { addToWishlist } from '@store/features/authSlice';
 
 import { DeliveryPlain, Minus, Plus, Return, WishList } from '@icons';
 
 import 'swiper/css';
+import { useNavigate } from 'react-router-dom';
 
 const ProductDetailDesktop = ({
   product,
@@ -23,6 +26,13 @@ const ProductDetailDesktop = ({
 }) => {
   const lang = useSelector((state) => state.lang.lang);
   const { product: selectedProduct } = useSelector((state) => state.product);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const handleAddToWishlist = () => {
+    dispatch(addToWishlist(selectedProduct));
+    navigate('/wishlist');
+  };
 
   const translations = {
     en: {
@@ -165,7 +175,7 @@ const ProductDetailDesktop = ({
               className="w-10 h-10 flex justify-center items-center border-[1px] border-black border-opacity-50 rounded"
               onClick={onAddToWishlistHandler}
             >
-              <WishList />
+              <WishList onClick={handleAddToWishlist} />
             </button>
           </div>
         </div>

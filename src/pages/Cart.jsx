@@ -125,15 +125,13 @@ const Cart = () => {
                           quantity: parseInt(event.target.value, 10) || 0,
                           stock: item.stock,
                         })
-                      )
-                    }
+                      )}
                   />
                   <button
                     className="flex justify-center items-center w-10 h-11 border-[1px] border-black border-opacity-50 rounded-tr rounded-br hover:bg-button-2 text-primary-2 hover:text-white hover:border-none disabled:bg-[#7d8184] disabled:border-none disabled:text-white"
                     disabled={item.quantity >= item.stock}
                     onClick={() =>
-                      dispatch(addToCart({ product: item, quantity: 1 }))
-                    }
+                      dispatch(addToCart({ product: item, quantity: 1 }))}
                   >
                     <Plus height="32" width="32" />
                   </button>
@@ -200,14 +198,12 @@ const Cart = () => {
                           quantity: parseInt(event.target.value, 10) || 0,
                           stock: item.stock,
                         })
-                      )
-                    }
+                      )}
                   />
                   <button
                     className="flex justify-center items-center w-7 h-7 border-[1px] border-black border-opacity-50 rounded-tr rounded-br hover:bg-button-2 text-primary-2 hover:text-white hover:border-none"
                     onClick={() =>
-                      dispatch(addToCart({ product: item, quantity: 1 }))
-                    }
+                      dispatch(addToCart({ product: item, quantity: 1 }))}
                   >
                     <Plus height="16" width="16" />
                   </button>
