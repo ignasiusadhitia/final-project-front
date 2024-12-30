@@ -18,6 +18,8 @@ import {
   productImg5,
 } from '@images';
 import 'swiper/css';
+import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 const product = {
   images: [productImg1, productImg2, productImg3, productImg4, productImg5],
@@ -112,6 +114,8 @@ const ProductDetail = () => {
   const [quantity, setQuantity] = useState(1);
   const [bottomSheetOpen, setBottomSheetOpen] = useState(false);
   const [activeSlide, setActiveSlide] = useState(1);
+  const { isAuthenticated } = useSelector((state) => state.auth);
+  const navigate = useNavigate();
 
   const handleImageClick = (image) => {
     setSelectedImage(image);
@@ -140,8 +144,16 @@ const ProductDetail = () => {
   };
 
   const handleAddToCart = () => {
-    console.log(quantity);
+    if (!isAuthenticated) {
+      return navigate("/login")
+    }
   };
+
+  const handleAddToWishlist = () => {
+    if (!isAuthenticated) {
+      return navigate("/login")
+    }
+  }
 
   return (
     <main className="container mt-6 md:mt-[33px] mb-6 md:mb-[140px]">
@@ -178,6 +190,7 @@ const ProductDetail = () => {
           selectedVariant={selectedVariant}
           onAddToCartHandler={handleAddToCart}
           onImageClickHandler={handleImageClick}
+          onAddToWishlistHandler={handleAddToWishlist}
           onQuantityInputChangeHandler={handleQuantityInputChange}
           onSetQuantityHandler={handleSetQuantity}
           onVariantClickHandler={handleVariantClick}

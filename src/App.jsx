@@ -24,6 +24,7 @@ import {
   Wishlist,
   Error,
 } from '@pages';
+import ProtectedLayout from '@layouts/ProtectedLayout';
 
 const routes = [
   {
@@ -124,12 +125,14 @@ const App = () => {
             <Route key={path} element={element} path={path} />
           ))}
 
-          <Route element={<Account />} path="/my-account">
-            <Route index element={<UpdateProfile />} />
-            <Route element={<AddressList />} path="address" />
-            <Route element={<UpdateAddress />} path="address/add" />
-            <Route element={<UpdateAddress />} path="address/edit/:id" />
-            <Route element={<MyOrders />} path="my-orders" />
+          <Route element={<ProtectedLayout />}>
+            <Route element={<Account />} path="/my-account">
+              <Route index element={<UpdateProfile />} />
+              <Route element={<AddressList />} path="address" />
+              <Route element={<UpdateAddress />} path="address/add" />
+              <Route element={<UpdateAddress />} path="address/edit/:id" />
+              <Route element={<MyOrders />} path="my-orders" />
+            </Route>
           </Route>
         </Routes>
       </div>
