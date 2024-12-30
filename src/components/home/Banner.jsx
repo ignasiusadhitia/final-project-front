@@ -1,6 +1,6 @@
 import React from 'react';
 
-import PropTypes, { string } from 'prop-types';
+import PropTypes from 'prop-types';
 import { Pagination, Autoplay } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
@@ -8,7 +8,7 @@ import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import 'swiper/css/grid';
 
-const Banner = ({ height, data = [] }) => {
+const Banner = ({ data = [] }) => {
   return (
     <>
       <Swiper
@@ -21,11 +21,11 @@ const Banner = ({ height, data = [] }) => {
       >
         {data.map((item, index) => (
           <SwiperSlide key={index}>
-            <div className={height}>
+            <div>
               <a href={item.url}>
                 <img
                   alt={item.title}
-                  className="w-full h-full object-cover"
+                  className="w-full h-full object-fit md:object-cover"
                   src={item.imageUrl}
                 />
               </a>

@@ -15,11 +15,14 @@ export default defineConfig({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.ico'],
       manifest: {
-        name: 'LumosBlog - Game Insights',
-        short_name: 'LumosBlog',
+        name: 'Exclusive - Limited Edition Store',
+        short_name: 'Exclusive',
         description:
-          'Discover the latest insights, news, and trends about games.',
-        theme_color: '#ffffff',
+          'Discover exclusive and limited edition items including electronics, fashion, collectibles, and more.',
+
+        theme_color: '#db4444',
+        background_color: '#ffffff',
+        display: 'standalone',
         icons: [
           {
             src: 'windows11/SmallTile.scale-100.png',

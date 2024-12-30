@@ -17,7 +17,6 @@ import {
   Contact,
   Home,
   Login,
-  NotFound,
   ProductDetail,
   Success,
   SignUp,
@@ -115,7 +114,7 @@ const App = () => {
   return (
     <>
       <Navbar />
-      <div className="">
+      <div className="pt-[122px] md:pt-[106px] lg:pt-[154px]">
         {/* Global Breadcrumb */}
         {isBreadcrumbVisible && <Breadcrumb />}
 

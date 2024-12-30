@@ -41,6 +41,12 @@ export { default as CardInstagram } from './card-instagram.svg?react';
 export { default as CardLinkedin } from './card-linkedin.svg?react';
 // Home's Icons
 export { default as Arrow } from './arrow.svg?react';
+export { default as Computer } from './computer.svg?react';
+export { default as Gamepad } from './gamepad.svg?react';
+export { default as Headphone } from './headphone.svg?react';
+export { default as Camera } from './camera.svg?react';
+export { default as CellPhone } from './cellphone.svg?react';
+export { default as SmartWatch } from './smartwatch.svg?react';
 // Cart's Icons
 export { default as Minus } from './minus.svg?react';
 export { default as Plus } from './plus.svg?react';
