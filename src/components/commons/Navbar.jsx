@@ -90,7 +90,7 @@ const Navbar = () => {
   const text = translations[lang];
 
   return (
-    <header className="border-b-2">
+    <header className="border-b-2 fixed top-0 left-0 w-full bg-white z-50">
       {!isSmallScreen || location !== '/login' ? (
         <div className="bg-black py-3">
           <div className="container px-5 lg:px-0 flex justify-end items-center">
