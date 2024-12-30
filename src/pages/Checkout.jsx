@@ -1,20 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 import { selectCartSubtotal } from '@store/features/productSlice';
 
 import { CheckoutProductCard } from '@components';
 import { EditAddress } from '@icons';
 import { bank, productSmall } from '@images';
-
-const user = {
-  name: 'Deni Irawan',
-  email: 'user@lumoshive.com',
-  address:
-    'Komp. Ruko Green Garden Blk. Z, Jl. Panjang Arteri Klp. Dua Raya No.5 4 No.15, RT.5/RW.8, Kedoya Utara, Kec. Kb. Jeruk, Kota Jakarta Barat, Daerah Khusus Ibukota Jakarta 11520',
-};
 
 const order = {
   products: [
@@ -28,6 +21,9 @@ const Checkout = () => {
   const lang = useSelector((state) => state.lang.lang);
   const subtotal = useSelector(selectCartSubtotal);
   const { cart } = useSelector((state) => state.product);
+  const { user } = useSelector((state) => state.auth);
+  const [addressIndex, setAddressIndex] = useState(0);
+  const navigate = useNavigate();
 
   const total = subtotal + (order.shipping === 'Free' ? 0 : order.shipping);
 
@@ -86,14 +82,21 @@ const Checkout = () => {
             <div className="flex items-center gap-4 md:gap-[42px] mt-4 mb-[21px] bg-secondary-1 rounded pl-4 pr-[21px] md:pr-[29px]">
               <div className="pt-[13px] pb-5">
                 <p className="text-sm md:text-base leading-5 font-semibold">
-                  {user?.name} | {user?.email}
+                  {user?.address[addressIndex].name} |{' '}
+                  {user?.address[addressIndex].email}
                 </p>
                 <p className=" text-sm md:text-base line-clamp-1 leading-6">
-                  {user.address}
+                  {user.address[addressIndex].address}
                 </p>
               </div>
               <div className="cursor-pointer">
-                <EditAddress />
+                <EditAddress
+                  onClick={() =>
+                    navigate(
+                      `/my-account/address/edit/${user?.address[addressIndex].id}`
+                    )
+                  }
+                />
               </div>
             </div>
           </div>
