@@ -5,6 +5,7 @@ import { Link, useLocation, useNavigate } from 'react-router-dom';
 
 import { logout } from '@store/features/authSlice';
 import { setLanguage } from '@store/features/languageSlice';
+import { selectCartTotalItems } from '@store/features/productSlice';
 
 import {
   Search,
@@ -29,6 +30,8 @@ const Navbar = () => {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const [isNavbarOpen, setNavbarOpen] = useState(false);
   const lang = useSelector((state) => state.lang.lang);
+  const { cartItemsCount } = useSelector((state) => state.product);
+  const totalItems = useSelector(selectCartTotalItems);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -341,7 +344,7 @@ const Navbar = () => {
                 <BlackCart className="w-6 h-6 lg:w-8 lg:h-8" />
                 {login && (
                   <span className="absolute text-text-1 px-1 rounded-full text-xs -right-1 -top-1 bg-secondary-3">
-                    2
+                    {totalItems > 0 ? totalItems : ''}
                   </span>
                 )}
               </button>

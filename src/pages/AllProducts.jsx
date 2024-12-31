@@ -306,7 +306,6 @@ const AllProducts = () => {
       : products.filter(
           (product) => product.categoryId === selectedCategory.id
         );
-  console.log(filteredProducts);
 
   const jsonLd = {
     '@context': 'https://schema.org',

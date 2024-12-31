@@ -6,6 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { addToWishlist } from '@store/features/authSlice';
+import { addToCart, setProduct } from '@store/features/productSlice';
 
 import { WhiteCart, Trash, Favorite } from '@icons';
 
@@ -17,8 +18,10 @@ const ProductCard = ({
 }) => {
   const lang = useSelector((state) => state.lang.lang);
   const [isFavorite, setIsFavorite] = useState(false);
+
   const { isAuthenticated, user } = useSelector((state) => state.auth);
   const navigate = useNavigate();
+
   const dispatch = useDispatch();
 
   const handleFavoriteClick = () => {
@@ -32,6 +35,8 @@ const ProductCard = ({
   const handleAddToCart = () => {
     if (!isAuthenticated) {
       return navigate('/login');
+    } else {
+      dispatch(addToCart({ product, quantity: 1 }));
     }
   };
 
@@ -109,7 +114,12 @@ const ProductCard = ({
       </div>
       <div className="px-3 py-4">
         <div className="font-medium text-sm lg:text-base line-clamp-2">
-          <Link to={'/products/1'}>{product.name}</Link>
+          <Link
+            to={`/products/${product.name.split(' ').join('-')}`}
+            onClick={() => dispatch(setProduct(product))}
+          >
+            {product.name}
+          </Link>
         </div>
       </div>
       <div className="px-3">
