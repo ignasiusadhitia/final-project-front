@@ -21,9 +21,6 @@ const Checkout = () => {
   const lang = useSelector((state) => state.lang.lang);
   const subtotal = useSelector(selectCartSubtotal);
   const { cart } = useSelector((state) => state.product);
-  const { user } = useSelector((state) => state.auth);
-  const [addressIndex, setAddressIndex] = useState(0);
-  const navigate = useNavigate();
 
   const total = subtotal + (order.shipping === 'Free' ? 0 : order.shipping);
 
@@ -82,20 +79,15 @@ const Checkout = () => {
             <div className="flex items-center gap-4 md:gap-[42px] mt-4 mb-[21px] bg-secondary-1 rounded pl-4 pr-[21px] md:pr-[29px]">
               <div className="pt-[13px] pb-5">
                 <p className="text-sm md:text-base leading-5 font-semibold">
-                  {user?.address[addressIndex].name} |{' '}
-                  {user?.address[addressIndex].email}
+                  Deni Irawan | user@lumoshive.com
                 </p>
                 <p className=" text-sm md:text-base line-clamp-1 leading-6">
-                  {user.address[addressIndex].address}
+                  Komp. Ruko Green Garden Blk. Z, Jl. Panjang Arteri Klp. Dua
+                  Raya No.5
                 </p>
               </div>
               <div className="cursor-pointer">
-                <EditAddress
-                  onClick={() =>
-                    navigate(
-                      `/my-account/address/edit/${user?.address[addressIndex].id}`
-                    )}
-                />
+                <EditAddress />
               </div>
             </div>
           </div>
