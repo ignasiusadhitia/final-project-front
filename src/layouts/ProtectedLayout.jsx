@@ -1,13 +1,17 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
-import { Outlet } from 'react-router-dom';
+import { useSelector } from 'react-redux';
+import { Outlet, useNavigate } from 'react-router-dom';
 
 const ProtectedLayout = () => {
-  return (
-    <div>
-      <Outlet />
-    </div>
-  );
+  const { isAuthenticated } = useSelector((state) => state.auth);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (!isAuthenticated) return navigate('/login');
+  });
+
+  return <Outlet />;
 };
 
 export default ProtectedLayout;

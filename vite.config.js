@@ -19,7 +19,6 @@ export default defineConfig({
         short_name: 'Exclusive',
         description:
           'Discover exclusive and limited edition items including electronics, fashion, collectibles, and more.',
-
         theme_color: '#db4444',
         background_color: '#ffffff',
         display: 'standalone',

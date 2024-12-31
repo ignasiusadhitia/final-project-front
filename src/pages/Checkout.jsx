@@ -1,18 +1,13 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import { useSelector } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+
+import { selectCartSubtotal } from '@store/features/productSlice';
 
 import { CheckoutProductCard } from '@components';
 import { EditAddress } from '@icons';
 import { bank, productSmall } from '@images';
-
-const user = {
-  name: 'Deni Irawan',
-  email: 'user@lumoshive.com',
-  address:
-    'Komp. Ruko Green Garden Blk. Z, Jl. Panjang Arteri Klp. Dua Raya No.5 4 No.15, RT.5/RW.8, Kedoya Utara, Kec. Kb. Jeruk, Kota Jakarta Barat, Daerah Khusus Ibukota Jakarta 11520',
-};
 
 const order = {
   products: [
@@ -24,10 +19,8 @@ const order = {
 
 const Checkout = () => {
   const lang = useSelector((state) => state.lang.lang);
-  const subtotal = order.products.reduce(
-    (sum, current) => sum + current.price,
-    0
-  );
+  const subtotal = useSelector(selectCartSubtotal);
+  const { cart } = useSelector((state) => state.product);
 
   const total = subtotal + (order.shipping === 'Free' ? 0 : order.shipping);
 
@@ -86,10 +79,11 @@ const Checkout = () => {
             <div className="flex items-center gap-4 md:gap-[42px] mt-4 mb-[21px] bg-secondary-1 rounded pl-4 pr-[21px] md:pr-[29px]">
               <div className="pt-[13px] pb-5">
                 <p className="text-sm md:text-base leading-5 font-semibold">
-                  {user?.name} | {user?.email}
+                  Deni Irawan | user@lumoshive.com
                 </p>
                 <p className=" text-sm md:text-base line-clamp-1 leading-6">
-                  {user.address}
+                  Komp. Ruko Green Garden Blk. Z, Jl. Panjang Arteri Klp. Dua
+                  Raya No.5
                 </p>
               </div>
               <div className="cursor-pointer">
@@ -131,7 +125,7 @@ const Checkout = () => {
         {/* Order Section */}
         <section className="max-w-[427px] mt-12 md:mt-10 mb-6 md:mb-0">
           <div className=" flex flex-col gap-8">
-            {order.products.map((item) => (
+            {cart.map((item) => (
               <CheckoutProductCard key={item.id} product={item} />
             ))}
           </div>

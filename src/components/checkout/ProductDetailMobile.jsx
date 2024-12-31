@@ -59,7 +59,7 @@ const ProductDetailMobile = ({ product }) => {
             </span>
           </div>
         </div>
-        <p className="mt-3 mb-6 text-xs">{product.desc}</p>
+        <p className="mt-3 mb-6 text-xs">{product.description}</p>
         <hr className="border-t-[1px] border-black opacity-50" />
 
         <div className="mt-6 grid grid-cols-2">

@@ -9,7 +9,7 @@ const CheckoutProductCard = ({ product }) => {
         <img
           alt="product-image"
           className="w-full h-full object-contain"
-          src={product?.img}
+          src={product?.imageUrl}
         />
       </div>
       <div className="w-full flex items-center justify-between py-[0.938]">
@@ -22,7 +22,7 @@ const CheckoutProductCard = ({ product }) => {
 
 CheckoutProductCard.propTypes = {
   product: PropTypes.shape({
-    img: PropTypes.string,
+    imageUrl: PropTypes.string,
     name: PropTypes.string,
     price: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
   }),

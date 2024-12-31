@@ -1,9 +1,17 @@
 import React, { useEffect, useState } from 'react';
 
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { Minus, Plus } from '@icons';
+import {
+  addToCart,
+  decrementQuantity,
+  removeFromCart,
+  selectCartSubtotal,
+  updateCartItemQuantity,
+} from '@store/features/productSlice';
+
+import { Cancel, Minus, Plus } from '@icons';
 import { productSmall } from '@images';
 
 const order = {
@@ -17,39 +25,15 @@ const order = {
 const Cart = () => {
   const [userOrder, setUserOrder] = useState([]);
   const lang = useSelector((state) => state.lang.lang);
-
-  const subtotal = order.products.reduce(
-    (sum, current) => sum + current.price,
-    0
-  );
+  const { cart } = useSelector((state) => state.product);
+  const subtotal = useSelector(selectCartSubtotal);
+  const dispatch = useDispatch();
 
   const total = subtotal + (order.shipping === 'Free' ? 0 : order.shipping);
 
-  const setQuantity = (id, type) => {
-    setUserOrder((prevOrders) =>
-      prevOrders.map((item) =>
-        item.id === id
-          ? {
-              ...item,
-              qty: type === 'inc' ? item.qty + 1 : Math.max(item.qty - 1, 0),
-            }
-          : item
-      )
-    );
-  };
-
-  const handleInputChange = (id, event) => {
-    const newQty = Math.max(0, parseInt(event.target.value, 10) || 0);
-    setUserOrder((prevOrders) =>
-      prevOrders.map((item) =>
-        item.id === id ? { ...item, qty: newQty } : item
-      )
-    );
-  };
-
   useEffect(() => {
-    setUserOrder(order.products);
-  }, []);
+    setUserOrder(cart);
+  }, [cart]);
 
   const translations = {
     en: {
@@ -105,17 +89,26 @@ const Cart = () => {
                 key={item?.id}
                 className="py-6 px-[66px] grid grid-cols-4 rounded shadow-md"
               >
-                <td className="flex items-center justify-start gap-5">
-                  <img alt="" src={item.img} />
-                  <span>{item.name}</span>
+                <td className="relative flex items-center justify-start gap-5 group">
+                  <Cancel
+                    className="absolute cursor-pointer top-0 left-0 opacity-0 group-hover:opacity-100 duration-300"
+                    onClick={() => dispatch(removeFromCart(item.id))}
+                  />
+                  <img
+                    alt="product-image"
+                    className="w-[54px] h-[54px]"
+                    src={item.imageUrl}
+                  />
+                  <span className="block w-full">{item.name}</span>
                 </td>
                 <td className="flex items-center justify-center">
                   ${item.price}
                 </td>
                 <td className="flex items-center justify-center">
                   <button
-                    className="flex justify-center items-center w-10 h-11 border-[1px] border-black border-opacity-50 rounded-tl rounded-bl hover:bg-button-2 text-primary-2 hover:text-white hover:border-none"
-                    onClick={() => setQuantity(item.id, 'dec')}
+                    className="flex justify-center items-center w-10 h-11 border-[1px] border-black border-opacity-50 rounded-tl rounded-bl hover:bg-button-2 text-primary-2 hover:text-white hover:border-none disabled:bg-[#7d8184] disabled:border-none disabled:text-white"
+                    disabled={item.quantity <= 1}
+                    onClick={() => dispatch(decrementQuantity(item.id))}
                   >
                     <Minus height="32" width="32" />
                   </button>
@@ -124,18 +117,27 @@ const Cart = () => {
                     id="quantity"
                     name="quantity"
                     type="text"
-                    value={item.qty}
-                    onChange={(event) => handleInputChange(item.id, event)}
+                    value={item.quantity}
+                    onChange={(event) =>
+                      dispatch(
+                        updateCartItemQuantity({
+                          productId: item.id,
+                          quantity: parseInt(event.target.value, 10) || 0,
+                          stock: item.stock,
+                        })
+                      )}
                   />
                   <button
-                    className="flex justify-center items-center w-10 h-11 border-[1px] border-black border-opacity-50 rounded-tr rounded-br hover:bg-button-2 text-primary-2 hover:text-white hover:border-none"
-                    onClick={() => setQuantity(item.id, 'inc')}
+                    className="flex justify-center items-center w-10 h-11 border-[1px] border-black border-opacity-50 rounded-tr rounded-br hover:bg-button-2 text-primary-2 hover:text-white hover:border-none disabled:bg-[#7d8184] disabled:border-none disabled:text-white"
+                    disabled={item.quantity >= item.stock}
+                    onClick={() =>
+                      dispatch(addToCart({ product: item, quantity: 1 }))}
                   >
                     <Plus height="32" width="32" />
                   </button>
                 </td>
                 <td className="flex items-center justify-end">
-                  ${item.price * item.qty}
+                  ${item.price * item.quantity}
                 </td>
               </tr>
             ))}
@@ -161,7 +163,7 @@ const Cart = () => {
                 <span className="block text-sm md:text-base">Product</span>
                 <div className="flex items-center gap-1">
                   <div className="w-8 h-8 ">
-                    <img alt="item-image" src={item.img} />
+                    <img alt="item-image" src={item.imageUrl} />
                   </div>
                   <span>{item.name}</span>
                 </div>
@@ -179,7 +181,7 @@ const Cart = () => {
                 <div className="flex items-center justify-center">
                   <button
                     className="flex justify-center items-center w-7 h-7 border-[1px] border-black border-opacity-50 rounded-tl rounded-bl hover:bg-button-2 text-primary-2 hover:text-white hover:border-none"
-                    onClick={() => setQuantity(item.id, 'dec')}
+                    onClick={() => dispatch(decrementQuantity(item.id))}
                   >
                     <Minus height="16" width="16" />
                   </button>
@@ -188,12 +190,20 @@ const Cart = () => {
                     id="quantity"
                     name="quantity"
                     type="text"
-                    value={item.qty}
-                    onChange={(event) => handleInputChange(item.id, event)}
+                    value={item.quantity}
+                    onChange={(event) =>
+                      dispatch(
+                        updateCartItemQuantity({
+                          productId: item.id,
+                          quantity: parseInt(event.target.value, 10) || 0,
+                          stock: item.stock,
+                        })
+                      )}
                   />
                   <button
                     className="flex justify-center items-center w-7 h-7 border-[1px] border-black border-opacity-50 rounded-tr rounded-br hover:bg-button-2 text-primary-2 hover:text-white hover:border-none"
-                    onClick={() => setQuantity(item.id, 'inc')}
+                    onClick={() =>
+                      dispatch(addToCart({ product: item, quantity: 1 }))}
                   >
                     <Plus height="16" width="16" />
                   </button>
@@ -205,7 +215,7 @@ const Cart = () => {
                   {text.subtotal}
                 </span>
                 <span className="block text-button-2 font-semibold">
-                  ${item.price * item.qty}
+                  ${item.price * item.quantity}
                 </span>
               </div>
             </li>

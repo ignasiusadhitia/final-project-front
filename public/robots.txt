@@ -1,0 +1,13 @@
+User-agent: *
+Disallow: /checkout/
+Disallow: /success/
+Disallow: /wishlist/
+Disallow: /login/
+Disallow: /sign-up/
+Disallow: /my-account/
+Disallow: /404/
+Disallow: /500/
+Disallow: /401/
+Disallow: /cart/
+
+Sitemap: https://exclusive-store-front.vercel.app/sitemap.xml
