@@ -1,3 +1,4 @@
+import { Helmet } from 'react-helmet-async';
 import { Route, Routes, useLocation } from 'react-router-dom';
 
 import ProtectedLayout from '@layouts/ProtectedLayout';
@@ -115,6 +116,29 @@ const App = () => {
 
   return (
     <>
+      <Helmet>
+        <meta charSet="utf-8" />
+        <title>Exclusive - Limited Edition Store</title>
+        <meta
+          content="Exclusive - Discover limited edition items including electronics, fashion, collectibles, and more."
+          name="description"
+        />
+        <meta
+          content="exclusive, limited edition, electronics, fashion, collectibles"
+          name="keywords"
+        />
+        <meta content="Exclusive - Limited Edition Store" property="og:title" />
+        <meta
+          content="Discover limited edition items including electronics, fashion, collectibles, and more."
+          property="og:description"
+        />
+        <meta content="website" property="og:type" />
+        <meta
+          content="https://exclusive-store-front.vercel.app/favicon.ico"
+          property="og:image"
+        />
+      </Helmet>
+
       <Navbar />
       <div className="pt-[122px] md:pt-[106px] lg:pt-[154px]">
         {/* Global Breadcrumb */}

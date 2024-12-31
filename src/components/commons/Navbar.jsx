@@ -62,6 +62,14 @@ const Navbar = () => {
     dispatch(logout());
   };
 
+  const handleToWishlist = () => {
+    if (!login) {
+      navigate('/login');
+    } else {
+      navigate('/wishlist');
+    }
+  };
+
   const handleToCart = () => {
     if (!login) {
       navigate('/login');
@@ -203,12 +211,12 @@ const Navbar = () => {
               </Link>
             </li>
             <li>
-              <Link
+              <button
                 className={`${location === '/wishlist' ? 'text-black font-medium border-secondary-3' : 'text-text-2 font-normal border-transparent'} border-l-8 py-2 px-3 text-sm font-normal`}
-                to={'wishlist'}
+                onClick={handleToWishlist}
               >
                 {text?.wishlist}
-              </Link>
+              </button>
             </li>
           </ul>
         </div>
@@ -337,9 +345,9 @@ const Navbar = () => {
             </div>
 
             <div className="flex gap-5 items-center">
-              <Link className="hidden lg:block" to={'wishlist'}>
+              <button className="hidden lg:block" onClick={handleToWishlist}>
                 <WishList />
-              </Link>
+              </button>
               <button className="relative z-50" onClick={handleToCart}>
                 <BlackCart className="w-6 h-6 lg:w-8 lg:h-8" />
                 {login && (
@@ -378,7 +386,6 @@ const Navbar = () => {
                       >
                         <Reviews /> {text?.myReviews}
                       </Link>
-
                       <button
                         className="flex items-center gap-2 px-4 py-2 w-full text-left text-sm font-normal text-text-1"
                         onClick={handleLogout}

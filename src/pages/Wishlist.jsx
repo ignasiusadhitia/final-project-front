@@ -127,7 +127,7 @@ const Wishlist = () => {
         </div>
         <div className="grid grid-cols-2 gap-5 md:grid-cols-4 md:gap-8 mt-5">
           {wishLists &&
-            wishLists.map((product) => (
+            wishLists?.map((product) => (
               <div key={product.id} className="relative">
                 <ProductsCard product={product} />
                 <button className="flex justify-center items-center absolute right-2 top-2 lg:right-5 lg:top-5 bg-white rounded-full w-6 h-6 md:w-8 md:h-8">

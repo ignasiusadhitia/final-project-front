@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { useSelector } from 'react-redux';
 
-import { SectionTitle } from '@components';
+import { SectionTitle, SEO } from '@components';
 
 import ProductGrid from '../components/ProductGrid';
 
@@ -307,46 +307,65 @@ const AllProducts = () => {
           (product) => product.categoryId === selectedCategory.id
         );
 
-  console.log(filteredProducts);
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: 'Exclusive Products',
+    url: 'https://exclusive-store-front.vercel.app/products',
+    description:
+      'Browse exclusive and limited edition products across categories such as electronics, fashion, and collectibles.',
+    mainEntityOfPage: 'https://exclusive-store-front.vercel.app/products',
+  };
 
   return (
-    <div className="flex px-5 pb-10 lg:px-0 justify-start lg:justify-start lg:gap-14 container lg:mt-10">
-      <div
-        className={`h-full py-5 text-left ${filteredProducts.length !== 0 && 'lg:flex-1'}`}
-      >
-        <ul className="hidden lg:flex flex-col gap-4 justify-start">
-          {categories.map((category) => (
-            <li
-              key={category.id}
-              className={`cursor-pointer hover:text-secondary-3 text-left w-full flex justify-start ${selectedCategory?.id === category.id ? 'text-secondary-3' : ''}`}
-              onClick={() => handleSelectCategory(category)}
+    <>
+      <SEO
+        description="Explore our exclusive collection of limited edition products including electronics, fashion, and collectibles."
+        image="https://exclusive-store-front.vercel.app/favicon.ico"
+        jsonLd={jsonLd}
+        keywords="exclusive products, limited edition electronics, fashion, collectibles"
+        title="Exclusive Products - Limited Edition Electronics, Fashion, and More"
+        url="https://exclusive-store-front.vercel.app/products"
+      />
+
+      <div className="flex px-5 pb-10 lg:px-0 justify-start lg:justify-start lg:gap-14 container lg:mt-10">
+        <div
+          className={`h-full py-5 text-left ${filteredProducts.length !== 0 && 'lg:flex-1'}`}
+        >
+          <ul className="hidden lg:flex flex-col gap-4 justify-start">
+            {categories.map((category) => (
+              <li
+                key={category.id}
+                className={`cursor-pointer hover:text-secondary-3 text-left w-full flex justify-start ${selectedCategory?.id === category.id ? 'text-secondary-3' : ''}`}
+                onClick={() => handleSelectCategory(category)}
+              >
+                <span className="text-left text-base font-normal">
+                  {category.name}
+                </span>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div className="py-4">
+          <SectionTitle
+            hideTitle
+            subTitle={selectedCategory.name}
+            title={selectedCategory.name}
+          />
+          <ProductGrid showRating gridCols={3} products={filteredProducts} />
+
+          {!showMore && filteredProducts.length !== 0 && (
+            <button
+              className="my-20 bg-secondary-3 hover:opacity-85 text-white font-medium text-base w-[184px] h-[56px] rounded mx-auto block"
+              onClick={handleShowMore}
             >
-              <span className="text-left text-base font-normal">
-                {category.name}
-              </span>
-            </li>
-          ))}
-        </ul>
+              {lang === 'id' ? 'Lebih Banyak' : 'Show More'}
+            </button>
+          )}
+        </div>
       </div>
-
-      <div className="py-4">
-        <SectionTitle
-          hideTitle
-          subTitle={selectedCategory.name}
-          title={selectedCategory.name}
-        />
-        <ProductGrid showRating gridCols={3} products={filteredProducts} />
-
-        {!showMore && filteredProducts.length !== 0 && (
-          <button
-            className="my-20 bg-secondary-3 hover:opacity-85 text-white font-medium text-base w-[184px] h-[56px] rounded mx-auto block"
-            onClick={handleShowMore}
-          >
-            {lang === 'id' ? 'Lebih Banyak' : 'Show More'}
-          </button>
-        )}
-      </div>
-    </div>
+    </>
   );
 };
 

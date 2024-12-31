@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 import { useSelector } from 'react-redux';
 
-import { SectionTitle } from '@components';
+import { SectionTitle, SEO } from '@components';
 
 import ProductCard from '../components/ProductsCard';
 
@@ -255,29 +255,50 @@ const BestSelling = () => {
 
   const text = translations[lang];
 
-  return (
-    <div className="container px-5 lg:mb-12 md:mt-16">
-      <h3 className="md:hidden block text-sm text-black font-semibold">
-        {text.bestSelling}
-      </h3>
-      <SectionTitle subTitle="Products" title={text.bestSelling} />
-      <div className="lg:px-0 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 mt-7 lg:mt-16">
-        {products.map((product) => (
-          <div key={product.id} className="relative">
-            <ProductCard showFavoriteButton showRating product={product} />
-          </div>
-        ))}
-      </div>
+  const jsonLd = {
+    '@context': 'https://schema.org',
+    '@type': 'CollectionPage',
+    name: 'Best Selling Products - Exclusive Store',
+    url: 'https://exclusive-store-front.vercel.app/best-selling',
+    description:
+      'Shop our best selling products, from electronics to fashion and collectibles, all available in limited editions.',
+    mainEntityOfPage: 'https://exclusive-store-front.vercel.app/best-selling',
+  };
 
-      <div className="flex items-center justify-center my-5 md:my-24">
-        <button
-          className="bg-secondary-3 w-[125px] hover:opacity-85 h-[45px] text-sm md:text-base lg:w-[184px] lg:h-[56px] text-text-1 rounded-md"
-          onClick={handleShowMore}
-        >
-          {text.showMore}
-        </button>
+  return (
+    <>
+      <SEO
+        description="Explore the best selling limited edition products at Exclusive, including top electronics, fashion, and collectibles."
+        image="https://exclusive-store-front.vercel.app/favicon.ico"
+        jsonLd={jsonLd}
+        keywords="best selling products, exclusive best sellers, limited edition electronics, fashion"
+        title="Best Selling Products - Exclusive Limited Edition Store"
+        url="https://exclusive-store-front.vercel.app/best-selling"
+      />
+
+      <div className="container px-5 lg:mb-12 md:mt-16">
+        <h3 className="md:hidden block text-sm text-black font-semibold">
+          {text.bestSelling}
+        </h3>
+        <SectionTitle subTitle="Products" title={text.bestSelling} />
+        <div className="lg:px-0 grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-5 mt-7 lg:mt-16">
+          {products.map((product) => (
+            <div key={product.id} className="relative">
+              <ProductCard showFavoriteButton showRating product={product} />
+            </div>
+          ))}
+        </div>
+
+        <div className="flex items-center justify-center my-5 md:my-24">
+          <button
+            className="bg-secondary-3 w-[125px] hover:opacity-85 h-[45px] text-sm md:text-base lg:w-[184px] lg:h-[56px] text-text-1 rounded-md"
+            onClick={handleShowMore}
+          >
+            {text.showMore}
+          </button>
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
