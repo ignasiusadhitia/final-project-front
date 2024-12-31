@@ -1,7 +1,12 @@
 import { useEffect, useState } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
+import { useParams } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
 import { Swiper, SwiperSlide } from 'swiper/react';
+
+import { addToWishlist } from '@store/features/authSlice';
+import { addToCart } from '@store/features/productSlice';
 
 import {
   BottomSheet,
@@ -21,11 +26,6 @@ import {
 } from '@images';
 
 import 'swiper/css';
-
-import { useNavigate } from 'react-router-dom';
-
-import { addToCart } from '@store/features/productSlice';
-import { addToWishlist } from '@store/features/authSlice';
 
 const product = {
   images: [productImg1, productImg2, productImg3, productImg4, productImg5],
@@ -127,6 +127,7 @@ const ProductDetail = () => {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { id } = useParams();
 
   const handleImageClick = (image) => {
     setSelectedImage(image);
@@ -179,13 +180,13 @@ const ProductDetail = () => {
     name: product.name,
     image: product.images[0],
     description: product.description,
-    sku: selectedProduct.id,
+    sku: id,
     offers: {
       '@type': 'Offer',
       priceCurrency: 'USD',
       price: product.price,
       availability: 'https://schema.org/InStock',
-      url: `https://exclusive-store-front.vercel.app/products/${selectedProduct.id}`,
+      url: `https://exclusive-store-front.vercel.app/products/${id}`,
     },
   };
 
