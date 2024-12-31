@@ -1,5 +1,6 @@
 import React from 'react';
 
+import { useSelector } from 'react-redux';
 import { Pagination } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
@@ -13,8 +14,6 @@ import {
   AnualGross,
 } from '@icons';
 import { aboutHero, member1, member2, member3, member4 } from '@images';
-
-import { useSelector } from 'react-redux';
 
 const About = () => {
   const lang = useSelector((state) => state.lang.lang);

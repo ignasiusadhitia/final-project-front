@@ -1,8 +1,9 @@
-import { addAddress, editAddress } from '@store/features/authSlice';
 import React, { useEffect, useState } from 'react';
 
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useNavigate, useParams } from 'react-router-dom';
+
+import { addAddress, editAddress } from '@store/features/authSlice';
 
 const UpdateAddress = () => {
   const { id } = useParams();
@@ -10,10 +11,10 @@ const UpdateAddress = () => {
   const { user } = useSelector((state) => state.auth);
   const [inputError, setInputError] = useState(false);
   const [formInput, setFormInput] = useState({
-    name: "",
-    email: "",
-    address: ""
-  })
+    name: '',
+    email: '',
+    address: '',
+  });
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [isEdit] = useState(!!id);
@@ -24,18 +25,18 @@ const UpdateAddress = () => {
       const detailAddress = address.find((item) => item.id === Number(id));
       setFormInput(detailAddress);
     }
-  }, [])
+  }, []);
 
   const handleFormChange = (e) => {
     const { name, value } = e.target;
-    setFormInput({...formInput, [name]: value })
-  }
+    setFormInput({ ...formInput, [name]: value });
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const { name, email, address } = formInput;
-    if (name.trim() === "" || email.trim() === "" || address.trim() === "") {
-      setInputError("Form cannot be empty!");
+    if (name.trim() === '' || email.trim() === '' || address.trim() === '') {
+      setInputError('Form cannot be empty!');
       return;
     }
     setInputError(false);
@@ -43,10 +44,10 @@ const UpdateAddress = () => {
     if (isEdit) {
       dispatch(editAddress(formInput, id));
     } else {
-      dispatch(addAddress({ ...formInput, id: Date.now() }))
+      dispatch(addAddress({ ...formInput, id: Date.now() }));
     }
-    navigate("/my-account/address")
-  }
+    navigate('/my-account/address');
+  };
 
   const translations = {
     en: {
@@ -116,14 +117,16 @@ const UpdateAddress = () => {
             cols="30"
             id="address"
             name="address"
+            rows="4"
             value={formInput.address}
             onChange={handleFormChange}
-            rows="4"
           ></textarea>
         </div>
       </div>
 
-      {inputError && <p className='text-secondary-3 text-xs md:text-sm'>{inputError}</p>}
+      {inputError && (
+        <p className="text-secondary-3 text-xs md:text-sm">{inputError}</p>
+      )}
 
       <div className="flex justify-end items-end">
         <div className="w-full lg:w-auto flex justify-between lg:justify-center lg:items-center gap-2 lg:gap-8">
@@ -133,7 +136,10 @@ const UpdateAddress = () => {
           >
             {text.cancel}
           </Link>
-          <button onClick={handleSubmit} className="w-[181px] h-11 lg:w-[214px] lg:h-14 bg-secondary-3 rounded-md text-sm lg:text-base font-medium text-text-1">
+          <button
+            className="w-[181px] h-11 lg:w-[214px] lg:h-14 bg-secondary-3 rounded-md text-sm lg:text-base font-medium text-text-1"
+            onClick={handleSubmit}
+          >
             {text.saveChanges}
           </button>
         </div>

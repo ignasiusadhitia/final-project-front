@@ -3,9 +3,10 @@ import React, { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 
+import { removeFromWishlist } from '@store/features/authSlice';
+
 import { ProductsCard } from '@components';
 import { Love, Trash } from '@icons';
-import { removeFromWishlist } from '@store/features/authSlice';
 
 const Wishlist = () => {
   const navigate = useNavigate();
@@ -109,7 +110,7 @@ const Wishlist = () => {
 
   const handleRemoveWishlist = (productId) => {
     dispatch(removeFromWishlist(productId));
-  }
+  };
 
   return (
     <div className="container mb-4 lg:mb-32 px-5 lg:p-0 lg:my-6 md:my-[3.75rem] space-y-10">
@@ -125,15 +126,19 @@ const Wishlist = () => {
           </button>
         </div>
         <div className="grid grid-cols-2 gap-5 md:grid-cols-4 md:gap-8 mt-5">
-          {wishLists && wishLists.map((product) => (
-            <div key={product.id} className="relative">
-              <ProductsCard product={product} />
-              <button className="flex justify-center items-center absolute right-2 top-2 lg:right-5 lg:top-5 bg-white rounded-full w-6 h-6 md:w-8 md:h-8">
-                <Trash onClick={() => handleRemoveWishlist(product.id)} className="hidden md:block" />
-                <Love className="block md:hidden" />
-              </button>
-            </div>
-          ))}
+          {wishLists &&
+            wishLists.map((product) => (
+              <div key={product.id} className="relative">
+                <ProductsCard product={product} />
+                <button className="flex justify-center items-center absolute right-2 top-2 lg:right-5 lg:top-5 bg-white rounded-full w-6 h-6 md:w-8 md:h-8">
+                  <Trash
+                    className="hidden md:block"
+                    onClick={() => handleRemoveWishlist(product.id)}
+                  />
+                  <Love className="block md:hidden" />
+                </button>
+              </div>
+            ))}
         </div>
       </section>
 

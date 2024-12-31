@@ -1,5 +1,7 @@
 import { Route, Routes, useLocation } from 'react-router-dom';
 
+import ProtectedLayout from '@layouts/ProtectedLayout';
+
 import { Breadcrumb, Footer, Navbar } from '@components';
 import {
   UpdateAddress,
@@ -17,14 +19,12 @@ import {
   Contact,
   Home,
   Login,
-  NotFound,
   ProductDetail,
   Success,
   SignUp,
   Wishlist,
   Error,
 } from '@pages';
-import ProtectedLayout from '@layouts/ProtectedLayout';
 
 const routes = [
   {

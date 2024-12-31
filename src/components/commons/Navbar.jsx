@@ -3,7 +3,9 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 
+import { logout } from '@store/features/authSlice';
 import { setLanguage } from '@store/features/languageSlice';
+import { selectCartTotalItems } from '@store/features/productSlice';
 
 import {
   Search,
@@ -17,7 +19,6 @@ import {
   Hamburger,
   Close,
 } from '@icons';
-import { logout } from '@store/features/authSlice';
 
 const Navbar = () => {
   const location = useLocation().pathname;
@@ -29,6 +30,8 @@ const Navbar = () => {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
   const [isNavbarOpen, setNavbarOpen] = useState(false);
   const lang = useSelector((state) => state.lang.lang);
+  const { cartItemsCount } = useSelector((state) => state.product);
+  const totalItems = useSelector(selectCartTotalItems);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -56,16 +59,16 @@ const Navbar = () => {
   };
 
   const handleLogout = () => {
-    dispatch(logout())
-  }
+    dispatch(logout());
+  };
 
   const handleToCart = () => {
     if (!login) {
-      navigate("/login");
+      navigate('/login');
     } else {
-      navigate("/cart");
+      navigate('/cart');
     }
-  }
+  };
 
   const translations = {
     en: {
@@ -213,31 +216,41 @@ const Navbar = () => {
         {login ? (
           <div className="px-5">
             <div className="border-b-2 pb-6 flex items-center justify-between">
-              <div className='flex gap-3 items-center'>
+              <div className="flex gap-3 items-center">
                 <img
                   alt="user-image"
                   className="border border-text-2 rounded-full w-8 h-8"
                   src="https://picsum.photos/200/300"
                 />
-                <Link to={"/my-account"} className="text-text-2 text-sm font-normal">{user?.profile ? user.profile : user?.email}</Link>
+                <Link
+                  className="text-text-2 text-sm font-normal"
+                  to={'/my-account'}
+                >
+                  {user?.profile ? user.profile : user?.email}
+                </Link>
               </div>
 
               <div className="flex gap-3">
                 <select
-                    className="text-text-2 focus:outline-none text-sm font-norma border py-1 px-3 border-secondary-3 rounded-lg"
-                    id="language"
-                    name="language"
-                    value={lang}
-                    onChange={changeLanguage}
-                  >
-                    <option className="text-text-1 bg-text-2" value="en">
-                      English
-                    </option>
-                    <option className="text-text-1 bg-text-2" value="id">
-                      Indonesia
-                    </option>
-                  </select>
-                <button onClick={handleLogout} className="text-white text-sm font-norma border py-1 px-3 bg-secondary-3 rounded-lg">{text?.logout}</button>
+                  className="text-text-2 focus:outline-none text-sm font-norma border py-1 px-3 border-secondary-3 rounded-lg"
+                  id="language"
+                  name="language"
+                  value={lang}
+                  onChange={changeLanguage}
+                >
+                  <option className="text-text-1 bg-text-2" value="en">
+                    English
+                  </option>
+                  <option className="text-text-1 bg-text-2" value="id">
+                    Indonesia
+                  </option>
+                </select>
+                <button
+                  className="text-white text-sm font-norma border py-1 px-3 bg-secondary-3 rounded-lg"
+                  onClick={handleLogout}
+                >
+                  {text?.logout}
+                </button>
               </div>
             </div>
           </div>
@@ -327,11 +340,11 @@ const Navbar = () => {
               <Link className="hidden lg:block" to={'wishlist'}>
                 <WishList />
               </Link>
-              <button onClick={handleToCart} className="relative z-50">
+              <button className="relative z-50" onClick={handleToCart}>
                 <BlackCart className="w-6 h-6 lg:w-8 lg:h-8" />
                 {login && (
                   <span className="absolute text-text-1 px-1 rounded-full text-xs -right-1 -top-1 bg-secondary-3">
-                    2
+                    {totalItems > 0 ? totalItems : ''}
                   </span>
                 )}
               </button>
@@ -365,7 +378,11 @@ const Navbar = () => {
                       >
                         <Reviews /> {text?.myReviews}
                       </Link>
-                      <button onClick={handleLogout} className="flex items-center gap-2 px-4 py-2 w-full text-left text-sm font-normal text-text-1">
+
+                      <button
+                        className="flex items-center gap-2 px-4 py-2 w-full text-left text-sm font-normal text-text-1"
+                        onClick={handleLogout}
+                      >
                         <Logout /> {text?.logout}
                       </button>
                     </div>

@@ -306,6 +306,7 @@ const AllProducts = () => {
       : products.filter(
           (product) => product.categoryId === selectedCategory.id
         );
+
   console.log(filteredProducts);
 
   return (

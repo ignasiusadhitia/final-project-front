@@ -1,7 +1,9 @@
 import React from 'react';
 
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
+
+import { clearCart, selectCartSubtotal } from '@store/features/productSlice';
 
 import { CheckoutProductCard } from '@components';
 import { productSmall } from '@images';
@@ -15,7 +17,10 @@ const order = {
 };
 
 const Success = () => {
+  const { cart } = useSelector((state) => state.product);
+  const subtotal = useSelector(selectCartSubtotal);
   const lang = useSelector((state) => state.lang.lang);
+  const dispatch = useDispatch();
 
   const translations = {
     en: {
@@ -43,11 +48,6 @@ const Success = () => {
   };
   const t = translations[lang];
 
-  const subtotal = order.products.reduce(
-    (sum, current) => sum + current.price,
-    0
-  );
-
   const total = subtotal + (order.shipping === 'Free' ? 0 : order.shipping);
 
   return (
@@ -59,7 +59,7 @@ const Success = () => {
               {t.orderSuccess}
             </h1>
             <div className="flex flex-col mt-4 md:mt-[4.563rem] gap-8">
-              {order.products.map((item) => (
+              {cart.map((item) => (
                 <CheckoutProductCard key={item.id} product={item} />
               ))}
             </div>
@@ -86,6 +86,7 @@ const Success = () => {
             <Link
               className="w-full mt-8 mb-12 md:mb-0 block bg-button-2 hover:bg-button-hover-1 text-text-1 rounded py-4 text-center"
               to="/"
+              onClick={() => dispatch(clearCart())}
             >
               {t.backToHome}
             </Link>

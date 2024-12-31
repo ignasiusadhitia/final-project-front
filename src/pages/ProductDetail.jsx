@@ -1,5 +1,6 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
+import { useDispatch, useSelector } from 'react-redux';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 import {
@@ -17,9 +18,13 @@ import {
   productImg4,
   productImg5,
 } from '@images';
+
 import 'swiper/css';
-import { useSelector } from 'react-redux';
+
 import { useNavigate } from 'react-router-dom';
+
+import { addToCart } from '@store/features/productSlice';
+import { addToWishlist } from '@store/features/authSlice';
 
 const product = {
   images: [productImg1, productImg2, productImg3, productImg4, productImg5],
@@ -107,7 +112,11 @@ const relatedProducts = [
 ];
 
 const ProductDetail = () => {
-  const [selectedImage, setSelectedImage] = useState(product.images[0]);
+  const { product: selectedProduct } = useSelector((state) => state.product);
+  const { user } = useSelector((state) => state.auth);
+  console.log(user);
+
+  const [selectedImage, setSelectedImage] = useState(selectedProduct.imageUrl);
   const [selectedVariant, setSelectedVariant] = useState(
     product.variant.size[0]
   );
@@ -115,7 +124,9 @@ const ProductDetail = () => {
   const [bottomSheetOpen, setBottomSheetOpen] = useState(false);
   const [activeSlide, setActiveSlide] = useState(1);
   const { isAuthenticated } = useSelector((state) => state.auth);
+
   const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const handleImageClick = (image) => {
     setSelectedImage(image);
@@ -145,15 +156,25 @@ const ProductDetail = () => {
 
   const handleAddToCart = () => {
     if (!isAuthenticated) {
-      return navigate("/login")
+      return navigate('/login');
+    } else {
+      dispatch(addToCart({ product: selectedProduct, quantity }));
+      navigate('/cart');
     }
   };
 
   const handleAddToWishlist = () => {
     if (!isAuthenticated) {
-      return navigate("/login")
+      return navigate('/login');
+    } else {
+      dispatch(addToWishlist(selectedProduct));
+      navigate('/wishlist');
     }
-  }
+  };
+
+  useEffect(() => {
+    setSelectedImage(selectedProduct.imageUrl);
+  }, [selectedProduct]);
 
   return (
     <main className="container mt-6 md:mt-[33px] mb-6 md:mb-[140px]">
@@ -169,7 +190,7 @@ const ProductDetail = () => {
                 <img
                   alt="product-image"
                   className="h[114px] py-6"
-                  src={image}
+                  src={selectedProduct.imageUrl}
                 />
               </div>
             </SwiperSlide>
@@ -189,8 +210,8 @@ const ProductDetail = () => {
           selectedImage={selectedImage}
           selectedVariant={selectedVariant}
           onAddToCartHandler={handleAddToCart}
-          onImageClickHandler={handleImageClick}
           onAddToWishlistHandler={handleAddToWishlist}
+          onImageClickHandler={handleImageClick}
           onQuantityInputChangeHandler={handleQuantityInputChange}
           onSetQuantityHandler={handleSetQuantity}
           onVariantClickHandler={handleVariantClick}
@@ -199,7 +220,7 @@ const ProductDetail = () => {
 
       <div className="block md:hidden">
         <ProductDetailMobile
-          product={product}
+          product={selectedProduct}
           selectedImage={selectedImage}
           selectedVariant={selectedVariant}
           onBottomSheetOpenHandler={handleBottomSheetOpen}
@@ -228,11 +249,15 @@ const ProductDetail = () => {
       </section>
       <div className="w-full px-6 py-4 mt-[58px] fixed bottom-0 bg-white flex md:hidden items-center gap-[13px] z-10">
         <div className="w-full flex items-center gap-3">
-          <button className="w-10 h-10 flex justify-center items-center border-[1px] border-black border-opacity-50 rounded">
+          <button
+            className="w-10 h-10 flex justify-center items-center border-[1px] border-black border-opacity-50 rounded"
+            onClick={handleAddToWishlist}
+          >
             <WishList />
           </button>
           <button
-            className="grow py-[10px] px-12 text-text-1 bg-button-2 hover:bg-button-hover-1 rounded"
+            className="grow py-[10px] px-12 text-text-1 bg-button-2 hover:bg-button-hover-1 rounded disabled:bg-[#7d8184] disabled:border-none disabled:text-white"
+            disabled={selectedProduct.stock === 0}
             onClick={handleBottomSheetOpen}
           >
             Add to Cart
@@ -241,7 +266,7 @@ const ProductDetail = () => {
       </div>
       {bottomSheetOpen && (
         <BottomSheet
-          product={product}
+          product={selectedProduct}
           quantity={quantity}
           selectedVariant={selectedVariant}
           onAddToCartHandler={handleAddToCart}

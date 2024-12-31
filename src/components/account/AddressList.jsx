@@ -3,8 +3,9 @@ import React from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Link } from 'react-router-dom';
 
-import { EditAddress, DeleteAddress, AddAddress } from '@icons';
 import { deleteAddress } from '@store/features/authSlice';
+
+import { EditAddress, DeleteAddress, AddAddress } from '@icons';
 
 const AddressList = () => {
   const lang = useSelector((state) => state.lang.lang);
@@ -13,8 +14,8 @@ const AddressList = () => {
   const address = user?.address;
 
   const handleDelete = (id) => {
-    dispatch(deleteAddress(id))
-  }
+    dispatch(deleteAddress(id));
+  };
 
   const translations = {
     en: {
@@ -41,28 +42,29 @@ const AddressList = () => {
           </Link>
         </div>
         <div className="flex flex-col gap-4 justify-between">
-          {address && address.map((item) => (
-            <div key={item.id} className="flex flex-row items-center w-full lg:w-[710px] justify-between p-4 bg-secondary-1">
-              <div className="flex flex-col gap-1">
-                <p className="text-sm font-medium line-clamp-1">
-                  {item.name} | {item.email}
-                </p>
-                <p className="text-sm line-clamp-1">
-                  {item.address}
-                </p>
-              </div>
+          {address &&
+            address.map((item) => (
+              <div
+                key={item.id}
+                className="flex flex-row items-center w-full lg:w-[710px] justify-between p-4 bg-secondary-1"
+              >
+                <div className="flex flex-col gap-1">
+                  <p className="text-sm font-medium line-clamp-1">
+                    {item.name} | {item.email}
+                  </p>
+                  <p className="text-sm line-clamp-1">{item.address}</p>
+                </div>
 
-              <div className="flex items-center gap-2">
-                <Link to={`/my-account/address/edit/${item.id}`}>
-                  <EditAddress />
-                </Link>
-                <button onClick={() => handleDelete(item.id)}>
-                  <DeleteAddress />
-                </button>
+                <div className="flex items-center gap-2">
+                  <Link to={`/my-account/address/edit/${item.id}`}>
+                    <EditAddress />
+                  </Link>
+                  <button onClick={() => handleDelete(item.id)}>
+                    <DeleteAddress />
+                  </button>
+                </div>
               </div>
-            </div>
-          ))
-        }
+            ))}
         </div>
       </div>
 

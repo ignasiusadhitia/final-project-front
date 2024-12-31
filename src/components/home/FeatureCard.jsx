@@ -9,6 +9,7 @@ const FeatureCard = ({ data }) => {
         className={`object-cover h-full w-full group-hover:scale-95 transition-all duration-500'}`}
         src={data.image}
       />
+
       <div className="absolute p-5 grid gap-1 md:gap-3 bottom-1 left-2 z-10">
         <p className="text-text-1 text-[12px] md:text-2xl">{data.title}</p>
         <p className="text-text-1 text-[8px] md:text-sm">{data.desc}</p>
